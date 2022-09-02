@@ -33,6 +33,10 @@ android {
 }
 
 dependencies {
+
+    // LeakCanary
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.9.1")
+
     //Chucker
     val chukerVresion = "3.5.2"
     debugImplementation("com.github.chuckerteam.chucker:library:${chukerVresion}")
