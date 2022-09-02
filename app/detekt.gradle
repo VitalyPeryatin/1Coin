@@ -1,0 +1,5 @@
+apply plugin: "io.gitlab.arturbosch.detekt"
+
+detekt {
+    input = files("src/main/java", "src/test/java")
+}

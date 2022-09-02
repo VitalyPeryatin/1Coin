@@ -1,6 +1,7 @@
 plugins {
-    id ("com.android.application")
-    id ("org.jetbrains.kotlin.android")
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id("io.gitlab.arturbosch.detekt")
 }
 
 android {
@@ -33,14 +34,13 @@ android {
 }
 
 dependencies {
-
     // LeakCanary
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.9.1")
 
     //Chucker
-    val chukerVresion = "3.5.2"
-    debugImplementation("com.github.chuckerteam.chucker:library:${chukerVresion}")
-    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:${chukerVresion}")
+    val chukerVersion = "3.5.2"
+    debugImplementation("com.github.chuckerteam.chucker:library:$chukerVersion")
+    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:$chukerVersion")
 
     //Core
     implementation("androidx.core:core-ktx:1.8.0")
