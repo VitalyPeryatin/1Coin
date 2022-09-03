@@ -64,13 +64,13 @@ dependencies {
 
     // Jetpack Compose
     val composeVersion = "1.3.0-beta01"
-    implementation("androidx.compose.ui:ui:$composeVersion")
-    implementation("androidx.navigation:navigation-compose:2.5.1")
     implementation("androidx.activity:activity-compose:1.5.1")
+    implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.animation:animation:$composeVersion")
     implementation("androidx.compose.ui:ui-tooling:$composeVersion")
     implementation("androidx.compose.foundation:foundation:$composeVersion")
     implementation("androidx.compose.material:material:$composeVersion")
+    implementation("androidx.navigation:navigation-compose:2.5.1")
 
     // LeakCanary
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.9.1")
