@@ -80,4 +80,9 @@ dependencies {
 
     //UI Tests
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.2.1")
+
+    //SQL Delight
+    val sqlDelightVersion = "1.5.3"
+    implementation ("com.squareup.sqldelight:android-driver:$sqlDelightVersion")
+    implementation ("com.squareup.sqldelight:coroutines-extensions-jvm:$sqlDelightVersion")
 }
