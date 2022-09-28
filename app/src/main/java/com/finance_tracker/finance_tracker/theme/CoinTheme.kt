@@ -20,6 +20,10 @@ data class CoinColors(
     val content: Color,
     val selectedContentColor: Color,
     val unSelectedContentColor: Color,
+    val textColor: Color,
+    val iconColor: Color,
+    val increaseColor: Color,
+    val decreaseColor: Color
 )
 
 val LocalCustomColors = staticCompositionLocalOf {
@@ -31,6 +35,10 @@ val LocalCustomColors = staticCompositionLocalOf {
         content = Color.Unspecified,
         selectedContentColor = Color.Unspecified,
         unSelectedContentColor = Color.Unspecified,
+        textColor = Color.Unspecified,
+        iconColor = Color.Unspecified,
+        increaseColor = Color.Unspecified,
+        decreaseColor = Color.Unspecified,
     )
 }
 val LocalCoinTypography = staticCompositionLocalOf {
@@ -54,6 +62,10 @@ private val DarkColorPalette = CoinColors(
     content = AppColors.White,
     selectedContentColor = AppColors.White,
     unSelectedContentColor = AppColors.White,
+    textColor = AppColors.Black,
+    iconColor = AppColors.Black,
+    increaseColor = Color.Unspecified,
+    decreaseColor = Color.Unspecified,
 )
 private val LightColorPalette = CoinColors(
     primary = AppColors.Purple500,
@@ -63,6 +75,10 @@ private val LightColorPalette = CoinColors(
     content = AppColors.White,
     selectedContentColor = AppColors.White,
     unSelectedContentColor = AppColors.White,
+    textColor = AppColors.Black,
+    iconColor = AppColors.Black,
+    increaseColor = AppColors.green,
+    decreaseColor = AppColors.Black,
 )
 
 @Composable

@@ -14,6 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.finance_tracker.finance_tracker.R
+import com.finance_tracker.finance_tracker.sreens.transactions.TransactionsListScreen
 import com.finance_tracker.finance_tracker.theme.AppColors
 
 @Composable
@@ -31,6 +32,7 @@ fun OperationsScreen(modifier: Modifier = Modifier) {
             textAlign = TextAlign.Center,
             fontSize = 24.sp
         )
+        TransactionsListScreen()
     }
 }
 
