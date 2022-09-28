@@ -1,4 +1,4 @@
-package com.finance_tracker.finance_tracker.sreens.more
+package com.finance_tracker.finance_tracker.screens.more
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

@@ -1,4 +1,4 @@
-package com.finance_tracker.finance_tracker.sreens.main
+package com.finance_tracker.finance_tracker.screens.operations
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -14,28 +14,30 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.finance_tracker.finance_tracker.R
+import com.finance_tracker.finance_tracker.screens.transactions.TransactionsListScreen
 import com.finance_tracker.finance_tracker.theme.AppColors
 
 @Composable
-fun MainScreen(modifier: Modifier = Modifier) {
+fun OperationsScreen(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(AppColors.Purple200)
+            .background(AppColors.Purple700)
     ) {
         Text(
-            text = stringResource(R.string.main_screen_text),
+            text = stringResource(R.string.operations_screen_text),
             fontWeight = FontWeight.Bold,
             color = Color.White,
             modifier = modifier.align(Alignment.CenterHorizontally),
             textAlign = TextAlign.Center,
             fontSize = 24.sp
         )
+        TransactionsListScreen()
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun MainScreenPreview() {
-    MainScreen()
+fun OperationsScreenPreview() {
+    OperationsScreen()
 }

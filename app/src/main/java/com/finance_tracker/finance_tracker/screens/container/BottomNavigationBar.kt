@@ -1,4 +1,4 @@
-package com.finance_tracker.finance_tracker.sreens.container
+package com.finance_tracker.finance_tracker.screens.container
 
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem

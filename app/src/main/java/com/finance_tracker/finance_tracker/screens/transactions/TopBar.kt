@@ -1,4 +1,4 @@
-package com.finance_tracker.finance_tracker.sreens.transactions
+package com.finance_tracker.finance_tracker.screens.transactions
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
