@@ -1,4 +1,4 @@
-package com.finance_tracker.finance_tracker.sreens.container
+package com.finance_tracker.finance_tracker.screens.container
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -11,9 +11,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.finance_tracker.finance_tracker.NavigationItem
-import com.finance_tracker.finance_tracker.sreens.main.MainScreen
-import com.finance_tracker.finance_tracker.sreens.more.MoreScreen
-import com.finance_tracker.finance_tracker.sreens.operations.OperationsScreen
+import com.finance_tracker.finance_tracker.screens.main.MainScreen
+import com.finance_tracker.finance_tracker.screens.more.MoreScreen
+import com.finance_tracker.finance_tracker.screens.operations.OperationsScreen
 
 @Composable
 fun TabsNavigationScreen(modifier: Modifier = Modifier) {

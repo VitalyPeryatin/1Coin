@@ -1,4 +1,4 @@
-package com.finance_tracker.finance_tracker.sreens.add_trnsaction
+package com.finance_tracker.finance_tracker.screens.add_trnsaction
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background

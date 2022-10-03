@@ -11,4 +11,7 @@
     <string name="add_transaction_amount">Amount</string>
     <string name="add_transaction_stage_account">Account</string>
     <string name="add_transaction_stage_category">Category</string>
+
+    <!--  TopBar  -->
+    <string name="transactions">Transactions</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.finance_tracker.finance_tracker.sreens.main
+package com.finance_tracker.finance_tracker.screens.more
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -18,15 +18,15 @@ import com.finance_tracker.finance_tracker.R
 import com.finance_tracker.finance_tracker.theme.AppColors
 
 @Composable
-fun MainScreen(modifier: Modifier = Modifier) {
+fun MoreScreen(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(AppColors.Purple200)
+            .background(AppColors.Purple500)
             .statusBarsPadding()
     ) {
         Text(
-            text = stringResource(R.string.main_screen_text),
+            text = stringResource(R.string.more_screen_text),
             fontWeight = FontWeight.Bold,
             color = Color.White,
             modifier = modifier.align(Alignment.CenterHorizontally),
@@ -38,6 +38,6 @@ fun MainScreen(modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun MainScreenPreview() {
-    MainScreen()
+fun MoreScreenPreview() {
+    MoreScreen()
 }

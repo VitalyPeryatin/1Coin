@@ -10,7 +10,7 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.finance_tracker.finance_tracker.sreens.container.TabsNavigationScreen
+import com.finance_tracker.finance_tracker.screens.container.TabsNavigationScreen
 import com.finance_tracker.finance_tracker.theme.CoinTheme
 
 class MainActivity : ComponentActivity() {

@@ -1,4 +1,4 @@
-package com.finance_tracker.finance_tracker.sreens.add_trnsaction
+package com.finance_tracker.finance_tracker.screens.add_trnsaction
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
