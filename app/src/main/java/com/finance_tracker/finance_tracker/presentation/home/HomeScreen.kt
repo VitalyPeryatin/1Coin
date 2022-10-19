@@ -43,6 +43,10 @@ fun HomeScreen() {
 
         AccountsWidget()
 
+        LastTransactionHeader()
+        
+        LastTransactionWidget()
+
     }
 }
 

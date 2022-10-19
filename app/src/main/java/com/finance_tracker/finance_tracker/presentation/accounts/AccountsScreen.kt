@@ -99,7 +99,8 @@ fun AccountsScreen() {
             type = Account.Type.DebitCard,
             name = "Debit card (*5841)",
             color = Color(0xFF33B679),
-        ),  Account(
+        ),
+        Account(
             id = 13,
             type = Account.Type.DebitCard,
             name = "Debit card (*5841)",
