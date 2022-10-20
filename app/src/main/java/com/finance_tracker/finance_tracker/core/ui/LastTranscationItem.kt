@@ -25,20 +25,28 @@ fun LastTransactionItem(
     data: Transaction,
     modifier: Modifier = Modifier
 ) {
-    Row() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.padding(
+            start = 16.dp,
+            end = 16.dp,
+            bottom = 12.dp
+        )
+    ) {
         Icon(
             painter = painterResource(R.drawable.ic_category_1),
             contentDescription = null,
             modifier = modifier
                 .size(44.dp)
                 .clip(CircleShape)
-                .background(CoinTheme.color.secondaryBackground, CircleShape),
-            tint = CoinTheme.color.primaryVariant
+                .background(
+                    CoinTheme.color.secondaryBackground,
+                    CircleShape
+                )
+                .padding(10.dp),
+            tint = CoinTheme.color.content
         )
-        Column(
-            modifier = Modifier.fillMaxHeight(),
-            verticalArrangement = Arrangement.Center
-        ) {
+        Column() {
             data.category?.let {
                 Text(
                     text = it.name,
@@ -56,16 +64,11 @@ fun LastTransactionItem(
             )
         }
         Spacer(modifier = Modifier.padding(start = 87.dp))
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier.fillMaxHeight()
-        ) {
-            Text(
+        Text(
                 text = data.amountCurrency,
                 style = CoinTheme.typography.body2,
                 color = CoinTheme.color.content,
             )
-        }
     }
 }
 

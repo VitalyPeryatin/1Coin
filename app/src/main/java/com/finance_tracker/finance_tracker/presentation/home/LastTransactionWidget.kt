@@ -2,8 +2,6 @@ package com.finance_tracker.finance_tracker.presentation.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -19,7 +17,6 @@ import com.finance_tracker.finance_tracker.domain.models.Account
 import com.finance_tracker.finance_tracker.domain.models.Category
 import com.finance_tracker.finance_tracker.domain.models.Transaction
 import com.finance_tracker.finance_tracker.domain.models.TransactionType
-import com.finance_tracker.finance_tracker.theme.AppColors
 import com.finance_tracker.finance_tracker.theme.CoinTheme
 import java.util.*
 
@@ -85,11 +82,19 @@ fun LastTransactionWidget(modifier: Modifier = Modifier) {
 
     LazyColumn(
         modifier = modifier
-            .border(1.dp,CoinTheme.color.secondaryBackground)
             .padding(16.dp)
-            .background(CoinTheme.color.background)
-            .clip(RoundedCornerShape(12.dp)),
-        contentPadding = PaddingValues(start = 12.dp),
+            .border(
+                1.dp,
+//                Change Color border
+                CoinTheme.color.content.copy(alpha = 0.5f)
+            )
+//                Fixed RoundedCornerShape
+            .clip(RoundedCornerShape(12.dp))
+            .background(CoinTheme.color.background),
+        contentPadding = PaddingValues(
+            top = 16.dp,
+            bottom = 4.dp
+        )
     ) {
         items(lastTransaction) { LastTransaction ->
             LastTransactionItem(data = LastTransaction)
