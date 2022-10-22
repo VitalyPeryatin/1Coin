@@ -14,7 +14,9 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import com.finance_tracker.finance_tracker.core.common.LocalContext
 import com.finance_tracker.finance_tracker.core.common.asSp
+import com.finance_tracker.finance_tracker.core.common.getContext
 
 @Immutable
 data class CoinColors(
@@ -106,6 +108,7 @@ fun CoinTheme(
     }
 
     CompositionLocalProvider(
+        LocalContext provides getContext(),
         LocalCoinColors provides coinColors,
         LocalCoinTypography provides CoinTheme.typography,
         LocalCoinElevation provides CoinTheme.elevation,

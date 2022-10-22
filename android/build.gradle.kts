@@ -82,7 +82,7 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics-ktx")
 
     // Jetpack Compose
-    val composeVersion = "1.3.0-beta01"
+    val composeVersion = "1.3.0-beta02"
     implementation("androidx.activity:activity-compose:1.6.0")
     implementation("androidx.compose.animation:animation:$composeVersion")
     implementation("androidx.compose.foundation:foundation:$composeVersion")
@@ -115,11 +115,6 @@ dependencies {
     implementation("com.squareup.sqldelight:android-driver:$sqlDelightVersion")
     implementation("com.squareup.sqldelight:coroutines-extensions:$sqlDelightVersion")
 
-    // Compose Destinations
-    val composeDestinationsVersion = "1.7.21-beta"
-    implementation("io.github.raamcosta.compose-destinations:animations-core:$composeDestinationsVersion")
-    ksp("io.github.raamcosta.compose-destinations:ksp:$composeDestinationsVersion")
-
     // Koin
     val koinVersion = "3.2.2"
     val koinKspVersion = "1.0.3"
@@ -129,4 +124,9 @@ dependencies {
     implementation("io.insert-koin:koin-android:$koinVersion")
     implementation("io.insert-koin:koin-androidx-compose:$koinAndroidComposeVersion")
     ksp("io.insert-koin:koin-ksp-compiler:$koinKspVersion")
+
+    // Odyssey
+    val odysseyVersion = "1.0.0"
+    implementation("io.github.alexgladkov:odyssey-core:$odysseyVersion")
+    implementation("io.github.alexgladkov:odyssey-compose:$odysseyVersion")
 }

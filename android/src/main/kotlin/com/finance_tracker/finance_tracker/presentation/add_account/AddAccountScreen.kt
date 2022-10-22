@@ -32,7 +32,6 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.R
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
@@ -46,10 +45,6 @@ import com.finance_tracker.finance_tracker.domain.models.AccountColorData
 import com.finance_tracker.finance_tracker.presentation.add_account.dropdown_menus.AccountColorsDropdownMenu
 import com.finance_tracker.finance_tracker.presentation.add_account.dropdown_menus.AccountTypesDropdownMenu
 import com.finance_tracker.finance_tracker.presentation.add_account.views.CurrencySelector
-import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.annotation.RootNavGraph
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -57,11 +52,8 @@ import org.koin.androidx.compose.getViewModel
 
 private const val AccountNameCharsLimit = 40
 
-@RootNavGraph
-@Destination
 @Composable
 fun AddAccountScreen(
-    navigator: DestinationsNavigator,
     viewModel: AddAccountViewModel = getViewModel(),
 ) {
     val context = LocalContext.current
@@ -74,8 +66,7 @@ fun AddAccountScreen(
     Column {
         AddAccountTopBar(
             modifier = Modifier
-                .statusBarsPadding(),
-            navigator = navigator
+                .statusBarsPadding()
         )
 
         val titleAccount by viewModel.enteredAccountName.collectAsState()
@@ -275,7 +266,6 @@ fun ColorIcon(accountColorData: AccountColorData?) {
 
 @Composable
 private fun AddAccountTopBar(
-    navigator: DestinationsNavigator,
     modifier: Modifier = Modifier
 ) {
     TopAppBar(
@@ -285,7 +275,7 @@ private fun AddAccountTopBar(
         navigationIcon = {
             AppBarIcon(
                 painter = rememberVectorPainter(loadXmlPicture("ic_arrow_back")),
-                onClick = { navigator.popBackStack() }
+                onClick = { /*navigator.popBackStack()*/ }
             )
         },
         title = {
@@ -294,13 +284,5 @@ private fun AddAccountTopBar(
                 style = CoinTheme.typography.h4
             )
         }
-    )
-}
-
-@Preview
-@Composable
-fun AddAccountScreenPreview() {
-    AddAccountScreen(
-        navigator = EmptyDestinationsNavigator
     )
 }

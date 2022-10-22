@@ -4,15 +4,11 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Surface
-import androidx.compose.ui.Modifier
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.finance_tracker.finance_tracker.core.theme.CoinTheme
-import com.finance_tracker.finance_tracker.presentation.NavGraphs
-import com.ramcosta.composedestinations.DestinationsNavHost
+import com.finance_tracker.finance_tracker.core.navigation.main.MainNavigationTree
+import com.finance_tracker.finance_tracker.core.navigation.main.navigationGraph
+import com.finance_tracker.finance_tracker.core.theme.setupThemedNavigation
 
 class MainActivity : ComponentActivity() {
 
@@ -22,16 +18,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            CoinTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = CoinTheme.color.background
-                ) {
-                    DestinationsNavHost(navGraph = NavGraphs.root)
-                }
-            }
-        }
+        setupThemedNavigation(MainNavigationTree.Main.name) { navigationGraph() }
 
         requestSmsPermission()
     }

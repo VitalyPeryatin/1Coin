@@ -28,6 +28,11 @@ kotlin {
 
                 // ViewModel
                 implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
+
+                // Odyssey
+                val odysseyVersion = "1.0.0"
+                implementation("io.github.alexgladkov:odyssey-core:$odysseyVersion")
+                implementation("io.github.alexgladkov:odyssey-compose:$odysseyVersion")
             }
             kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
         }
@@ -36,12 +41,22 @@ kotlin {
                 api(compose.uiTooling)
                 // Needed only for preview.
                 api(compose.preview)
+
+                // Koin
+                val koinVersion = "3.2.2"
+                implementation("io.insert-koin:koin-core:$koinVersion")
             }
         }
         named("androidMain") {
             dependencies {
                 api("androidx.appcompat:appcompat:1.5.1")
                 api("androidx.core:core-ktx:1.9.0")
+
+                // Koin
+                val koinVersion = "3.2.2"
+                val koinAndroidComposeVersion = "3.2.1"
+                implementation("io.insert-koin:koin-android:$koinVersion")
+                implementation("io.insert-koin:koin-androidx-compose:$koinAndroidComposeVersion")
             }
         }
     }
