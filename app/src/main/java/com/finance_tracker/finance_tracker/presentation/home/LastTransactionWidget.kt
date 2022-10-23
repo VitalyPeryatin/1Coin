@@ -1,6 +1,5 @@
 package com.finance_tracker.finance_tracker.presentation.home
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -85,12 +84,10 @@ fun LastTransactionWidget(modifier: Modifier = Modifier) {
             .padding(16.dp)
             .border(
                 1.dp,
-//                Change Color border
-                CoinTheme.color.content.copy(alpha = 0.5f)
+                CoinTheme.color.content.copy(0.4f),
+                radius = 12.dp
             )
-//                Fixed RoundedCornerShape
-            .clip(RoundedCornerShape(12.dp))
-            .background(CoinTheme.color.background),
+            .clip(RoundedCornerShape(12.dp)),
         contentPadding = PaddingValues(
             top = 16.dp,
             bottom = 4.dp
