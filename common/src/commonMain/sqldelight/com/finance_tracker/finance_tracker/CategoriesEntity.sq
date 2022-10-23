@@ -1,0 +1,14 @@
+CREATE TABLE CategoriesEntity (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    icon TEXT NOT NULL
+);
+
+getAllCategories:
+SELECT *
+FROM CategoriesEntity;
+
+insertCategory:
+INSERT OR REPLACE
+INTO CategoriesEntity
+VALUES (?,?,?);

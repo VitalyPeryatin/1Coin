@@ -1,0 +1,30 @@
+import com.finance_tracker.finance_tracker.domain.models.Account;
+
+CREATE TABLE AccountsEntity (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    type TEXT AS Account.Type NOT NULL,
+    name TEXT NOT NULL,
+    balance REAL NOT NULL,
+    colorHex TEXT NOT NULL
+);
+
+INSERT INTO AccountsEntity (id, type, name, balance, colorHex) VALUES(1, 'CreditCard', 'Cash', 0, '#FF0000');
+INSERT INTO AccountsEntity (id, type, name, balance, colorHex) VALUES(2, 'Cash', 'Card', 0, '#00FF00');
+
+getAccountById:
+SELECT *
+FROM AccountsEntity
+WHERE id = :id;
+
+getAllAccounts:
+SELECT *
+FROM AccountsEntity;
+
+insertAccount:
+INSERT OR REPLACE
+INTO AccountsEntity
+VALUES (?,?,?,?,?);
+
+deleteAccountById:
+DELETE FROM AccountsEntity
+WHERE id = :id;

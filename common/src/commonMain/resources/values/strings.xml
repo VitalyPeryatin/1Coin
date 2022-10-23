@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">FinanceTracker</string>
+    <string name="more_screen_text">Ещё</string>
+    <string name="main_screen_text">Главная</string>
+    <string name="operations_screen_text">Операции</string>
+
+    <string name="transactions_title">Transactions</string>
+
+    <!-- Tabs -->
+    <string name="tab_home">Home</string>
+    <string name="tab_transactions">Transactions</string>
+    <string name="tab_accounts">Accounts</string>
+    <string name="tab_analytics">Analytics</string>
+
+    <!-- Add transaction -->
+    <string name="add_transaction_tab_income">Income</string>
+    <string name="add_transaction_tab_expense">Expense</string>
+    <string name="add_transaction_tab_transfer">Transfer</string>
+    <string name="add_transaction_amount">Amount</string>
+    <string name="add_transaction_stage_account">Account</string>
+    <string name="add_transaction_stage_category">Category</string>
+
+    <!-- Home -->
+    <string name="home_topbar_text">Total Balance</string>
+    <string name="home_my_accounts">My Accounts</string>
+
+    <!--Accounts -->
+    <string name="accounts_screen_header">Accounts</string>
+
+    <!-- Transactions -->
+    <string name="transactions_today">Today</string>
+    <string name="transactions_yesterday">Yesterday</string>
+
+    <!-- New account -->
+    <string name="new_account_title">New Account</string>
+    <string name="new_account_btn_add">Add</string>
+    <string name="new_account_field_name_label">Title</string>
+    <string name="new_account_field_name_placeholder">Enter Name</string>
+    <string name="new_account_field_type_label">Type</string>
+    <string name="new_account_field_type_placeholder">Select Type</string>
+    <string name="new_account_field_color_label">Color</string>
+    <string name="new_account_field_color_placeholder">Select Color</string>
+    <string name="new_account_field_amount_label">Amount</string>
+    <string name="new_account_field_amount_placeholder">Enter Amount</string>
+    <string name="new_account_error_enter_account_name">Enter account name</string>
+    <string name="new_account_error_select_account_type">Select type</string>
+    <string name="new_account_error_select_account_color">Select color</string>
+    <string name="new_account_error_enter_account_balance">Enter amount</string>
+</resources>
