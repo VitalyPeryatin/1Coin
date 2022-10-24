@@ -5,6 +5,8 @@ odyssey = "1.0.0"
 compose = "1.3.0-beta02"
 koin = "3.2.2"
 sqldelight = "1.5.4"
+firebase = "30.3.2"
+chucker = "3.5.2"
 
 [libraries]
 odyssey-core = { module = "io.github.alexgladkov:odyssey-core", version.ref = "odyssey" }
@@ -24,6 +26,14 @@ sqldelight-android = { module = "com.squareup.sqldelight:android-driver", versio
 sqldelight-jvm = { module = "com.squareup.sqldelight:sqlite-driver", version.ref = "sqldelight" }
 
 viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
+
+leakcanary = "com.squareup.leakcanary:leakcanary-android:2.9.1"
+
+chucker-release = { module = "com.github.chuckerteam.chucker:library-no-op", version.ref = "chucker" }
+chucker-debug = { module = "com.github.chuckerteam.chucker:library", version.ref = "chucker" }
 
 [bundles]
 odyssey = ["odyssey-core", "odyssey-compose"]

@@ -3,7 +3,7 @@ package com.finance_tracker.finance_tracker.di
 import com.finance_tracker.finance_tracker.presentation.accounts.AccountsScreenViewModel
 import com.finance_tracker.finance_tracker.presentation.add_account.AddAccountViewModel
 import com.finance_tracker.finance_tracker.presentation.add_transaction.AddTransactionViewModel
-import com.finance_tracker.finance_tracker.presentation.categories.CategorySettingsScreenViewModel
+import com.finance_tracker.finance_tracker.presentation.categories.CategorySettingsViewModel
 import com.finance_tracker.finance_tracker.presentation.home.HomeScreenViewModel
 import com.finance_tracker.finance_tracker.presentation.transactions.TransactionsViewModel
 import org.koin.core.module.Module
@@ -17,6 +17,6 @@ actual class ViewModelsModule {
         factoryOf(::AddAccountViewModel)
         factoryOf(::HomeScreenViewModel)
         factoryOf(::AddTransactionViewModel)
-        factoryOf(::CategorySettingsScreenViewModel)
+        factoryOf(::CategorySettingsViewModel)
     }
 }

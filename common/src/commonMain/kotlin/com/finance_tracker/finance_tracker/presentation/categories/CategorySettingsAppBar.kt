@@ -9,21 +9,25 @@ import com.finance_tracker.finance_tracker.core.common.getLocalizedString
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.ui.AppBarIcon
 import com.finance_tracker.finance_tracker.core.ui.loadXmlPicture
+import ru.alexgladkov.odyssey.compose.local.LocalRootController
 
 @Composable
 fun CategorySettingsAppBar() {
+
+    val rootController = LocalRootController.current
     val context = LocalContext.current
+
     TopAppBar(
         backgroundColor = CoinTheme.color.primaryVariant,
         navigationIcon = {
             AppBarIcon(
                 painter = rememberVectorPainter(loadXmlPicture("ic_arrow_back")),
-                onClick = {  },
+                onClick = { rootController.findRootController().popBackStack() },
             )
         },
         title = {
             Text(
-                text = getLocalizedString("category_settings", context),
+                text = getLocalizedString(id = "category_settings", context = context),
                 style = CoinTheme.typography.h4
             )
         },

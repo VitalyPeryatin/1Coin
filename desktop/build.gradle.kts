@@ -13,11 +13,7 @@ kotlin {
         named("jvmMain") {
             dependencies {
                 implementation(compose.desktop.currentOs)
-            }
-        }
-        named("commonMain") {
-            dependencies {
-                implementation(project(":common"))
+                implementation(projects.common)
             }
         }
     }
@@ -28,9 +24,22 @@ compose.desktop {
         mainClass = "com.finance_tracker.finance_tracker.MainKt"
 
         nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "KotlinMultiplatformComposeDesktopApplication"
+            modules("java.sql")
+            targetFormats(TargetFormat.Dmg, TargetFormat.Exe, TargetFormat.Deb)
+            packageName = "1Coin"
             packageVersion = "1.0.0"
+            copyright = "© 2021 1Coin. All rights reserved."
+            vendor = "FinanceTracker"
+            licenseFile.set(rootProject.file("LICENSE"))
+            macOS {
+                iconFile.set(project.file("src/jvmMain/resources/icons/app_icon.icns"))
+            }
+            windows {
+                iconFile.set(project.file("src/jvmMain/resources/icons/app_icon.ico"))
+            }
+            linux {
+                iconFile.set(project.file("src/jvmMain/resources/icons/app_icon.png"))
+            }
 
             windows {
                 menuGroup = "Desktop"

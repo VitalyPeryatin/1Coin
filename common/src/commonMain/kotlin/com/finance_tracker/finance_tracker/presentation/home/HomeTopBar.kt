@@ -16,12 +16,17 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.common.LocalContext
 import com.finance_tracker.finance_tracker.core.common.getLocalizedString
+import com.finance_tracker.finance_tracker.core.navigation.main.MainNavigationTree
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.ui.loadXmlPicture
+import ru.alexgladkov.odyssey.compose.extensions.push
+import ru.alexgladkov.odyssey.compose.local.LocalRootController
 
 @Composable
 fun HomeTopBar() {
     val context = LocalContext.current
+    val rootController = LocalRootController.current
+
     TopAppBar(
         backgroundColor = CoinTheme.color.primaryVariant,
         title = {
@@ -47,7 +52,7 @@ fun HomeTopBar() {
                         color = CoinTheme.color.secondaryBackground,
                         shape = CircleShape
                     )
-                    .clickable { }
+                    .clickable { rootController.findRootController().push(MainNavigationTree.CategorySettings.name) }
                     .padding(8.dp),
                 tint = CoinTheme.color.content.copy(alpha = 0.8f)
             )

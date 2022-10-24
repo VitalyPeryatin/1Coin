@@ -87,7 +87,8 @@ class DatabaseInitializer(
                     categoriesEntityQueries.insertCategory(
                         id = category.id,
                         name = category.name,
-                        icon = category.iconId
+                        icon = category.iconId,
+                        position = category.id,
                     )
                 }
             }

@@ -1,13 +1,9 @@
-import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
-
 plugins {
-    id("org.jetbrains.compose") version "1.2.0"
+    id("org.jetbrains.compose")
     id("com.android.application")
     id("com.google.firebase.crashlytics")
     id("com.google.gms.google-services")
-    id("io.gitlab.arturbosch.detekt")
     kotlin("android")
-    kotlin("kapt")
 }
 
 android {
@@ -19,17 +15,12 @@ android {
         minSdk = 24
         targetSdk = 33
         versionCode = 1
-        versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        versionName = "1.0.0"
     }
 
     buildTypes {
         debug {
-            isMinifyEnabled = false
-            (this as ExtensionAware).configure<CrashlyticsExtension> {
-                mappingFileUploadEnabled = false
-            }
+            isDebuggable = true
         }
         release {
             isMinifyEnabled = true
@@ -47,41 +38,27 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-        kotlinOptions {
-            jvmTarget = "11"
-        }
-    }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.0"
+        kotlinCompilerExtensionVersion = "1.3.2"
     }
 }
 
 dependencies {
+    implementation(projects.common)
 
-    implementation(project(":common"))
-    implementation("androidx.activity:activity-compose:1.6.0")
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.crashlytics)
 
-    // Firebase BoM
-    implementation(platform ("com.google.firebase:firebase-bom:30.3.2"))
-    implementation("com.google.firebase:firebase-analytics-ktx")
-    implementation("com.google.firebase:firebase-config-ktx")
-    implementation("com.google.firebase:firebase-crashlytics-ktx")
+    debugImplementation(libs.leakcanary)
 
-    // LeakCanary
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.9.1")
-
-    // Chucker
-    val chukerVersion = "3.5.2"
-    debugImplementation("com.github.chuckerteam.chucker:library:$chukerVersion")
-    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:$chukerVersion")
+    debugImplementation(libs.chucker.debug)
+    releaseImplementation(libs.chucker.release)
 
     implementation(libs.bundles.koin.android)
 }

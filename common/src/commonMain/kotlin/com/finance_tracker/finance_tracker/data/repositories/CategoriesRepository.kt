@@ -18,6 +18,7 @@ class CategoriesRepository(
                 id = null,
                 name = categoryName,
                 icon = categoryIcon,
+                position = null,
             )
         }
     }
@@ -26,6 +27,19 @@ class CategoriesRepository(
         return withContext(Dispatchers.IO) {
             categoriesEntityQueries.getAllCategories().executeAsList()
                 .map { it.categoryToDomainModel() }
+        }
+    }
+
+    suspend fun deleteCategoryById(id: Long) {
+        withContext(Dispatchers.IO) {
+            categoriesEntityQueries.deleteCategoryById(id)
+        }
+    }
+
+    suspend fun updateCategoryPosition(categoryFrom: Category, categoryTo: Category) {
+        withContext(Dispatchers.IO) {
+            categoriesEntityQueries.replaceCategory(categoryFrom.id, categoryTo.id)
+            categoriesEntityQueries.replaceCategory(categoryTo.id, categoryFrom.id)
         }
     }
 }

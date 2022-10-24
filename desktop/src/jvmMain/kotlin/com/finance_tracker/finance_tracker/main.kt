@@ -11,7 +11,11 @@ import org.koin.core.context.startKoin
 
 fun main() = application {
     initKoin()
-    Window(onCloseRequest = ::exitApplication) {
+    Window(
+        visible = true,
+        title = "",
+        onCloseRequest = ::exitApplication
+    ) {
         setupThemedNavigation(MainNavigationTree.Main.name) { navigationGraph() }
     }
 }
