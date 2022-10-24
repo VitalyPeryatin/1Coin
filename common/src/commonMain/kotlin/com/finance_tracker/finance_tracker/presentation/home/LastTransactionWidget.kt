@@ -8,15 +8,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.ui.LastTransactionItem
 import com.finance_tracker.finance_tracker.core.ui.border
 import com.finance_tracker.finance_tracker.domain.models.Account
 import com.finance_tracker.finance_tracker.domain.models.Category
 import com.finance_tracker.finance_tracker.domain.models.Transaction
 import com.finance_tracker.finance_tracker.domain.models.TransactionType
-import com.finance_tracker.finance_tracker.theme.CoinTheme
 import java.util.*
 
 @Composable
@@ -28,17 +27,14 @@ fun LastTransactionWidget(modifier: Modifier = Modifier) {
             type = TransactionType.Expense,
             amountCurrency = "-$25.52",
             account = Account(
-                0,
-                Account.Type.DebitCard,
-                "Debit card (*5841)",
-                CoinTheme.color.content.copy(alpha = 0.5f)
+                id = 0,
+                type = Account.Type.DebitCard,
+                name = "Debit card (*5841)",
+                balance = 100.0,
+                color = CoinTheme.color.content.copy(alpha = 0.5f)
             ),
             amount = 25.52,
-            category = Category(
-                0,
-                "Restaurant",
-                1
-            ),
+            category = Category.EMPTY,
             date = Date(28)
         ),
         Transaction(
@@ -46,17 +42,14 @@ fun LastTransactionWidget(modifier: Modifier = Modifier) {
             type = TransactionType.Expense,
             amountCurrency = "-$25.52",
             account = Account(
-                0,
-                Account.Type.DebitCard,
-                "Debit card (*5841)",
-                CoinTheme.color.content.copy(alpha = 0.5f)
+                id = 0,
+                type = Account.Type.DebitCard,
+                name = "Debit card (*5841)",
+                balance = 100.0,
+                color = CoinTheme.color.content.copy(alpha = 0.5f)
             ),
             amount = 25.52,
-            category = Category(
-                0,
-                "Health",
-                2
-            ),
+            category = Category.EMPTY,
             date = Date(28)
         ),
         Transaction(
@@ -64,17 +57,14 @@ fun LastTransactionWidget(modifier: Modifier = Modifier) {
             type = TransactionType.Expense,
             amountCurrency = "-$25.52",
             account = Account(
-                0,
-                Account.Type.DebitCard,
-                "Debit card (*5841)",
-                CoinTheme.color.content.copy(alpha = 0.5f)
+                id = 0,
+                type = Account.Type.DebitCard,
+                name = "Debit card (*5841)",
+                balance = 100.0,
+                color = CoinTheme.color.content.copy(alpha = 0.5f)
             ),
             amount = 25.52,
-            category = Category(
-                0,
-                "Public Transport",
-                8
-            ),
+            category = Category.EMPTY,
             date = Date(28)
         )
     )
@@ -97,10 +87,4 @@ fun LastTransactionWidget(modifier: Modifier = Modifier) {
             LastTransactionItem(data = LastTransaction)
         }
     }
-}
-
-@Composable
-@Preview
-fun LastTransactionWidgetPreview() {
-    LastTransactionWidget()
 }

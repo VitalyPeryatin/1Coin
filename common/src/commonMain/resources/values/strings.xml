@@ -23,6 +23,8 @@
     <!-- Home -->
     <string name="home_topbar_text">Total Balance</string>
     <string name="home_my_accounts">My Accounts</string>
+    <string name="home_last_transaction">Last Transaction</string>
+
 
     <!--Accounts -->
     <string name="accounts_screen_header">Accounts</string>

@@ -1,20 +1,25 @@
 package com.finance_tracker.finance_tracker.presentation.home
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.dp
-import com.finance_tracker.finance_tracker.R
-import com.finance_tracker.finance_tracker.theme.CoinTheme
+import com.finance_tracker.finance_tracker.core.common.LocalContext
+import com.finance_tracker.finance_tracker.core.common.getLocalizedString
+import com.finance_tracker.finance_tracker.core.theme.CoinTheme
+import com.finance_tracker.finance_tracker.core.ui.loadXmlPicture
+
 
 @Composable
 fun LastTransactionHeader(modifier: Modifier = Modifier) {
+    val context = LocalContext.current
     Row(
         modifier = modifier
             .padding(
@@ -23,24 +28,18 @@ fun LastTransactionHeader(modifier: Modifier = Modifier) {
             )
     ) {
         Text(
-            text = stringResource(id = R.string.home_last_transaction),
+            text = getLocalizedString("home_last_transaction", context),
             style = CoinTheme.typography.h4
         )
         Spacer(
             modifier = Modifier.weight(1f)
         )
         Icon(
-            painter = painterResource(R.drawable.ic_arrow_next_small),
+            painter = rememberVectorPainter(loadXmlPicture("ic_arrow_next_small")),
             contentDescription = null,
             modifier = Modifier
                 .size(24.dp)
                 .align(Alignment.CenterVertically)
         )
     }
-}
-
-@Preview
-@Composable
-fun LastTransactionHeaderPreview() {
-    LastTransactionHeader()
 }
