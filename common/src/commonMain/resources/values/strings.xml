@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FinanceTracker</string>
+    <string name="app_name">1Coin</string>
     <string name="more_screen_text">Ещё</string>
     <string name="main_screen_text">Главная</string>
     <string name="operations_screen_text">Операции</string>
@@ -30,6 +30,9 @@
     <!-- Transactions -->
     <string name="transactions_today">Today</string>
     <string name="transactions_yesterday">Yesterday</string>
+
+    <!-- Categories -->
+    <string name="category_settings">Category Settings</string>
 
     <!-- New account -->
     <string name="new_account_title">New Account</string>

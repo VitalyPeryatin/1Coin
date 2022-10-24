@@ -1,23 +1,24 @@
 package com.finance_tracker.finance_tracker.core.ui
 
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.material.DropdownMenuItem as AndroidDropDownMenuItem
 
 @Composable
-fun CoinDropdownMenu(
+actual fun CoinDropdownMenu(
     expanded: Boolean,
     onDismissRequest: () -> Unit,
-    modifier: Modifier = Modifier,
-    xOffset: Dp = 0.dp,
-    yOffset: Dp = 8.dp,
+    modifier: Modifier,
+    xOffset: Dp,
+    yOffset: Dp,
     content: @Composable ColumnScope.() -> Unit
 ) {
     MaterialTheme(shapes = MaterialTheme.shapes.copy(medium = RoundedCornerShape(12.dp))) {
@@ -31,8 +32,13 @@ fun CoinDropdownMenu(
     }
 }
 
-@Preview
 @Composable
-fun CoinDropdownMenuPreview() {
-    CoinDropdownMenu(expanded = true, onDismissRequest = {}, content = {})
-}
+actual fun DropdownMenuItem(
+    modifier: Modifier,
+    onClick: () -> Unit,
+    content: @Composable RowScope.() -> Unit
+) = AndroidDropDownMenuItem(
+    modifier = modifier,
+    onClick = onClick,
+    content = content
+)

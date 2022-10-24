@@ -16,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.ui.loadXmlPicture
@@ -68,15 +67,5 @@ fun CurrencySelector(
         items = items,
         expandedState = currencyMenuExpanded,
         onCurrencySelect = onCurrencySelect
-    )
-}
-
-@Preview
-@Composable
-fun CurrencySelectorPreview() {
-    val currency = Currency(name = "USD", sign = "\$")
-    CurrencySelector(
-        items = listOf(currency),
-        selectedCurrency = currency
     )
 }
