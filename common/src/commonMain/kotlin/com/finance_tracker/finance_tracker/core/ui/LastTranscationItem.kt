@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.domain.models.Transaction
+import com.finance_tracker.finance_tracker.core.ui.
 
 @Composable
 fun LastTransactionItem(
@@ -28,7 +29,7 @@ fun LastTransactionItem(
         )
     ) {
         Icon(
-            painter = rememberVectorPainter(loadXmlPicture("ic_category_1")),
+            painter = rememberVectorPainter("ic_category_1"),
             contentDescription = null,
             modifier = modifier
                 .size(44.dp)
