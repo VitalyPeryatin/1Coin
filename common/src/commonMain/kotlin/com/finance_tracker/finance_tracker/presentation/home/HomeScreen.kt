@@ -13,6 +13,7 @@ import com.finance_tracker.finance_tracker.core.common.LocalContext
 import com.finance_tracker.finance_tracker.core.common.getViewModel
 import com.finance_tracker.finance_tracker.core.common.statusBarsPadding
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
+import com.finance_tracker.finance_tracker.core.ui.TitleHeader
 
 @Composable
 fun HomeScreen(
@@ -31,12 +32,22 @@ fun HomeScreen(
 
         HomeTopBar()
 
-        MyAccountsHeader(
+        TitleHeader(
             modifier = Modifier
-                .padding(top = 26.dp)
+                .padding(top = 26.dp),
+            textValue = "home_my_accounts"
         )
 
         AccountsWidget(data = accounts)
+
+        TitleHeader(
+            modifier = Modifier
+                .padding(top = 26.dp),
+            textValue = "home_last_transaction"
+
+        )
+
+        LastTransactionWidget()
 
     }
 }

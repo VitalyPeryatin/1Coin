@@ -1,6 +1,7 @@
 package com.finance_tracker.finance_tracker.presentation.home
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -10,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
-import com.finance_tracker.finance_tracker.core.ui.LastTransactionItem
+import com.finance_tracker.finance_tracker.core.ui.TransactionItem
 import com.finance_tracker.finance_tracker.core.ui.border
 import com.finance_tracker.finance_tracker.domain.models.Account
 import com.finance_tracker.finance_tracker.domain.models.Category
@@ -34,7 +35,11 @@ fun LastTransactionWidget(modifier: Modifier = Modifier) {
                 color = CoinTheme.color.content.copy(alpha = 0.5f)
             ),
             amount = 25.52,
-            category = Category.EMPTY,
+            category = Category(
+                id = 0,
+                name = "Restaurant",
+                iconId = "ic_category_1"
+            ),
             date = Date(28)
         ),
         Transaction(
@@ -49,7 +54,11 @@ fun LastTransactionWidget(modifier: Modifier = Modifier) {
                 color = CoinTheme.color.content.copy(alpha = 0.5f)
             ),
             amount = 25.52,
-            category = Category.EMPTY,
+            category = Category(
+                id = 1,
+                name = "Health",
+                iconId = "ic_category_2"
+            ),
             date = Date(28)
         ),
         Transaction(
@@ -64,13 +73,18 @@ fun LastTransactionWidget(modifier: Modifier = Modifier) {
                 color = CoinTheme.color.content.copy(alpha = 0.5f)
             ),
             amount = 25.52,
-            category = Category.EMPTY,
+            category = Category(
+                id = 2,
+                name = "Public Transport",
+                iconId = "ic_category_8"
+            ),
             date = Date(28)
         )
     )
 
     LazyColumn(
         modifier = modifier
+            .fillMaxWidth()
             .padding(16.dp)
             .border(
                 1.dp,
@@ -84,7 +98,7 @@ fun LastTransactionWidget(modifier: Modifier = Modifier) {
         )
     ) {
         items(lastTransaction) { LastTransaction ->
-            LastTransactionItem(data = LastTransaction)
+            TransactionItem(transaction = LastTransaction)
         }
     }
 }
