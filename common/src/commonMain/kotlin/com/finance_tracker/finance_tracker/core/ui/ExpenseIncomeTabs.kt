@@ -10,9 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.finance_tracker.finance_tracker.core.common.LocalContext
-import com.finance_tracker.finance_tracker.core.common.getLocalizedString
 import com.finance_tracker.finance_tracker.core.common.statusBarsPadding
+import com.finance_tracker.finance_tracker.core.common.stringResource
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 
 
@@ -52,14 +51,13 @@ private fun CategoryItem(
     modifier: Modifier = Modifier,
     onClick: (CategoryTab) -> Unit
 ) {
-    val context = LocalContext.current
     Text(
         modifier = modifier
             .padding(horizontal = 1.dp)
             .clip(RoundedCornerShape(8.dp))
             .clickable { onClick.invoke(categoryTab) }
             .padding(horizontal = 8.dp, vertical = 8.dp),
-        text = getLocalizedString(categoryTab.textId, context),
+        text = stringResource(categoryTab.textId),
         style = CoinTheme.typography.h5,
         color = if (selectedCategoryTab == categoryTab) {
             CoinTheme.color.content

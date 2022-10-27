@@ -6,31 +6,28 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
-import com.finance_tracker.finance_tracker.core.common.LocalContext
-import com.finance_tracker.finance_tracker.core.common.getLocalizedString
 import com.finance_tracker.finance_tracker.core.common.statusBarsPadding
+import com.finance_tracker.finance_tracker.core.common.stringResource
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.ui.AppBarIcon
-import com.finance_tracker.finance_tracker.core.ui.loadXmlPicture
+import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
 
 @Composable
 fun TransactionsAppBar(
     modifier: Modifier = Modifier
 ) {
-    val context = LocalContext.current
     TopAppBar(
         modifier = modifier
             .background(CoinTheme.color.background)
             .statusBarsPadding(),
         title = {
             Text(
-                text = getLocalizedString("transactions_title", context),
+                text = stringResource("transactions_title"),
                 style = CoinTheme.typography.h4
             )
         },
         actions = {
-            AppBarIcon(painter = rememberVectorPainter(loadXmlPicture("ic_more_vert")))
+            AppBarIcon(painter = rememberVectorPainter("ic_more_vert"))
         },
         backgroundColor = Color.White
     )

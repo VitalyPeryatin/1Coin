@@ -24,7 +24,7 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
-import com.finance_tracker.finance_tracker.core.ui.loadXmlPicture
+import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
 import com.finance_tracker.finance_tracker.domain.models.Category
 import kotlin.math.roundToInt
 
@@ -93,7 +93,7 @@ private fun CategoryCard(
         verticalArrangement = Arrangement.Center
     ) {
         Icon(
-            imageVector = loadXmlPicture(category.iconId),
+            painter = rememberVectorPainter(category.iconId),
             contentDescription = null
         )
         Text(

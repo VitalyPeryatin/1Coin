@@ -12,21 +12,17 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.dp
-import com.finance_tracker.finance_tracker.core.common.LocalContext
-import com.finance_tracker.finance_tracker.core.common.getLocalizedString
+import com.finance_tracker.finance_tracker.core.common.stringResource
 import com.finance_tracker.finance_tracker.core.navigation.main.MainNavigationTree
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
-import com.finance_tracker.finance_tracker.core.ui.loadXmlPicture
+import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
 import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 
 @Composable
 fun HomeTopBar() {
-    val context = LocalContext.current
     val rootController = LocalRootController.current
-
     TopAppBar(
         backgroundColor = CoinTheme.color.primaryVariant,
         title = {
@@ -36,14 +32,14 @@ fun HomeTopBar() {
                     style = CoinTheme.typography.h4
                 )
                 Text(
-                    text = getLocalizedString("home_topbar_text", context),
+                    text = stringResource("home_topbar_text"),
                     style = CoinTheme.typography.subtitle2
                 )
             }
         },
         actions = {
             Icon(
-                painter = rememberVectorPainter(loadXmlPicture("ic_settings")),
+                painter = rememberVectorPainter("ic_settings"),
                 contentDescription = null,
                 Modifier
                     .size(42.dp)

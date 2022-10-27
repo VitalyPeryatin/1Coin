@@ -11,11 +11,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
-import com.finance_tracker.finance_tracker.core.ui.loadXmlPicture
+import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
 
 sealed interface KeyboardCommand {
     data class Digit(val value: Int): KeyboardCommand
@@ -55,7 +54,7 @@ fun AmountKeyboard(
                             KeyboardCommand.Delete -> {
                                 Icon(
                                     modifier = Modifier.size(24.dp),
-                                    painter = rememberVectorPainter(loadXmlPicture("ic_plus")),
+                                    painter = rememberVectorPainter("ic_plus"),
                                     contentDescription = null
                                 )
                             }

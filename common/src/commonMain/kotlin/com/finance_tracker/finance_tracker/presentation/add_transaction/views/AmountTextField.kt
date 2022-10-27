@@ -11,8 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.finance_tracker.finance_tracker.core.common.LocalContext
-import com.finance_tracker.finance_tracker.core.common.getLocalizedString
+import com.finance_tracker.finance_tracker.core.common.stringResource
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 
 @Composable
@@ -21,7 +20,6 @@ fun AmountTextField(
     modifier: Modifier = Modifier,
     amount: Double = 0.0
 ) {
-    val context = LocalContext.current
     Column(
         modifier = modifier
             .background(Color.White)
@@ -37,7 +35,7 @@ fun AmountTextField(
         )
         Text(
             modifier = Modifier.padding(top = 8.dp),
-            text = getLocalizedString("add_transaction_amount", context),
+            text = stringResource("add_transaction_amount"),
             color = Color.Black.copy(alpha = 0.3f),
             style = CoinTheme.typography.subtitle2
         )

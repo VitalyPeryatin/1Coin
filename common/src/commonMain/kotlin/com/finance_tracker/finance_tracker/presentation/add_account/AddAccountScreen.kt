@@ -23,7 +23,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInParent
 import androidx.compose.ui.platform.LocalFocusManager
@@ -31,16 +30,16 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.common.LocalContext
-import com.finance_tracker.finance_tracker.core.common.getLocalizedString
 import com.finance_tracker.finance_tracker.core.common.getViewModel
 import com.finance_tracker.finance_tracker.core.common.statusBarsPadding
+import com.finance_tracker.finance_tracker.core.common.stringResource
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.theme.staticTextSize
 import com.finance_tracker.finance_tracker.core.ui.AppBarIcon
 import com.finance_tracker.finance_tracker.core.ui.CoinOutlinedSelectTextField
 import com.finance_tracker.finance_tracker.core.ui.CoinOutlinedTextField
 import com.finance_tracker.finance_tracker.core.ui.PrimaryButton
-import com.finance_tracker.finance_tracker.core.ui.loadXmlPicture
+import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
 import com.finance_tracker.finance_tracker.domain.models.AccountColorData
 import com.finance_tracker.finance_tracker.presentation.add_account.dropdown_menus.AccountColorsDropdownMenu
 import com.finance_tracker.finance_tracker.presentation.add_account.dropdown_menus.AccountTypesDropdownMenu
@@ -78,12 +77,12 @@ fun AddAccountScreen(
             value = titleAccount,
             label = {
                 Text(
-                    text = getLocalizedString("new_account_field_name_label", context)
+                    text = stringResource("new_account_field_name_label")
                 )
             },
             placeholder = {
                 Text(
-                    text = getLocalizedString("new_account_field_name_placeholder", context),
+                    text = stringResource("new_account_field_name_placeholder"),
                     style = CoinTheme.typography.body1.staticTextSize()
                 )
             },
@@ -112,14 +111,14 @@ fun AddAccountScreen(
             value = amountAccount,
             label = {
                 Text(
-                    text = getLocalizedString("new_account_field_amount_label", context),
+                    text = stringResource("new_account_field_amount_label"),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
             },
             placeholder = {
                 Text(
-                    text = getLocalizedString("new_account_field_amount_placeholder", context),
+                    text = stringResource("new_account_field_amount_placeholder"),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     style = CoinTheme.typography.body1.staticTextSize()
@@ -142,7 +141,7 @@ fun AddAccountScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp, start = 16.dp, end = 16.dp),
-            text = getLocalizedString("new_account_btn_add", context),
+            text = stringResource("new_account_btn_add"),
             onClick = viewModel::onAddAccountClick,
             enabled = isAddButtonEnabled
         )
@@ -158,7 +157,6 @@ private fun RowScope.AccountTypeTextField(
     val accountTypeMenuExpanded = remember { mutableStateOf(false) }
     val interactionSource = remember { MutableInteractionSource() }
     val selectedType by viewModel.selectedType.collectAsState()
-    val context = LocalContext.current
     CoinOutlinedSelectTextField(
         value = selectedType.orEmpty(),
         modifier = modifier
@@ -172,14 +170,14 @@ private fun RowScope.AccountTypeTextField(
             },
         label = {
             Text(
-                text = getLocalizedString("new_account_field_type_label", context),
+                text = stringResource("new_account_field_type_label"),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
         },
         placeholder = {
             Text(
-                text = getLocalizedString("new_account_field_type_placeholder", context),
+                text = stringResource("new_account_field_type_placeholder"),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 style = CoinTheme.typography.body1.staticTextSize()
@@ -206,7 +204,6 @@ fun RowScope.AccountColorTextField(
     val accountColorMenuOffsetX = remember { mutableStateOf(0) }
     val accountColorMenuExpanded = remember { mutableStateOf(false) }
     val selectedColor by viewModel.selectedColor.collectAsState()
-    val context = LocalContext.current
     CoinOutlinedSelectTextField(
         value = selectedColor?.name.orEmpty(),
         modifier = modifier
@@ -223,7 +220,7 @@ fun RowScope.AccountColorTextField(
             },
         label = {
             Text(
-                text = getLocalizedString("new_account_field_color_label", context),
+                text = stringResource("new_account_field_color_label"),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -235,7 +232,7 @@ fun RowScope.AccountColorTextField(
         },
         placeholder = {
             Text(
-                text = getLocalizedString("new_account_field_color_placeholder", context),
+                text = stringResource("new_account_field_color_placeholder"),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 style = CoinTheme.typography.body1.staticTextSize()
@@ -272,20 +269,19 @@ private fun AddAccountTopBar(
     modifier: Modifier = Modifier
 ) {
     val rootController = LocalRootController.current
-    val context = LocalContext.current
     TopAppBar(
         modifier = modifier,
         backgroundColor = CoinTheme.color.background,
         contentColor = CoinTheme.color.content,
         navigationIcon = {
             AppBarIcon(
-                painter = rememberVectorPainter(loadXmlPicture("ic_arrow_back")),
+                painter = rememberVectorPainter("ic_arrow_back"),
                 onClick = { rootController.popBackStack() }
             )
         },
         title = {
             Text(
-                text = getLocalizedString("new_account_title", context),
+                text = stringResource("new_account_title"),
                 style = CoinTheme.typography.h4
             )
         }

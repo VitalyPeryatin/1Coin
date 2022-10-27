@@ -1,11 +1,9 @@
 package com.finance_tracker.finance_tracker.presentation.tabs_navigation.tabs
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
-import com.finance_tracker.finance_tracker.core.common.LocalContext
-import com.finance_tracker.finance_tracker.core.common.getLocalizedString
+import com.finance_tracker.finance_tracker.core.common.stringResource
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
-import com.finance_tracker.finance_tracker.core.ui.loadXmlPicture
+import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
 import ru.alexgladkov.odyssey.compose.navigation.bottom_bar_navigation.TabConfiguration
 import ru.alexgladkov.odyssey.compose.navigation.bottom_bar_navigation.TabItem
 
@@ -14,11 +12,10 @@ class HomeTab : TabItem() {
     override val configuration: TabConfiguration
         @Composable
         get() {
-            val context = LocalContext.current
             return TabConfiguration(
-                title = getLocalizedString("tab_home", context),
-                selectedIcon = rememberVectorPainter(loadXmlPicture("ic_home_active")),
-                unselectedIcon = rememberVectorPainter(loadXmlPicture("ic_home_inactive")),
+                title = stringResource("tab_home"),
+                selectedIcon = rememberVectorPainter("ic_home_active"),
+                unselectedIcon = rememberVectorPainter("ic_home_inactive"),
                 selectedColor = CoinTheme.color.primary,
                 unselectedColor = CoinTheme.color.content
             )

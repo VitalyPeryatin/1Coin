@@ -124,7 +124,7 @@ fun CoinOutlinedSelectTextField(
             Icon(
                 modifier = Modifier
                     .size(24.dp),
-                imageVector = loadXmlPicture("ic_expand_more"),
+                painter = rememberVectorPainter("ic_expand_more"),
                 contentDescription = null,
                 tint = CoinTheme.color.content
             )

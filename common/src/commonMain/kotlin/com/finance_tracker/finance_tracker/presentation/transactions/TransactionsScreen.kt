@@ -25,11 +25,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.common.DateFormatType
 import com.finance_tracker.finance_tracker.core.common.DecimalFormatType
-import com.finance_tracker.finance_tracker.core.common.LocalContext
-import com.finance_tracker.finance_tracker.core.common.getLocalizedString
 import com.finance_tracker.finance_tracker.core.common.getViewModel
+import com.finance_tracker.finance_tracker.core.common.stringResource
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
-import com.finance_tracker.finance_tracker.core.ui.loadXmlPicture
+import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
 import com.finance_tracker.finance_tracker.domain.models.Category
 import com.finance_tracker.finance_tracker.domain.models.Transaction
 import com.finance_tracker.finance_tracker.domain.models.TransactionType
@@ -109,7 +108,7 @@ private fun TransactionItem(
                 .size(44.dp)
                 .background(color = CoinTheme.color.secondaryBackground, shape = CircleShape)
                 .padding(12.dp),
-            imageVector = loadXmlPicture(category.iconId),
+            painter = rememberVectorPainter(category.iconId),
             contentDescription = null
         )
 
@@ -142,17 +141,16 @@ private fun DayTotalHeader(
     modifier: Modifier = Modifier,
     dayTotalModel: TransactionUiModel.DateAndDayTotal
 ) {
-    val context = LocalContext.current
     Row(
         modifier = modifier
             .padding(top = 24.dp, bottom = 8.dp)
     ) {
         val formattedDate = when {
             dayTotalModel.date.isToday() -> {
-                getLocalizedString("transactions_today", context)
+                stringResource("transactions_today")
             }
             dayTotalModel.date.isYesterday() -> {
-                getLocalizedString("transactions_yesterday", context)
+                stringResource("transactions_yesterday")
             }
             else -> {
                 DateFormatter.format(dayTotalModel.date)

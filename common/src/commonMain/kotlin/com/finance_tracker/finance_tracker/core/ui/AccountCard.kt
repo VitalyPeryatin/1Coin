@@ -31,7 +31,7 @@ fun AccountCard(
     ) {
         Column {
             Icon(
-                imageVector = loadXmlPicture("ic_wallet_active"),
+                painter = rememberVectorPainter("ic_wallet_active"),
                 contentDescription = null,
                 modifier = Modifier
                     .padding(

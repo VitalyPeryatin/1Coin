@@ -13,15 +13,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.finance_tracker.finance_tracker.core.common.LocalContext
-import com.finance_tracker.finance_tracker.core.common.getLocalizedString
 import com.finance_tracker.finance_tracker.core.common.statusBarsPadding
+import com.finance_tracker.finance_tracker.core.common.stringResource
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.ui.AppBarIcon
-import com.finance_tracker.finance_tracker.core.ui.loadXmlPicture
+import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 
 enum class CategoryTab(val textId: String) {
@@ -43,7 +42,7 @@ fun CategoriesAppBar(
             .statusBarsPadding(),
         navigationIcon = {
             AppBarIcon(
-                painter = rememberVectorPainter(loadXmlPicture("ic_arrow_back")),
+                painter = rememberVectorPainter("ic_arrow_back"),
                 onClick = { rootController.popBackStack() }
             )
         },
@@ -72,7 +71,7 @@ fun CategoriesAppBar(
             }
         },
         actions = {
-            AppBarIcon(painter = rememberVectorPainter(loadXmlPicture("ic_arrow_refresh")))
+            AppBarIcon(painter = rememberVectorPainter("ic_arrow_refresh"))
         },
         backgroundColor = CoinTheme.color.background
     )
@@ -92,7 +91,7 @@ private fun CategoryItem(
             .clip(RoundedCornerShape(8.dp))
             .clickable { onClick.invoke(categoryTab) }
             .padding(horizontal = 7.dp, vertical = 8.dp),
-        text = getLocalizedString(categoryTab.textId, context),
+        text = stringResource(categoryTab.textId),
         fontSize = 16.sp,
         color = if (selectedCategoryTab == categoryTab) {
             Color.Black

@@ -3,7 +3,12 @@ package com.finance_tracker.finance_tracker.presentation.add_transaction.views
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.LocalContentColor
@@ -11,14 +16,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.finance_tracker.finance_tracker.core.common.LocalContext
-import com.finance_tracker.finance_tracker.core.common.getLocalizedString
+import com.finance_tracker.finance_tracker.core.common.stringResource
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
-import com.finance_tracker.finance_tracker.core.ui.loadXmlPicture
+import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
 import com.finance_tracker.finance_tracker.domain.models.Account
 import com.finance_tracker.finance_tracker.domain.models.Category
 import com.finance_tracker.finance_tracker.presentation.add_transaction.views.enter_transaction_controller.AccountCard
@@ -98,12 +101,11 @@ fun CategoryRow(
         modifier = modifier
     ) {
         Row(
-            modifier = modifier,
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
-                imageVector = loadXmlPicture(category.iconId),
+                painter = rememberVectorPainter(category.iconId),
                 contentDescription = null
             )
             Text(
@@ -124,7 +126,7 @@ fun NextIcon(
     Icon(
         modifier = modifier
             .padding(horizontal = 8.dp),
-        painter = rememberVectorPainter(loadXmlPicture("ic_arrow_next_small")),
+        painter = rememberVectorPainter("ic_arrow_next_small"),
         contentDescription = null
     )
 }
@@ -138,7 +140,6 @@ private fun <T: Any> RowScope.StageText(
     modifier: Modifier = Modifier,
     dataContent: @Composable (data: T) -> Unit = {}
 ) {
-    val context = LocalContext.current
     val isActiveStage = currentStep == selectedStep
     Box(
         modifier = modifier
@@ -149,7 +150,7 @@ private fun <T: Any> RowScope.StageText(
     ) {
         if (data == null) {
             Text(
-                text = currentStep.textId?.let { getLocalizedString(it, context) }.orEmpty(),
+                text = currentStep.textId?.let { stringResource(it) }.orEmpty(),
                 style = CoinTheme.typography.subtitle1,
                 textAlign = TextAlign.Center,
                 color = if (isActiveStage) {

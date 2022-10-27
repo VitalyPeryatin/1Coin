@@ -13,12 +13,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import com.finance_tracker.finance_tracker.core.common.navigationBarsPadding
 import com.finance_tracker.finance_tracker.core.navigation.main.MainNavigationTree
 import com.finance_tracker.finance_tracker.core.navigation.tabs.TabsNavigationTree
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
-import com.finance_tracker.finance_tracker.core.ui.loadXmlPicture
+import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
 import ru.alexgladkov.odyssey.compose.base.AnimatedHost
 import ru.alexgladkov.odyssey.compose.controllers.MultiStackRootController
 import ru.alexgladkov.odyssey.compose.controllers.TabNavigationModel
@@ -40,11 +39,11 @@ fun TabsNavigationScreen() {
                 backgroundColor = CoinTheme.color.primary,
                 contentColor = CoinTheme.color.primaryVariant,
                 onClick = {
-                    selectedTabItem.rootController.findRootController().push(MainNavigationTree.AddTransaction.name)
+                    rootController.findRootController().push(MainNavigationTree.AddTransaction.name)
                 }
             ) {
                 Icon(
-                    painter = rememberVectorPainter(loadXmlPicture("ic_plus")),
+                    painter = rememberVectorPainter("ic_plus"),
                     contentDescription = null
                 )
             }

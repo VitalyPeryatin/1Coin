@@ -2,7 +2,11 @@ package com.finance_tracker.finance_tracker.core.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
@@ -12,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.domain.models.Category
@@ -28,7 +31,7 @@ fun CategoryCard(
             .fillMaxWidth()
     ) {
         Icon(
-            painter = rememberVectorPainter(loadXmlPicture("ic_three_stripes")),
+            painter = rememberVectorPainter("ic_three_stripes"),
             contentDescription = null,
             modifier = Modifier
                 .padding(end = 12.dp)
@@ -37,7 +40,7 @@ fun CategoryCard(
             tint = CoinTheme.color.content
         )
         Icon(
-            painter = rememberVectorPainter(loadXmlPicture(name = data.iconId)),
+            painter = rememberVectorPainter(data.iconId),
             contentDescription = null,
             Modifier
                 .size(42.dp)
@@ -59,7 +62,7 @@ fun CategoryCard(
         )
         Spacer(Modifier.weight(1f))
         Icon(
-            painter = rememberVectorPainter(loadXmlPicture("ic_cross")),
+            painter = rememberVectorPainter("ic_cross"),
             contentDescription = null,
             modifier = Modifier
                 .clip(RoundedCornerShape(12.dp))
