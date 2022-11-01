@@ -54,6 +54,8 @@ dependencies {
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics)
+    implementation(project(mapOf("path" to ":common")))
+    implementation(project(mapOf("path" to ":common")))
 
     debugImplementation(libs.leakcanary)
 

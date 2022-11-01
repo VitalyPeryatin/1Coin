@@ -30,13 +30,19 @@ fun TransactionItem(
     Row(
         modifier = modifier
             .clickable { onClick.invoke() }
-            .padding(vertical = 6.dp, horizontal = 16.dp),
+            .padding(
+                vertical = 6.dp,
+                horizontal = 16.dp
+            ),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
             modifier = Modifier
                 .size(44.dp)
-                .background(color = CoinTheme.color.secondaryBackground, shape = CircleShape)
+                .background(
+                    color = CoinTheme.color.secondaryBackground,
+                    shape = CircleShape
+                )
                 .padding(12.dp),
             painter = rememberVectorPainter(category.iconId),
             contentDescription = null

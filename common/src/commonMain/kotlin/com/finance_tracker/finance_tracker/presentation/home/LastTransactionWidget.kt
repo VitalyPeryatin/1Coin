@@ -20,7 +20,11 @@ import com.finance_tracker.finance_tracker.domain.models.TransactionType
 import java.util.*
 
 @Composable
-fun LastTransactionWidget(modifier: Modifier = Modifier) {
+fun LastTransactionWidget(
+    modifier: Modifier = Modifier,
+    transactions: List<Transaction>
+
+) {
 
     val lastTransaction = listOf(
         Transaction(
@@ -87,8 +91,8 @@ fun LastTransactionWidget(modifier: Modifier = Modifier) {
             .fillMaxWidth()
             .padding(16.dp)
             .border(
-                1.dp,
-                CoinTheme.color.content.copy(0.4f),
+                strokeWidth = 1.dp,
+                color = CoinTheme.color.content.copy(0.4f),
                 radius = 12.dp
             )
             .clip(RoundedCornerShape(12.dp)),
