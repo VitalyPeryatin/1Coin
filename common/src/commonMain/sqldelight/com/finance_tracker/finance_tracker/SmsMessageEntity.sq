@@ -1,4 +1,4 @@
-CREATE TABLE SmsMessageEntity (
+CREATE TABLE IF NOT EXISTS SmsMessageEntity (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     sender TEXT NOT NULL,
     message TEXT NOT NULL,

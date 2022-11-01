@@ -5,12 +5,16 @@ import androidx.compose.ui.window.application
 import com.finance_tracker.finance_tracker.core.navigation.main.MainNavigationTree
 import com.finance_tracker.finance_tracker.core.navigation.main.navigationGraph
 import com.finance_tracker.finance_tracker.core.theme.setupThemedNavigation
+import com.finance_tracker.finance_tracker.data.database.DatabaseInitializer
 import com.finance_tracker.finance_tracker.di.commonModules
 import org.koin.core.context.startKoin
+import org.koin.java.KoinJavaComponent.inject
 
+private val databaseInitializer: DatabaseInitializer by inject(DatabaseInitializer::class.java)
 
 fun main() = application {
     initKoin()
+    databaseInitializer.init()
     Window(
         visible = true,
         title = "",

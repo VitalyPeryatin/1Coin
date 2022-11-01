@@ -1,11 +1,11 @@
-CREATE TABLE AccountColorsEntity (
+CREATE TABLE IF NOT EXISTS AccountColorsEntity (
     hex TEXT NOT NULL PRIMARY KEY,
     name TEXT NOT NULL
 );
 
-INSERT INTO AccountColorsEntity (hex, name) VALUES('#FF0000', 'Red');
-INSERT INTO AccountColorsEntity (hex, name) VALUES('#00FF00', 'Green');
-INSERT INTO AccountColorsEntity (hex, name) VALUES('#0000FF', 'Blue');
+INSERT OR IGNORE INTO AccountColorsEntity (hex, name) VALUES('#FF0000', 'Red');
+INSERT OR IGNORE INTO AccountColorsEntity (hex, name) VALUES('#00FF00', 'Green');
+INSERT OR IGNORE INTO AccountColorsEntity (hex, name) VALUES('#0000FF', 'Blue');
 
 getAllAccountColors:
 SELECT *

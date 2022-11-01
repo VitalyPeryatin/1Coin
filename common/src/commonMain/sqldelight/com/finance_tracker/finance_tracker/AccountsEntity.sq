@@ -1,6 +1,6 @@
 import com.finance_tracker.finance_tracker.domain.models.Account;
 
-CREATE TABLE AccountsEntity (
+CREATE TABLE IF NOT EXISTS AccountsEntity (
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     type TEXT AS Account.Type NOT NULL,
     name TEXT NOT NULL,
@@ -8,8 +8,8 @@ CREATE TABLE AccountsEntity (
     colorHex TEXT NOT NULL
 );
 
-INSERT INTO AccountsEntity (id, type, name, balance, colorHex) VALUES(1, 'CreditCard', 'Cash', 0, '#FF0000');
-INSERT INTO AccountsEntity (id, type, name, balance, colorHex) VALUES(2, 'Cash', 'Card', 0, '#00FF00');
+INSERT OR IGNORE INTO AccountsEntity (id, type, name, balance, colorHex) VALUES(1, 'CreditCard', 'Cash', 0, '#FF0000');
+INSERT OR IGNORE INTO AccountsEntity (id, type, name, balance, colorHex) VALUES(2, 'Cash', 'Card', 0, '#00FF00');
 
 getAccountById:
 SELECT *

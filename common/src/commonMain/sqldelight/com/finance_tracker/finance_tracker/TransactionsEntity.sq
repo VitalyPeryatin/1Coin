@@ -1,7 +1,7 @@
 import com.finance_tracker.finance_tracker.domain.models.TransactionType;
 import java.util.Date;
 
-CREATE TABLE TransactionsEntity (
+CREATE TABLE IF NOT EXISTS TransactionsEntity (
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     type TEXT AS TransactionType NOT NULL,
     amount REAL NOT NULL,
