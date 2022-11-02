@@ -13,6 +13,7 @@ import com.finance_tracker.finance_tracker.core.ui.TransactionItem
 import com.finance_tracker.finance_tracker.core.ui.border
 import com.finance_tracker.finance_tracker.domain.models.Account
 import com.finance_tracker.finance_tracker.domain.models.Category
+import com.finance_tracker.finance_tracker.domain.models.Currency
 import com.finance_tracker.finance_tracker.domain.models.Transaction
 import com.finance_tracker.finance_tracker.domain.models.TransactionType
 import java.util.*
@@ -30,7 +31,8 @@ fun LastTransactionWidget(modifier: Modifier = Modifier) {
                 type = Account.Type.DebitCard,
                 name = "Debit card (*5841)",
                 balance = 100.0,
-                color = CoinTheme.color.content.copy(alpha = 0.5f)
+                color = CoinTheme.color.content.copy(alpha = 0.5f),
+                currency = Currency("dollar","$")
             ),
             amount = 25.52,
             category = Category(
@@ -49,7 +51,8 @@ fun LastTransactionWidget(modifier: Modifier = Modifier) {
                 type = Account.Type.DebitCard,
                 name = "Debit card (*5841)",
                 balance = 100.0,
-                color = CoinTheme.color.content.copy(alpha = 0.5f)
+                color = CoinTheme.color.content.copy(alpha = 0.5f),
+                currency = Currency("dollar","$")
             ),
             amount = 25.52,
             category = Category(
@@ -68,7 +71,8 @@ fun LastTransactionWidget(modifier: Modifier = Modifier) {
                 type = Account.Type.DebitCard,
                 name = "Debit card (*5841)",
                 balance = 100.0,
-                color = CoinTheme.color.content.copy(alpha = 0.5f)
+                color = CoinTheme.color.content.copy(alpha = 0.5f),
+                currency = Currency("dollar","$")
             ),
             amount = 25.52,
             category = Category(

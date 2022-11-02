@@ -11,10 +11,10 @@ import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.common.StoredViewModel
 import com.finance_tracker.finance_tracker.core.common.statusBarsPadding
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
+import com.finance_tracker.finance_tracker.core.ui.TitleHeader
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import com.finance_tracker.finance_tracker.core.ui.TitleHeader
 
 @Composable
 fun HomeScreen() {
@@ -49,31 +49,26 @@ fun HomeScreen() {
 
             HomeTopBar()
 
-        TitleHeader(
-            modifier = Modifier
-                .padding(top = 26.dp),
-            textValue = "home_my_accounts"
-        )
-            MyAccountsHeader(
+            TitleHeader(
                 modifier = Modifier
                     .padding(top = 26.dp),
+                textValue = "home_my_accounts"
             )
 
             AccountsWidget(
                 data = accounts,
                 state = accountsLazyListState
             )
+
+            TitleHeader(
+                modifier = Modifier
+                    .padding(top = 26.dp),
+                textValue = "home_last_transaction"
+            )
+
+            LastTransactionWidget()
         }
-        AccountsWidget(data = accounts)
 
-        TitleHeader(
-            modifier = Modifier
-                .padding(top = 26.dp),
-            textValue = "home_last_transaction"
-
-        )
-
-        LastTransactionWidget()
 
     }
 }
