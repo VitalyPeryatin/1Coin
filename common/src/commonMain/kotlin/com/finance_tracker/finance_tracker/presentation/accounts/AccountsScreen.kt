@@ -11,30 +11,26 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.finance_tracker.finance_tracker.core.common.getViewModel
+import com.finance_tracker.finance_tracker.core.common.StoredViewModel
 import com.finance_tracker.finance_tracker.core.ui.AccountCard
 
 @Composable
-fun AccountsScreen(
-    viewModel: AccountsScreenViewModel = getViewModel(),
-) {
+fun AccountsScreen() {
+    StoredViewModel<AccountsViewModel> { viewModel ->
+        Column {
+            AccountsAppBar()
 
-    Column {
-
-        AccountsAppBar()
-
-        val accounts by viewModel.accounts.collectAsState()
-
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            modifier = Modifier
-                .fillMaxHeight(),
-            contentPadding = PaddingValues(bottom = 96.dp)
-        ) {
-            items(accounts) { account ->
-                AccountCard(data = account)
+            val accounts by viewModel.accounts.collectAsState()
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                modifier = Modifier
+                    .fillMaxHeight(),
+                contentPadding = PaddingValues(bottom = 96.dp)
+            ) {
+                items(accounts) { account ->
+                    AccountCard(data = account)
+                }
             }
         }
     }
-
 }

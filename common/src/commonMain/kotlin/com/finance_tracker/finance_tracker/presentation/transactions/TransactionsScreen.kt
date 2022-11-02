@@ -1,10 +1,14 @@
 package com.finance_tracker.finance_tracker.presentation.transactions
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -12,7 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.common.DateFormatType
 import com.finance_tracker.finance_tracker.core.common.DecimalFormatType
-import com.finance_tracker.finance_tracker.core.common.getViewModel
+import com.finance_tracker.finance_tracker.core.common.StoredViewModel
 import com.finance_tracker.finance_tracker.core.common.stringResource
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.ui.TransactionItem
@@ -20,22 +24,25 @@ import com.finance_tracker.finance_tracker.presentation.transactions.views.Trans
 import java.text.SimpleDateFormat
 import java.util.*
 
-private val DateFormatter = SimpleDateFormat("dd.mm")
+private val DateFormatter = SimpleDateFormat("dd.MM")
 
 @Composable
-fun TransactionsScreen(
-    viewModel: TransactionsViewModel = getViewModel()
-) {
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        TransactionsAppBar()
+fun TransactionsScreen() {
+    StoredViewModel<TransactionsViewModel> { viewModel ->
+        LaunchedEffect(Unit) {
+            viewModel.loadTransactions()
+        }
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            TransactionsAppBar()
 
-        val transactions by viewModel.transactions.collectAsState()
-        if (transactions.isEmpty()) {
-            EmptyTransactionsStub()
-        } else {
-            TransactionsList(transactions = transactions)
+            val transactions by viewModel.transactions.collectAsState()
+            if (transactions.isEmpty()) {
+                EmptyTransactionsStub()
+            } else {
+                TransactionsList(transactions = transactions)
+            }
         }
     }
 }
@@ -71,6 +78,57 @@ fun EmptyTransactionsStub(
         text = "", // TODO: Empty text
         textAlign = TextAlign.Center
     )
+}
+
+@Composable
+private fun TransactionItem(
+    transaction: Transaction,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {}
+) {
+    val category = transaction.category ?: Category.EMPTY
+    Row(
+        modifier = modifier
+            .clickable { onClick.invoke() }
+            .padding(vertical = 6.dp, horizontal = 16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            modifier = Modifier
+                .size(44.dp)
+                .background(color = CoinTheme.color.secondaryBackground, shape = CircleShape)
+                .padding(12.dp),
+            painter = rememberVectorPainter(category.iconId),
+            contentDescription = null
+        )
+
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 12.dp)
+                .weight(1f)
+        ) {
+            Text(
+                text = category.name,
+                style = CoinTheme.typography.body2
+            )
+            Text(
+                text = transaction.account.name,
+                style = CoinTheme.typography.subtitle2,
+                color = LocalContentColor.current.copy(alpha = 0.5f)
+            )
+        }
+
+        val sign = if (transaction.type == TransactionType.Income) "+" else "-"
+        Text(
+            text = sign + transaction.amountCurrency + DecimalFormatType.Amount.format(transaction.amount),
+            style = CoinTheme.typography.body2,
+            color = if (transaction.type == TransactionType.Income) {
+                CoinTheme.color.accentGreen
+            } else {
+                CoinTheme.color.content
+            }
+        )
+    }
 }
 
 @Composable

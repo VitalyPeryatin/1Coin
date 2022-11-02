@@ -10,7 +10,7 @@ import com.squareup.sqldelight.EnumColumnAdapter
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import java.text.SimpleDateFormat
-import java.util.Date
+import java.util.*
 
 internal val databaseModule = module {
     singleOf(::DatabaseInitializer)
@@ -20,6 +20,7 @@ internal val databaseModule = module {
     factory { get<AppDatabase>().accountsEntityQueries }
     factory { get<AppDatabase>().categoriesEntityQueries }
     factory { get<AppDatabase>().accountColorsEntityQueries }
+    factory { get<AppDatabase>().defaultCategoriesEntityQueries }
 }
 
 private fun provideAppDatabase(driverFactory: DriverFactory): AppDatabase {
@@ -33,6 +34,7 @@ private fun provideAppDatabase(driverFactory: DriverFactory): AppDatabase {
         driver = driver,
         TransactionsEntityAdapter = TransactionsEntity.Adapter(
             typeAdapter = EnumColumnAdapter(),
+            insertionDateAdapter = dateAdapter,
             dateAdapter = dateAdapter
         ),
         AccountsEntityAdapter = AccountsEntity.Adapter(

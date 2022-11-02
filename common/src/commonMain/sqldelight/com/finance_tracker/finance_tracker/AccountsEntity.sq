@@ -5,11 +5,12 @@ CREATE TABLE IF NOT EXISTS AccountsEntity (
     type TEXT AS Account.Type NOT NULL,
     name TEXT NOT NULL,
     balance REAL NOT NULL,
-    colorHex TEXT NOT NULL
+    colorHex TEXT NOT NULL,
+    currency TEXT NOT NULL
 );
 
-INSERT OR IGNORE INTO AccountsEntity (id, type, name, balance, colorHex) VALUES(1, 'CreditCard', 'Cash', 0, '#FF0000');
-INSERT OR IGNORE INTO AccountsEntity (id, type, name, balance, colorHex) VALUES(2, 'Cash', 'Card', 0, '#00FF00');
+INSERT OR IGNORE INTO AccountsEntity (id, type, name, balance, colorHex, currency) VALUES(1, 'CreditCard', 'Credit card', 0, '#D50101', 'USD');
+INSERT OR IGNORE INTO AccountsEntity (id, type, name, balance, colorHex, currency) VALUES(2, 'Cash', 'Cash', 0, '#4050B5', 'USD');
 
 getAccountById:
 SELECT *
@@ -23,7 +24,7 @@ FROM AccountsEntity;
 insertAccount:
 INSERT OR REPLACE
 INTO AccountsEntity
-VALUES (?,?,?,?,?);
+VALUES (?,?,?,?,?,?);
 
 deleteAccountById:
 DELETE FROM AccountsEntity

@@ -20,7 +20,6 @@ fun TransactionFields.getTransactionType(): TransactionType? {
     return when (this[TransactionField.Type]) {
         "Снятие", "Покупка" -> TransactionType.Expense
         "Пополнение" -> TransactionType.Income
-        "Перевод" -> TransactionType.Transfer
         else -> null
     }
 }

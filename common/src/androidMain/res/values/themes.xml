@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CalendarDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/primary</item>                   <!--header background-->
+        <item name="android:windowBackground">@color/background</item>     <!--calendar background-->
+        <item name="android:colorControlActivated">@color/primary</item> <!--selected day-->
+        <item name="android:textColorPrimary">@color/content</item> <!--days of the month-->
+        <item name="android:textColorSecondary">@color/secondary</item>    <!--days of the week-->
+    </style>
+</resources>

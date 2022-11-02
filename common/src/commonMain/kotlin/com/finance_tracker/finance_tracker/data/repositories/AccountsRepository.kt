@@ -4,6 +4,7 @@ import com.finance_tracker.finance_tracker.core.common.hexToColor
 import com.finance_tracker.finance_tracker.data.database.mappers.accountToDomainModel
 import com.finance_tracker.finance_tracker.domain.models.Account
 import com.finance_tracker.finance_tracker.domain.models.AccountColorData
+import com.finance_tracker.finance_tracker.domain.models.Currency
 import com.financetracker.financetracker.AccountColorsEntityQueries
 import com.financetracker.financetracker.AccountsEntityQueries
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +19,8 @@ class AccountsRepository(
         accountName: String,
         type: Account.Type,
         balance: Double,
-        colorHex: String
+        colorHex: String,
+        currency: Currency
     ) {
         withContext(Dispatchers.IO) {
             accountsEntityQueries.insertAccount(
@@ -26,7 +28,8 @@ class AccountsRepository(
                 type = type,
                 name = accountName,
                 balance = balance,
-                colorHex = colorHex
+                colorHex = colorHex,
+                currency = currency.name
             )
         }
     }

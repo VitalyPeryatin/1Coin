@@ -42,7 +42,7 @@ fun AccountCard(
                 tint = CoinTheme.color.primaryVariant
             )
             Text(
-                text = DecimalFormatType.Amount.format(data.balance),
+                text = data.currency.sign + DecimalFormatType.Amount.format(data.balance),
                 style = CoinTheme.typography.h5,
                 color = CoinTheme.color.primaryVariant,
                 modifier = Modifier
@@ -51,8 +51,13 @@ fun AccountCard(
                         start = 16.dp
                     )
             )
+            val accountName = if (data.type == Account.Type.Cash) {
+                "${data.name} (${data.currency.sign})"
+            } else {
+                data.name
+            }
             Text(
-                text = data.name,
+                text = accountName,
                 style = CoinTheme.typography.subtitle2,
                 color = CoinTheme.color.primaryVariant.copy(alpha = 0.5f),
                 modifier = Modifier

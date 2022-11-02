@@ -13,10 +13,8 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.Job
@@ -44,6 +42,7 @@ fun <T : Any> LazyDragColumn(
             .pointerInput(dragDropState) {
                 detectDragGesturesAfterLongPress(
                     onDrag = { change, offset ->
+
                         change.consume()
                         dragDropState.onDrag(offset = offset)
 
@@ -83,32 +82,24 @@ fun <T : Any> LazyDragColumn(
             ) { isDragging ->
                 val elevation by animateDpAsState(if (isDragging) 4.dp else 0.dp)
                 Card(
-                    shape = MaterialTheme.shapes.large,
-                    modifier = Modifier
-                        .clip(
-                            when (index) {
-                                0 -> {
-                                    RoundedCornerShape(
-                                        topStart = 12.dp,
-                                        topEnd = 12.dp,
-                                        bottomStart = 0.dp,
-                                        bottomEnd = 0.dp
-                                    )
-                                }
-                                items.lastIndex -> {
-                                    RoundedCornerShape(
-                                        topStart = 0.dp,
-                                        topEnd = 0.dp,
-                                        bottomStart = 12.dp,
-                                        bottomEnd = 12.dp
-                                    )
-                                }
-                                else -> {
-                                    RoundedCornerShape(0.dp)
-                                }
-                            }
-                        ),
                     elevation = elevation,
+                    shape = when (index) {
+                        0 -> {
+                            RoundedCornerShape(
+                                topStart = 12.dp,
+                                topEnd = 12.dp,
+                            )
+                        }
+                        items.lastIndex -> {
+                            RoundedCornerShape(
+                                bottomStart = 12.dp,
+                                bottomEnd = 12.dp
+                            )
+                        }
+                        else -> {
+                            RoundedCornerShape(0.dp)
+                        }
+                    },
                 ) {
                     itemContent(index, item)
                 }

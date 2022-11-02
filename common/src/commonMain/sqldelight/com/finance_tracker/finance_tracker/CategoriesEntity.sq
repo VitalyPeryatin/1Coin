@@ -2,18 +2,36 @@ CREATE TABLE IF NOT EXISTS CategoriesEntity (
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     icon TEXT NOT NULL,
-    position INTEGER
+    position INTEGER,
+    isExpense INTEGER AS Boolean DEFAULT 0 NOT NULL,
+    isIncome INTEGER AS Boolean DEFAULT 0 NOT NULL
 );
+
+getAllCategoriesWithoutPosition:
+SELECT *
+FROM CategoriesEntity;
 
 getAllCategories:
 SELECT *
 FROM CategoriesEntity
 ORDER BY position;
 
+getAllExpenseCategories:
+SELECT *
+FROM CategoriesEntity
+WHERE isExpense = 1
+ORDER BY position;
+
+getAllIncomeCategories:
+SELECT *
+FROM CategoriesEntity
+WHERE isIncome = 1
+ORDER BY position;
+
 insertCategory:
 INSERT OR REPLACE
 INTO CategoriesEntity
-VALUES (?,?,?,?);
+VALUES (?,?,?,?,?,?);
 
 deleteCategoryById:
 DELETE

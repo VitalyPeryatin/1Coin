@@ -15,7 +15,8 @@ import com.finance_tracker.finance_tracker.domain.models.Account
 @Composable
 fun AccountCard(
     account: Account,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    maxLines: Int = 2
 ) {
     Row(
         modifier = modifier,
@@ -31,7 +32,7 @@ fun AccountCard(
             modifier = Modifier.padding(start = 4.dp),
             text = account.name,
             style = CoinTheme.typography.body2,
-            maxLines = 2,
+            maxLines = maxLines,
             overflow = TextOverflow.Ellipsis
         )
     }

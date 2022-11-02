@@ -11,7 +11,7 @@ import org.xml.sax.InputSource
 @Composable
 actual fun rememberImageVector(id: String): ImageVector {
     val density = LocalDensity.current
-    return remember {
+    return remember(id) {
         useResource("drawable/$id.xml") { stream ->
             loadXmlImageVector(InputSource(stream), density)
         }

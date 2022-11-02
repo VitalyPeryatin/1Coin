@@ -3,12 +3,7 @@ package com.finance_tracker.finance_tracker.presentation.add_transaction.views
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.LocalContentColor
@@ -19,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.finance_tracker.finance_tracker.core.common.asDp
 import com.finance_tracker.finance_tracker.core.common.stringResource
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
@@ -41,7 +38,9 @@ fun StepsEnterTransactionBar(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(CoinTheme.color.background),
+            .height(IntrinsicSize.Min)
+            .background(CoinTheme.color.background)
+            .padding(horizontal = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
@@ -72,7 +71,7 @@ fun RowScope.AccountStage(
         data = data.accountData,
         selectedStep = data.currentStep,
         onStepSelect = onStageSelect,
-        dataContent = { AccountCard(account = it) }
+        dataContent = { AccountCard(account = it, maxLines = 1) }
     )
 }
 
@@ -98,24 +97,22 @@ fun CategoryRow(
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = modifier
+        modifier = modifier,
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Icon(
-                painter = rememberVectorPainter(category.iconId),
-                contentDescription = null
-            )
-            Text(
-                modifier = Modifier.padding(start = 4.dp),
-                text = category.name,
-                style = CoinTheme.typography.body2,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis
-            )
-        }
+        Icon(
+            modifier = Modifier.size(20.sp.asDp()),
+            painter = rememberVectorPainter(category.iconId),
+            contentDescription = null
+        )
+        Text(
+            modifier = Modifier.padding(start = 4.dp),
+            text = category.name,
+            style = CoinTheme.typography.body2,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
+        )
     }
 }
 
@@ -125,7 +122,7 @@ fun NextIcon(
 ) {
     Icon(
         modifier = modifier
-            .padding(horizontal = 8.dp),
+            .padding(horizontal = 2.dp),
         painter = rememberVectorPainter("ic_arrow_next_small"),
         contentDescription = null
     )
@@ -143,9 +140,25 @@ private fun <T: Any> RowScope.StageText(
     val isActiveStage = currentStep == selectedStep
     Box(
         modifier = modifier
-            .weight(1f)
+            .fillMaxHeight()
             .clickable(enabled = !isActiveStage) { onStepSelect.invoke(currentStep) }
-            .padding(vertical = 16.dp, horizontal = 8.dp),
+            .weight(1f)
+            .padding(vertical = 16.dp, horizontal = 8.dp)
+            .border(
+                width = 1.dp,
+                color = if (isActiveStage) {
+                    CoinTheme.color.primary
+                } else {
+                    CoinTheme.color.dividers
+                },
+                shape = RoundedCornerShape(percent = 50)
+            )
+            .padding(
+                start = 8.dp,
+                end = 8.dp,
+                top = 10.dp,
+                bottom = 10.dp
+            ),
         contentAlignment = Alignment.Center
     ) {
         if (data == null) {
@@ -157,23 +170,7 @@ private fun <T: Any> RowScope.StageText(
                     LocalContentColor.current
                 } else {
                     LocalContentColor.current.copy(alpha = 0.3f)
-                },
-                modifier = Modifier
-                    .border(
-                        width = 2.dp,
-                        color = if (isActiveStage) {
-                            CoinTheme.color.primary
-                        } else {
-                            CoinTheme.color.dividers
-                        },
-                        shape = RoundedCornerShape(50.dp)
-                    )
-                    .padding(
-                        start = 48.dp,
-                        end = 48.dp,
-                        top = 10.dp,
-                        bottom = 10.dp
-                    ),
+                }
             )
         } else {
             dataContent.invoke(data)

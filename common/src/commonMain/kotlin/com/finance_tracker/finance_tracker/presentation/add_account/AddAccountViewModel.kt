@@ -1,39 +1,23 @@
 package com.finance_tracker.finance_tracker.presentation.add_account
 
-import com.finance_tracker.finance_tracker.core.common.EventFlow
-import com.finance_tracker.finance_tracker.core.common.ViewModel
+import com.adeo.kviewmodel.KViewModel
+import com.finance_tracker.finance_tracker.core.common.EventChannel
 import com.finance_tracker.finance_tracker.core.common.toHexString
 import com.finance_tracker.finance_tracker.data.repositories.AccountsRepository
 import com.finance_tracker.finance_tracker.domain.models.Account
 import com.finance_tracker.finance_tracker.domain.models.AccountColorData
 import com.finance_tracker.finance_tracker.domain.models.Currency
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-
-private val mockAccountTypes = listOf(
-    "Debit card",
-    "Credit card",
-    "Cash"
-) // TODO: Удалить моковые данные
-
-private val mockAmountCurrencies = listOf(
-    Currency(name = "USD", sign = "\$"),
-    Currency(name = "EURO", sign = "€"),
-    Currency(name = "GBR", sign = "£")
-) // TODO: Удалить моковые данные
 
 class AddAccountViewModel(
     private val accountsRepository: AccountsRepository
-): ViewModel() {
+): KViewModel() {
 
-    private val _amountCurrencies = MutableStateFlow(mockAmountCurrencies)
+    private val _amountCurrencies = MutableStateFlow(Currency.list)
     val amountCurrencies = _amountCurrencies.asStateFlow()
 
-    private val _types = MutableStateFlow(mockAccountTypes)
+    private val _types = MutableStateFlow(Account.Type.values().toList())
     val types = _types.asStateFlow()
 
     private val _colors = MutableStateFlow(emptyList<AccountColorData>())
@@ -42,7 +26,7 @@ class AddAccountViewModel(
     private val _selectedColor = MutableStateFlow<AccountColorData?>(null)
     val selectedColor = _selectedColor.asStateFlow()
 
-    private val _selectedType = MutableStateFlow<String?>(null)
+    private val _selectedType = MutableStateFlow<Account.Type?>(null)
     val selectedType = _selectedType.asStateFlow()
 
     private val _selectedCurrency = MutableStateFlow(amountCurrencies.value.first())
@@ -54,7 +38,8 @@ class AddAccountViewModel(
     private val _enteredAmount = MutableStateFlow("")
     val enteredAmount = _enteredAmount.asStateFlow()
 
-    val events = EventFlow<AddAccountEvent?>()
+    private val _events = EventChannel<AddAccountEvent>()
+    val events = _events.receiveAsFlow()
 
     val isAddButtonEnabled = combine(
         enteredAccountName,
@@ -80,7 +65,7 @@ class AddAccountViewModel(
         _enteredAccountName.value = accountName
     }
 
-    fun onAccountTypeSelect(accountType: String) {
+    fun onAccountTypeSelect(accountType: Account.Type) {
         _selectedType.value = accountType
     }
 
@@ -99,25 +84,25 @@ class AddAccountViewModel(
     fun onAddAccountClick() {
         viewModelScope.launch {
             val accountName = enteredAccountName.value.takeIf { it.isNotBlank() } ?: run {
-                events.emit(AddAccountEvent.ShowToast(
+                _events.send(AddAccountEvent.ShowToast(
                     textId = "new_account_error_enter_account_name"
                 ))
                 return@launch
             }
             val selectedColor = selectedColor.value?.color ?: run {
-                events.emit(AddAccountEvent.ShowToast(
+                _events.send(AddAccountEvent.ShowToast(
                     textId = "new_account_error_select_account_color"
                 ))
                 return@launch
             }
             val balance = enteredAmount.value.toDoubleOrNull() ?: run {
-                events.emit(AddAccountEvent.ShowToast(
+                _events.send(AddAccountEvent.ShowToast(
                     textId = "new_account_error_enter_account_balance"
                 ))
                 return@launch
             }
             val type = selectedType.value ?: run {
-                events.emit(AddAccountEvent.ShowToast(
+                _events.send(AddAccountEvent.ShowToast(
                     textId = "new_account_error_select_account_type"
                 ))
                 return@launch
@@ -126,9 +111,10 @@ class AddAccountViewModel(
                 accountName = accountName,
                 balance = balance,
                 colorHex = selectedColor.toHexString(),
-                type = Account.Type.CreditCard // TODO: Подставлять выбранный AccountType
+                type = type,
+                currency = selectedCurrency.value
             )
-            events.emit(AddAccountEvent.Close)
+            _events.send(AddAccountEvent.Close)
         }
     }
 }

@@ -7,10 +7,15 @@ koin = "3.2.2"
 sqldelight = "1.5.4"
 firebase = "30.3.2"
 chucker = "3.5.2"
+kviewmodel = "0.11"
 
 [libraries]
 odyssey-core = { module = "io.github.alexgladkov:odyssey-core", version.ref = "odyssey" }
 odyssey-compose = { module = "io.github.alexgladkov:odyssey-compose", version.ref = "odyssey" }
+
+kviewmodel = { module = "com.adeo:kviewmodel", version.ref = "kviewmodel" }
+kviewmodel-compose = { module = "com.adeo:kviewmodel-compose", version.ref = "kviewmodel" }
+kviewmodel-odyssey = { module = "com.adeo:kviewmodel-odyssey", version.ref = "kviewmodel" }
 
 compose-animation = { module = "androidx.compose.animation:animation", version.ref = "compose" }
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
@@ -25,6 +30,8 @@ koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = 
 sqldelight-android = { module = "com.squareup.sqldelight:android-driver", version.ref = "sqldelight" }
 sqldelight-jvm = { module = "com.squareup.sqldelight:sqlite-driver", version.ref = "sqldelight" }
 
+datepicker-desktop = "com.github.lgooddatepicker:LGoodDatePicker:11.2.1"
+
 viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
 
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
@@ -38,7 +45,8 @@ chucker-debug = { module = "com.github.chuckerteam.chucker:library", version.ref
 [bundles]
 odyssey = ["odyssey-core", "odyssey-compose"]
 compose = ["compose-animation", "compose-foundation", "compose-material", "compose-ui", "compose-tooling"]
-koin-android = ["koin-core", "koin-android", "koin-compose"]
+koin-common = ["koin-core", "koin-compose"]
+kviewmodel = ["kviewmodel", "kviewmodel-compose", "kviewmodel-odyssey"]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "gradleplugin" }

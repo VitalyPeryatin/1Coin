@@ -6,6 +6,10 @@
 
     <string name="transactions_title">Transactions</string>
 
+    <string name="account_type_debit_card">Debit card</string>
+    <string name="account_type_credit_card">Credit card</string>
+    <string name="account_type_cash">Cash</string>
+
     <!-- Tabs -->
     <string name="tab_home">Home</string>
     <string name="tab_transactions">Transactions</string>
@@ -15,10 +19,11 @@
     <!-- Add transaction -->
     <string name="add_transaction_tab_income">Income</string>
     <string name="add_transaction_tab_expense">Expense</string>
-    <string name="add_transaction_tab_transfer">Transfer</string>
     <string name="add_transaction_amount">Amount</string>
     <string name="add_transaction_stage_account">Account</string>
     <string name="add_transaction_stage_category">Category</string>
+    <string name="add_transaction_today">Today</string>
+    <string name="add_transaction_yesterday">Yesterday</string>
 
     <!-- Home -->
     <string name="home_topbar_text">Total Balance</string>
@@ -35,6 +40,8 @@
 
     <!-- Categories -->
     <string name="category_settings">Category Settings</string>
+    <string name="new_expense_category">New Expense Category</string>
+    <string name="new_income_category">New Income Category</string>
 
     <!-- New account -->
     <string name="new_account_title">New Account</string>

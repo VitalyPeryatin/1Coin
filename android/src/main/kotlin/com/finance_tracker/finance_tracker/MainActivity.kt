@@ -5,18 +5,12 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.ProvidedValue
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.finance_tracker.finance_tracker.core.navigation.main.MainNavigationTree
 import com.finance_tracker.finance_tracker.core.navigation.main.navigationGraph
-import com.finance_tracker.finance_tracker.core.theme.CoinTheme
-import ru.alexgladkov.odyssey.compose.base.Navigator
+import com.finance_tracker.finance_tracker.core.navigation.setupNavigation
 import ru.alexgladkov.odyssey.compose.extensions.setupWithActivity
-import ru.alexgladkov.odyssey.compose.local.LocalRootController
-import ru.alexgladkov.odyssey.compose.navigation.RootComposeBuilder
-import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalNavigator
 
 class MainActivity : ComponentActivity() {
 
@@ -26,7 +20,15 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setupThemedNavigation(MainNavigationTree.Main.name) { navigationGraph() }
+
+        setContent {
+            setupNavigation(
+                startScreen = MainNavigationTree.Main.name,
+                onConfigure = {
+                    setupWithActivity(this@MainActivity)
+                }
+            ) { navigationGraph() }
+        }
 
         requestSmsPermission()
     }
@@ -41,30 +43,6 @@ class MainActivity : ComponentActivity() {
                 arrayOf(permission),
                 REQUEST_CODE_SMS_PERMISSION
             )
-        }
-    }
-}
-
-private fun ComponentActivity.setupThemedNavigation(
-    startScreen: String,
-    vararg providers: ProvidedValue<*>,
-    navigationGraph: RootComposeBuilder.() -> Unit
-) {
-    setContent {
-        CoinTheme {
-            val rootController = RootComposeBuilder()
-                .apply(navigationGraph).build()
-            rootController.backgroundColor = CoinTheme.color.background
-            rootController.setupWithActivity(this)
-
-            CompositionLocalProvider(
-                *providers,
-                LocalRootController provides rootController
-            ) {
-                ModalNavigator {
-                    Navigator(startScreen)
-                }
-            }
         }
     }
 }

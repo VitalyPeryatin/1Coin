@@ -2,6 +2,7 @@ package com.finance_tracker.finance_tracker.presentation.home
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -13,13 +14,14 @@ import com.finance_tracker.finance_tracker.domain.models.Account
 @Composable
 fun AccountsWidget(
     modifier: Modifier = Modifier,
-    data: List<Account>
+    data: List<Account>,
+    state: LazyListState
 ) {
-
     LazyRow(
         modifier = modifier
             .padding(top = 12.dp),
-        contentPadding = PaddingValues(start = 4.dp)
+        contentPadding = PaddingValues(start = 4.dp),
+        state = state
     ) {
         items(data) { account ->
             AccountCard(data = account)

@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.compose")
     id("com.android.library")
     id("com.squareup.sqldelight")
+    id("kotlin-parcelize")
 }
 
 kotlin {
@@ -18,24 +19,22 @@ kotlin {
                 api(compose.uiTooling)
                 api(compose.preview)
 
-                api(libs.koin.core)
+                api(libs.bundles.koin.common)
                 api(libs.bundles.odyssey)
+                api(libs.bundles.kviewmodel)
             }
         }
         named("desktopMain") {
             dependencies {
-                api(compose.uiTooling)
-                api(compose.preview)
-
-                api(libs.koin.core)
-
+                implementation(libs.koin.core)
                 implementation(libs.sqldelight.jvm)
+                implementation(libs.datepicker.desktop)
             }
         }
         named("androidMain") {
             dependencies {
                 implementation(libs.viewModel)
-                implementation(libs.bundles.koin.android)
+                implementation(libs.koin.android)
                 implementation(libs.sqldelight.android)
             }
         }

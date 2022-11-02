@@ -14,6 +14,7 @@ import com.finance_tracker.finance_tracker.core.ui.PrimaryButton
 @Composable
 fun AddButtonSection(
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     onAddClick: () -> Unit = {}
 ) {
     Surface(
@@ -28,7 +29,8 @@ fun AddButtonSection(
                 .fillMaxWidth()
                 .padding(16.dp),
             text = "Add",
-            onClick = onAddClick
+            onClick = onAddClick,
+            enabled = enabled
         )
     }
 }

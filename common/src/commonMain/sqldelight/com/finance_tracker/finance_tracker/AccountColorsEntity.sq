@@ -3,9 +3,14 @@ CREATE TABLE IF NOT EXISTS AccountColorsEntity (
     name TEXT NOT NULL
 );
 
-INSERT OR IGNORE INTO AccountColorsEntity (hex, name) VALUES('#FF0000', 'Red');
-INSERT OR IGNORE INTO AccountColorsEntity (hex, name) VALUES('#00FF00', 'Green');
-INSERT OR IGNORE INTO AccountColorsEntity (hex, name) VALUES('#0000FF', 'Blue');
+INSERT OR IGNORE INTO AccountColorsEntity (hex, name) VALUES('#D50101', 'Guardsman Red');
+INSERT OR IGNORE INTO AccountColorsEntity (hex, name) VALUES('#E67C73', 'Sunglo');
+INSERT OR IGNORE INTO AccountColorsEntity (hex, name) VALUES('#F4511E', 'Pomegranate');
+INSERT OR IGNORE INTO AccountColorsEntity (hex, name) VALUES('#F6BF25', 'Saffron');
+INSERT OR IGNORE INTO AccountColorsEntity (hex, name) VALUES('#32B779', 'Jungle Green');
+INSERT OR IGNORE INTO AccountColorsEntity (hex, name) VALUES('#0A8043', 'Salem');
+INSERT OR IGNORE INTO AccountColorsEntity (hex, name) VALUES('#049BE5', 'Cerulean');
+INSERT OR IGNORE INTO AccountColorsEntity (hex, name) VALUES('#4050B5', 'San Marino');
 
 getAllAccountColors:
 SELECT *

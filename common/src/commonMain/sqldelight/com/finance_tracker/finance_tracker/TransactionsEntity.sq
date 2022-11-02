@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS TransactionsEntity (
     amountCurrency TEXT NOT NULL,
     categoryId INTEGER,
     accountId INTEGER,
+    insertionDate TEXT AS Date NOT NULL,
     date TEXT AS Date NOT NULL
 );
 
@@ -17,7 +18,9 @@ FROM TransactionsEntity
 INNER JOIN AccountsEntity AS accounts ON TransactionsEntity.accountId = accounts.id
 INNER JOIN CategoriesEntity AS categories ON TransactionsEntity.categoryId = categories.id
 WHERE accounts.id IS NOT NULL
-ORDER BY date DESC;
+ORDER BY
+    date DESC,
+    insertionDate DESC;
 
 getTotalTransactionAmountByDateAndType:
 SELECT SUM(amount)
@@ -29,4 +32,4 @@ WHERE DATE(date) = :date AND TransactionsEntity.type = :type AND accounts.id IS 
 insertTransaction:
 INSERT OR REPLACE
 INTO TransactionsEntity
-VALUES (?,?,?,?,?,?,?);
+VALUES (?,?,?,?,?,?,?,?);

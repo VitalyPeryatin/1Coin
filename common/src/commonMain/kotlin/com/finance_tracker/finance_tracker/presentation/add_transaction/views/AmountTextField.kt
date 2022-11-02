@@ -17,12 +17,12 @@ import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 @Composable
 fun AmountTextField(
     currency: String,
+    amount: String,
     modifier: Modifier = Modifier,
-    amount: Double = 0.0
 ) {
     Column(
         modifier = modifier
-            .background(Color.White)
+            .background(CoinTheme.color.background)
             .padding(16.dp)
             .fillMaxWidth(),
         verticalArrangement = Arrangement.Center,

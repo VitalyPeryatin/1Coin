@@ -1,32 +1,32 @@
 package com.finance_tracker.finance_tracker.presentation.transactions
 
-import com.finance_tracker.finance_tracker.core.common.ViewModel
+import com.adeo.kviewmodel.KViewModel
 import com.finance_tracker.finance_tracker.data.repositories.TransactionsRepository
 import com.finance_tracker.finance_tracker.domain.models.TransactionType
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.util.Calendar
-import java.util.Date
+import java.util.*
 
 class TransactionsViewModel constructor(
     private val transactionsRepository: TransactionsRepository
-): ViewModel() {
+): KViewModel() {
 
     private val _transactions: MutableStateFlow<List<TransactionUiModel>> = MutableStateFlow(emptyList())
     val transactions: StateFlow<List<TransactionUiModel>> = _transactions.asStateFlow()
 
-    init {
-        loadTransactions()
-    }
+    private var loadTransactionsJob: Job? = null
 
-    private fun loadTransactions() {
-        viewModelScope.launch {
-            val transactions = transactionsRepository.getAllTransactions()
-            for (transaction in transactions) {
-                val lastUiTransactionModel = _transactions.value.lastOrNull()
+    fun loadTransactions() {
+        loadTransactionsJob?.cancel()
+        loadTransactionsJob = viewModelScope.launch {
+            val allTransactions = transactionsRepository.getAllTransactions()
+            val newTransactions = mutableListOf<TransactionUiModel>()
+            for (transaction in allTransactions) {
+                val lastUiTransactionModel = newTransactions.lastOrNull()
 
                 if (lastUiTransactionModel == null ||
                     (lastUiTransactionModel is TransactionUiModel.Data &&
@@ -34,26 +34,25 @@ class TransactionsViewModel constructor(
                                 transaction.date
                             ))
                 ) {
-                    _transactions.update {
-                        val totalIncomeAmount =
-                            transactionsRepository.getTotalTransactionAmountByDateAndType(
-                                date = transaction.date,
-                                type = TransactionType.Income
-                            )
-                        val totalExpenseAmount =
-                            transactionsRepository.getTotalTransactionAmountByDateAndType(
-                                date = transaction.date,
-                                type = TransactionType.Expense
-                            )
-                        it + TransactionUiModel.DateAndDayTotal(
+                    val totalIncomeAmount =
+                        transactionsRepository.getTotalTransactionAmountByDateAndType(
                             date = transaction.date,
-                            income = totalIncomeAmount,
-                            expense = totalExpenseAmount
-                        ) // получение общего дохода и расхода за 1 день
-                    }
+                            type = TransactionType.Income
+                        )
+                    val totalExpenseAmount =
+                        transactionsRepository.getTotalTransactionAmountByDateAndType(
+                            date = transaction.date,
+                            type = TransactionType.Expense
+                        )
+                    newTransactions += TransactionUiModel.DateAndDayTotal(
+                        date = transaction.date,
+                        income = totalIncomeAmount,
+                        expense = totalExpenseAmount
+                    ) // получение общего дохода и расхода за 1 день
                 }
-                _transactions.update { it + TransactionUiModel.Data(transaction) }
+                newTransactions += TransactionUiModel.Data(transaction)
             }
+            _transactions.update { newTransactions }
         }
     }
 

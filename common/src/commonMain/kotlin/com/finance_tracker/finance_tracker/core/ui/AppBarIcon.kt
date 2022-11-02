@@ -7,10 +7,12 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
+import com.finance_tracker.finance_tracker.core.common.`if`
 
 @Composable
 fun AppBarIcon(
@@ -18,13 +20,19 @@ fun AppBarIcon(
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
     contentDescription: String? = null,
-    tint: Color = Color.Black
+    tint: Color = Color.Black,
+    enabled: Boolean = true
 ) {
     Icon(
         modifier = modifier
+            .`if`(!enabled) {
+                alpha(0.2f)
+            }
             .clip(CircleShape)
             .size(40.dp)
-            .clickable { onClick.invoke() }
+            .`if`(enabled) {
+                clickable { onClick.invoke() }
+            }
             .padding(8.dp),
         painter = painter,
         contentDescription = contentDescription,

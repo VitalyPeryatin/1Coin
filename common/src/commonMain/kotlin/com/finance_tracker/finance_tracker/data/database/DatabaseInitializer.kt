@@ -4,10 +4,10 @@ import com.finance_tracker.finance_tracker.domain.models.Category
 import com.financetracker.financetracker.CategoriesEntityQueries
 
 class DatabaseInitializer(
-    private val categoriesEntityQueries: CategoriesEntityQueries
+    private val categoriesEntityQueries: CategoriesEntityQueries,
 ) {
 
-    private val defaultCategories = listOf(
+    private val defaultExpenseCategories = listOf(
         Category(
             id = 0,
             name = "Restoraunt",
@@ -35,7 +35,7 @@ class DatabaseInitializer(
         ),
         Category(
             id = 5,
-            name = "Entertaiment",
+            name = "Entertainment",
             iconId = "ic_category_6"
         ),
         Category(
@@ -65,7 +65,7 @@ class DatabaseInitializer(
         ),
         Category(
             id = 11,
-            name = "Electonics",
+            name = "Electronics",
             iconId = "ic_category_12"
         ),
         Category(
@@ -75,6 +75,25 @@ class DatabaseInitializer(
         )
     )
 
+    private val defaultIncomeCategories = listOf(
+        Category(
+            id = 13,
+            name = "Salary",
+            iconId = "ic_category_14"
+        ),
+        Category(
+            id = 14,
+            name = "Allowance",
+            iconId = "ic_category_15"
+        ),
+        Category(
+            id = 15,
+            name = "Gift",
+            iconId = "ic_category_16"
+        )
+    )
+
+
     fun init() {
         initCategories()
     }
@@ -82,13 +101,26 @@ class DatabaseInitializer(
     private fun initCategories() {
         categoriesEntityQueries.transaction {
             val databaseCategories = categoriesEntityQueries.getAllCategories().executeAsList()
+
             if (databaseCategories.isEmpty()) {
-                defaultCategories.forEach { category ->
+                defaultExpenseCategories.forEach { category ->
                     categoriesEntityQueries.insertCategory(
                         id = category.id,
                         name = category.name,
                         icon = category.iconId,
                         position = category.id,
+                        isExpense = true,
+                        isIncome = false,
+                    )
+                }
+                defaultIncomeCategories.forEach { category ->
+                    categoriesEntityQueries.insertCategory(
+                        id = category.id,
+                        name = category.name,
+                        icon = category.iconId,
+                        position = category.id,
+                        isExpense = false,
+                        isIncome = true,
                     )
                 }
             }

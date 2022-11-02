@@ -14,5 +14,5 @@ actual fun rememberImageVector(id: String): ImageVector {
     val imageVector = with(context) {
         ImageVector.vectorResource(resources.getIdentifier(id, "drawable", packageName))
     }
-    return remember { imageVector }
+    return remember(id) { imageVector }
 }

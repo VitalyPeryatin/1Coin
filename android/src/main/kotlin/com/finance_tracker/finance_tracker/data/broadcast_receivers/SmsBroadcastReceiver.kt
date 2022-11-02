@@ -12,6 +12,7 @@ import com.financetracker.financetracker.SmsMessageEntityQueries
 import com.financetracker.financetracker.TransactionsEntityQueries
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import java.util.*
 
 class SmsBroadcastReceiver : BroadcastReceiver(), KoinComponent {
 
@@ -46,6 +47,7 @@ class SmsBroadcastReceiver : BroadcastReceiver(), KoinComponent {
             amountCurrency = transaction.amountCurrency,
             categoryId = transaction.category?.id,
             accountId = transaction.account.id,
+            insertionDate = Date(),
             date = transaction.date
         )
     }

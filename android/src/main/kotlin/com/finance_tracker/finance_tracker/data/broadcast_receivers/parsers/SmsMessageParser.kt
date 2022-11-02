@@ -2,14 +2,11 @@ package com.finance_tracker.finance_tracker.data.broadcast_receivers.parsers
 
 import android.telephony.SmsMessage
 import androidx.compose.ui.graphics.Color
-import com.finance_tracker.finance_tracker.data.broadcast_receivers.parsers.models.SmsTemplate
-import com.finance_tracker.finance_tracker.data.broadcast_receivers.parsers.models.TransactionFields
-import com.finance_tracker.finance_tracker.data.broadcast_receivers.parsers.models.getAmount
-import com.finance_tracker.finance_tracker.data.broadcast_receivers.parsers.models.getAmountCurrency
-import com.finance_tracker.finance_tracker.data.broadcast_receivers.parsers.models.getTransactionType
+import com.finance_tracker.finance_tracker.data.broadcast_receivers.parsers.models.*
 import com.finance_tracker.finance_tracker.domain.models.Account
+import com.finance_tracker.finance_tracker.domain.models.Currency
 import com.finance_tracker.finance_tracker.domain.models.Transaction
-import java.util.Date
+import java.util.*
 
 class SmsMessageParser(
     private val templates: List<SmsTemplate>
@@ -30,7 +27,8 @@ class SmsMessageParser(
                 type = Account.Type.DebitCard,
                 name = "Fake card",
                 balance = 0.0,
-                color = Color.Red
+                color = Color.Red,
+                currency = Currency.list.first()
             ),
             amountCurrency = fields.getAmountCurrency(),
             category = null,
