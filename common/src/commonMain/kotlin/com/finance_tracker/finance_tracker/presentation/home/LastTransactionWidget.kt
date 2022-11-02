@@ -5,10 +5,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.ui.TransactionItem
@@ -20,11 +18,7 @@ import com.finance_tracker.finance_tracker.domain.models.TransactionType
 import java.util.*
 
 @Composable
-fun LastTransactionWidget(
-    modifier: Modifier = Modifier,
-    transactions: List<Transaction>
-
-) {
+fun LastTransactionWidget(modifier: Modifier = Modifier) {
 
     val lastTransaction = listOf(
         Transaction(
@@ -94,8 +88,7 @@ fun LastTransactionWidget(
                 strokeWidth = 1.dp,
                 color = CoinTheme.color.content.copy(0.4f),
                 radius = 12.dp
-            )
-            .clip(RoundedCornerShape(12.dp)),
+            ),
         contentPadding = PaddingValues(
             top = 16.dp,
             bottom = 4.dp
