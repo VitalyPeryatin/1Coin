@@ -60,5 +60,5 @@ dependencies {
     debugImplementation(libs.chucker.debug)
     releaseImplementation(libs.chucker.release)
 
-    implementation(libs.koin.android)
+    implementation(libs.bundles.koin.android)
 }

@@ -11,6 +11,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.common.`if`
 
@@ -21,7 +22,9 @@ fun AppBarIcon(
     onClick: () -> Unit = {},
     contentDescription: String? = null,
     tint: Color = Color.Black,
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    width: Dp = 40.dp,
+    height: Dp = 40.dp
 ) {
     Icon(
         modifier = modifier
@@ -29,7 +32,10 @@ fun AppBarIcon(
                 alpha(0.2f)
             }
             .clip(CircleShape)
-            .size(40.dp)
+            .size(
+                width = width,
+                height = height
+            )
             .`if`(enabled) {
                 clickable { onClick.invoke() }
             }

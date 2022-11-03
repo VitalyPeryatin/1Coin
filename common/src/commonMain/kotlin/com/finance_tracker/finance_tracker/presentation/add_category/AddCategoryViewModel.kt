@@ -2,7 +2,6 @@ package com.finance_tracker.finance_tracker.presentation.add_category
 
 import com.adeo.kviewmodel.KViewModel
 import com.finance_tracker.finance_tracker.data.repositories.CategoriesRepository
-import com.finance_tracker.finance_tracker.domain.models.Category
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -11,33 +10,17 @@ class AddCategoryViewModel(
     private val repository: CategoriesRepository
 ): KViewModel() {
 
-    private val _chosenCategory = MutableStateFlow(
-        Category(
-            id = 0,
-            name = "Restaurant",
-            iconId = "ic_category_1"
-        )
-    )
-    val chosenCategory = _chosenCategory.asStateFlow()
+    private val _icons = MutableStateFlow(List(63) { "ic_category_${it + 1}" })
+    val icons = _icons.asStateFlow()
 
-    private val _newCategoryName = MutableStateFlow("")
-    val newCategoryName = _newCategoryName.asStateFlow()
+    private val _chosenIcon = MutableStateFlow(icons.value.first())
+    val chosenIcon = _chosenIcon.asStateFlow()
 
-    private val _categories = MutableStateFlow<List<Category>>(emptyList())
-    val categories = _categories.asStateFlow()
+    private val _categoryName = MutableStateFlow("")
+    val categoryName = _categoryName.asStateFlow()
 
-    init {
-        loadAllCategories()
-    }
-
-    private fun loadAllCategories() {
-        viewModelScope.launch {
-            _categories.value = repository.getAllDefaultCategories()
-        }
-    }
-
-    fun onCategoryChoose(category: Category) {
-        _chosenCategory.value = category
+    fun onIconChoose(icon: String) {
+        _chosenIcon.value = icon
     }
 
     fun addExpenseCategory(categoryName: String, categoryIcon: String) {
@@ -63,6 +46,6 @@ class AddCategoryViewModel(
     }
 
     fun setCategoryName(name: String) {
-        _newCategoryName.value = name
+        _categoryName.value = name
     }
 }

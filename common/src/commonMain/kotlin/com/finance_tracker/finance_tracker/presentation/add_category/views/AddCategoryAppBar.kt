@@ -1,4 +1,4 @@
-package com.finance_tracker.finance_tracker.presentation.add_category
+package com.finance_tracker.finance_tracker.presentation.add_category.views
 
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar

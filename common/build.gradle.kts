@@ -19,14 +19,13 @@ kotlin {
                 api(compose.uiTooling)
                 api(compose.preview)
 
-                api(libs.bundles.koin.common)
+                api(libs.koin.core)
                 api(libs.bundles.odyssey)
                 api(libs.bundles.kviewmodel)
             }
         }
         named("desktopMain") {
             dependencies {
-                implementation(libs.koin.core)
                 implementation(libs.sqldelight.jvm)
                 implementation(libs.datepicker.desktop)
             }
@@ -34,7 +33,7 @@ kotlin {
         named("androidMain") {
             dependencies {
                 implementation(libs.viewModel)
-                implementation(libs.koin.android)
+                implementation(libs.bundles.koin.android)
                 implementation(libs.sqldelight.android)
             }
         }

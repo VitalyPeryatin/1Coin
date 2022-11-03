@@ -4,5 +4,6 @@ fun commonModules() = listOf(
     DriverFactoryModule().module,
     viewModelsModule,
     databaseModule,
-    repositoriesModule
+    repositoriesModule,
+    domainModule
 )

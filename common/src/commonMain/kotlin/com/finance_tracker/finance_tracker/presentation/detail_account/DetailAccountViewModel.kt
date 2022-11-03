@@ -1,4 +1,4 @@
-package com.finance_tracker.finance_tracker.presentation.transactions
+package com.finance_tracker.finance_tracker.presentation.detail_account
 
 import com.adeo.kviewmodel.KViewModel
 import com.finance_tracker.finance_tracker.domain.interactors.TransactionsInteractor
@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class TransactionsViewModel constructor(
+class DetailAccountViewModel(
     private val transactionsInteractor: TransactionsInteractor
 ): KViewModel() {
 
@@ -19,7 +19,11 @@ class TransactionsViewModel constructor(
 
     private var loadTransactionsJob: Job? = null
 
-    fun loadTransactions() {
+    fun onScreenComposed() {
+        loadTransactions()
+    }
+
+    private fun loadTransactions() {
         loadTransactionsJob?.cancel()
         loadTransactionsJob = viewModelScope.launch {
             _transactions.update { transactionsInteractor.getAllTransactions() }

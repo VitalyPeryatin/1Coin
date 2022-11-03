@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.common.LocalContext
 import com.finance_tracker.finance_tracker.core.common.StoredViewModel
@@ -16,7 +17,11 @@ import com.finance_tracker.finance_tracker.core.common.getLocalizedString
 import com.finance_tracker.finance_tracker.core.common.statusBarsPadding
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.ui.CoinOutlinedTextField
+import com.finance_tracker.finance_tracker.presentation.add_category.views.AddCategoryAppBar
+import com.finance_tracker.finance_tracker.presentation.add_category.views.ChooseIconButton
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
+
+private const val MIN_CATEGORY_NAME_LENGTH = 2
 
 @Composable
 fun AddCategoryScreen(
@@ -36,8 +41,8 @@ fun AddCategoryScreen(
 
             AddCategoryAppBar(textValue = appBarText)
 
-            val chosenCategory by viewModel.chosenCategory.collectAsState()
-            val newCategoryName by viewModel.newCategoryName.collectAsState()
+            val chosenIcon by viewModel.chosenIcon.collectAsState()
+            val newCategoryName by viewModel.categoryName.collectAsState()
 
             Row(
                 modifier = Modifier
@@ -47,11 +52,13 @@ fun AddCategoryScreen(
                     ),
             ) {
 
-                val categories by viewModel.categories.collectAsState()
-                AddCategoryButton(
-                    chosenCategory = viewModel.chosenCategory.value,
-                    categories = categories,
-                    onCategoryChoose = viewModel::onCategoryChoose
+                val icons by viewModel.icons.collectAsState()
+                val focusManager = LocalFocusManager.current
+                ChooseIconButton(
+                    chosenIcon = chosenIcon,
+                    icons = icons,
+                    onIconChoose = viewModel::onIconChoose,
+                    onClick = { focusManager.clearFocus() }
                 )
 
                 CoinOutlinedTextField(
@@ -65,7 +72,7 @@ fun AddCategoryScreen(
                         ),
                     onValueChange = {
                         viewModel.setCategoryName(it)
-                    },
+                    }
                 )
             }
 
@@ -79,13 +86,13 @@ fun AddCategoryScreen(
                     if (appBarText == "new_expense_category" && newCategoryName != "") {
                         viewModel.addExpenseCategory(
                             categoryName = newCategoryName,
-                            categoryIcon = chosenCategory.iconId
+                            categoryIcon = chosenIcon
                         )
                         rootController.findRootController().popBackStack()
                     } else if (appBarText == "new_income_category" && newCategoryName != "") {
                         viewModel.addIncomeCategory(
                             categoryName = newCategoryName,
-                            categoryIcon = chosenCategory.iconId
+                            categoryIcon = chosenIcon
                         )
                         rootController.findRootController().popBackStack()
                     }
@@ -102,7 +109,8 @@ fun AddCategoryScreen(
                     top = 12.dp,
                     bottom = 12.dp
                 ),
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(12.dp),
+                enabled = newCategoryName.length >= MIN_CATEGORY_NAME_LENGTH
             ) {
                 Text(
                     text = getLocalizedString(
