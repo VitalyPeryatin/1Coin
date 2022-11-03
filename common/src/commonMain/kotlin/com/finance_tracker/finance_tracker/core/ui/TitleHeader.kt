@@ -15,8 +15,8 @@ import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 
 @Composable
 fun TitleHeader(
-    modifier: Modifier = Modifier,
-    textValue: String
+    textValue: String,
+    modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier

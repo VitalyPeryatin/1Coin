@@ -19,8 +19,10 @@ import com.finance_tracker.finance_tracker.domain.models.TransactionType
 import java.util.*
 
 @Composable
-fun LastTransactionWidget(modifier: Modifier = Modifier) {
-
+fun LastTransactionWidget(
+    transaction: List<Transaction>,
+    modifier: Modifier = Modifier
+) {
     val lastTransaction = listOf(
         Transaction(
             id = 0,
