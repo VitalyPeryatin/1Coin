@@ -11,16 +11,14 @@ import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.ui.TransactionItem
 import com.finance_tracker.finance_tracker.core.ui.border
-import com.finance_tracker.finance_tracker.domain.models.Account
-import com.finance_tracker.finance_tracker.domain.models.Category
+import com.finance_tracker.finance_tracker.core.ui.transactions.CommonTransactionsList
+import com.finance_tracker.finance_tracker.domain.models.*
 import com.finance_tracker.finance_tracker.domain.models.Currency
-import com.finance_tracker.finance_tracker.domain.models.Transaction
-import com.finance_tracker.finance_tracker.domain.models.TransactionType
 import java.util.*
 
 @Composable
 fun LastTransactionWidget(
-    transaction: List<Transaction>,
+    transactions: List<Transaction>,
     modifier: Modifier = Modifier
 ) {
     val lastTransaction = listOf(
@@ -85,23 +83,23 @@ fun LastTransactionWidget(
             date = Date(28)
         )
     )
-
-    LazyColumn(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-            .border(
-                strokeWidth = 1.dp,
-                color = CoinTheme.color.content.copy(0.4f),
-                radius = 12.dp
-            ),
-        contentPadding = PaddingValues(
-            top = 16.dp,
-            bottom = 4.dp
-        )
-    ) {
-        items(lastTransaction) { LastTransaction ->
-            TransactionItem(transaction = LastTransaction)
-        }
-    }
+CommonTransactionList(lastTransaction)
+//    LazyColumn(
+//        modifier = modifier
+//            .fillMaxWidth()
+//            .padding(16.dp)
+//            .border(
+//                strokeWidth = 1.dp,
+//                color = CoinTheme.color.content.copy(0.4f),
+//                radius = 12.dp
+//            ),
+//        contentPadding = PaddingValues(
+//            top = 16.dp,
+//            bottom = 4.dp
+//        )
+//    ) {
+//        items(CommonTransactionsList()) { LastTransaction ->
+//            TransactionItem(transaction = lastTransaction)
+//        }
+//    }
 }

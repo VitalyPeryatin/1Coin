@@ -9,13 +9,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.finance_tracker.finance_tracker.core.common.StoredViewModel
 import com.finance_tracker.finance_tracker.core.ui.transactions.CommonTransactionsList
-import com.finance_tracker.finance_tracker.core.common.stringResource
-import com.finance_tracker.finance_tracker.core.theme.CoinTheme
-import com.finance_tracker.finance_tracker.core.ui.TransactionItem
-import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
-import com.finance_tracker.finance_tracker.domain.models.Category
-import com.finance_tracker.finance_tracker.domain.models.Transaction
-import com.finance_tracker.finance_tracker.domain.models.TransactionType
 import com.finance_tracker.finance_tracker.presentation.transactions.views.TransactionsAppBar
 
 @Composable
