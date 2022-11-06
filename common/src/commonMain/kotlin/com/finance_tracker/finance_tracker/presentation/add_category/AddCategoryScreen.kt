@@ -1,6 +1,12 @@
 package com.finance_tracker.finance_tracker.presentation.add_category
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -30,7 +36,6 @@ fun AddCategoryScreen(
 ) {
     StoredViewModel<AddCategoryViewModel> { viewModel ->
         val rootController = LocalRootController.current
-
         val context = LocalContext.current
 
         Column(

@@ -29,8 +29,6 @@ class MainActivity : ComponentActivity() {
                 }
             ) { navigationGraph() }
         }
-
-        requestSmsPermission()
     }
 
     // TODO: Запрос разрешений перенести в место настройки СМС сообщений

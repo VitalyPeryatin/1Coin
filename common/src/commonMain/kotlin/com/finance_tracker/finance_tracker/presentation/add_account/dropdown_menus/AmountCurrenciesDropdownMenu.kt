@@ -4,6 +4,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.ui.CoinDropdownMenu
 import com.finance_tracker.finance_tracker.core.ui.DropdownMenuItem
@@ -14,12 +16,16 @@ fun AmountCurrenciesDropdownMenu(
     items: List<Currency>,
     expandedState: MutableState<Boolean>,
     modifier: Modifier = Modifier,
-    onCurrencySelect: (Currency) -> Unit = {}
+    onCurrencySelect: (Currency) -> Unit = {},
+    xOffset: Dp = 0.dp,
+    yOffset: Dp = 0.dp,
 ) {
     CoinDropdownMenu(
         modifier = modifier,
         expanded = expandedState.value,
-        onDismissRequest = { expandedState.value = false }
+        onDismissRequest = { expandedState.value = false },
+        xOffset = xOffset,
+        yOffset = yOffset,
     ) {
         items.forEach { item ->
             DropdownMenuItem(

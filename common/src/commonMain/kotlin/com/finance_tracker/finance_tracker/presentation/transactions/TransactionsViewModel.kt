@@ -22,7 +22,7 @@ class TransactionsViewModel constructor(
     fun loadTransactions() {
         loadTransactionsJob?.cancel()
         loadTransactionsJob = viewModelScope.launch {
-            _transactions.update { transactionsInteractor.getAllTransactions() }
+            _transactions.update { transactionsInteractor.getTransactions() }
         }
     }
 }

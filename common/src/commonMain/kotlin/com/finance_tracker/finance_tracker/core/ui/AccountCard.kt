@@ -15,7 +15,6 @@ import com.finance_tracker.finance_tracker.core.common.DecimalFormatType
 import com.finance_tracker.finance_tracker.core.navigation.main.MainNavigationTree
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.domain.models.Account
-import com.finance_tracker.finance_tracker.presentation.detail_account.DetailAccountData
 import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 
@@ -38,16 +37,13 @@ fun AccountCard(
         onClick = {
             navController.push(
                 screen = MainNavigationTree.DetailAccount.name,
-                params = DetailAccountData(
-                    color = data.color,
-                    name = data.name
-                )
+                params = data
             )
         }
     ) {
         Column {
             Icon(
-                painter = rememberVectorPainter("ic_wallet_active"),
+                painter = rememberVectorPainter(data.iconId),
                 contentDescription = null,
                 modifier = Modifier
                     .padding(

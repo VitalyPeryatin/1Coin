@@ -34,6 +34,8 @@ datepicker-desktop = "com.github.lgooddatepicker:LGoodDatePicker:11.2.1"
 
 viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
 
+napier = "io.github.aakira:napier:2.6.1"
+
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 

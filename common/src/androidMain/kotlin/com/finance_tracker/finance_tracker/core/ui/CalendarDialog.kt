@@ -12,6 +12,8 @@ private val todayDate = LocalDate.now()
 
 @Composable
 actual fun CalendarDialog(
+    minDate: Long,
+    maxDate: Long,
     modifier: Modifier,
     onControllerCreate: (CalendarDialogController) -> Unit,
     onDateChangeListener: (LocalDate) -> Unit
@@ -24,6 +26,10 @@ actual fun CalendarDialog(
         }, todayDate.year, todayDate.monthValue, todayDate.dayOfMonth
     )
     datePickerDialog.window?.setBackgroundDrawableResource(R.drawable.calendar_dialog_background)
+    datePickerDialog.apply {
+        datePicker.minDate = minDate//Calendar.getInstance().apply { add(Calendar.YEAR, -1) }.time.time
+        datePicker.maxDate = maxDate//Calendar.getInstance().time.time
+    }
     LaunchedEffect(datePickerDialog) {
         onControllerCreate.invoke(getCalendarDialogController(datePickerDialog))
     }

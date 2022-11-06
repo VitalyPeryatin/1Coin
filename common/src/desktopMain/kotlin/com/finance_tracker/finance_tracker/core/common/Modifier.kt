@@ -5,3 +5,5 @@ import androidx.compose.ui.Modifier
 actual fun Modifier.statusBarsPadding(): Modifier = this
 
 actual fun Modifier.navigationBarsPadding(): Modifier = this
+
+actual fun Modifier.systemBarsPadding(): Modifier = this

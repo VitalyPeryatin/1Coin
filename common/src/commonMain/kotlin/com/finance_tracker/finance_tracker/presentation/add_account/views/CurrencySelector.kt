@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
@@ -27,7 +28,9 @@ fun CurrencySelector(
     items: List<Currency>,
     selectedCurrency: Currency,
     modifier: Modifier = Modifier,
-    onCurrencySelect: (Currency) -> Unit = {}
+    onCurrencySelect: (Currency) -> Unit = {},
+    xOffset: Dp = 0.dp,
+    yOffset: Dp = 0.dp,
 ) {
     val currencyMenuExpanded = remember { mutableStateOf(false) }
     val focusManager = LocalFocusManager.current
@@ -66,6 +69,8 @@ fun CurrencySelector(
     AmountCurrenciesDropdownMenu(
         items = items,
         expandedState = currencyMenuExpanded,
-        onCurrencySelect = onCurrencySelect
+        onCurrencySelect = onCurrencySelect,
+        xOffset = xOffset,
+        yOffset = yOffset,
     )
 }

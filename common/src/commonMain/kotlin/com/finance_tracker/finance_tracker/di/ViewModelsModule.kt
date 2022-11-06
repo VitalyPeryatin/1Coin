@@ -8,6 +8,7 @@ import com.finance_tracker.finance_tracker.presentation.categories.CategorySetti
 import com.finance_tracker.finance_tracker.presentation.detail_account.DetailAccountViewModel
 import com.finance_tracker.finance_tracker.presentation.home.HomeViewModel
 import com.finance_tracker.finance_tracker.presentation.transactions.TransactionsViewModel
+import com.finance_tracker.finance_tracker.presentation.settings.SettingsSheetViewModel
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 
@@ -20,4 +21,5 @@ internal val viewModelsModule = module {
     factoryOf(::CategorySettingsViewModel)
     factoryOf(::AddCategoryViewModel)
     factoryOf(::DetailAccountViewModel)
+    factoryOf(::SettingsSheetViewModel)
 }

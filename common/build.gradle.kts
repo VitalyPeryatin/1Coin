@@ -22,6 +22,7 @@ kotlin {
                 api(libs.koin.core)
                 api(libs.bundles.odyssey)
                 api(libs.bundles.kviewmodel)
+                api(libs.napier)
             }
         }
         named("desktopMain") {

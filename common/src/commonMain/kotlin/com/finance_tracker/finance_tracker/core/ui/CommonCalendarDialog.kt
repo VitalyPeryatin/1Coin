@@ -6,6 +6,8 @@ import java.time.LocalDate
 
 @Composable
 expect fun CalendarDialog(
+    minDate: Long,
+    maxDate: Long,
     modifier: Modifier = Modifier,
     onControllerCreate: (CalendarDialogController) -> Unit = { StubCalendarDialogController },
     onDateChangeListener: (LocalDate) -> Unit = {}

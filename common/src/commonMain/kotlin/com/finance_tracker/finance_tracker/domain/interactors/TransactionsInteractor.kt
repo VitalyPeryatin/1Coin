@@ -9,8 +9,12 @@ class TransactionsInteractor(
     private val transactionsRepository: TransactionsRepository
 ) {
 
-    suspend fun getAllTransactions(): List<TransactionListModel> {
-        val allTransactions = transactionsRepository.getAllTransactions()
+    suspend fun getTransactions(accountId: Long? = null): List<TransactionListModel> {
+        val allTransactions = if (accountId == null) {
+            transactionsRepository.getAllTransactions()
+        } else {
+            transactionsRepository.getTransactions(accountId)
+        }
         val newTransactions = mutableListOf<TransactionListModel>()
         for (transaction in allTransactions) {
             val lastUiTransactionModel = newTransactions.lastOrNull()

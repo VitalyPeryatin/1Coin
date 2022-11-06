@@ -16,3 +16,5 @@ fun Modifier.`if`(
 expect fun Modifier.statusBarsPadding(): Modifier
 
 expect fun Modifier.navigationBarsPadding(): Modifier
+
+expect fun Modifier.systemBarsPadding(): Modifier

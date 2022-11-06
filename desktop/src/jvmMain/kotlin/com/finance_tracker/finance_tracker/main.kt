@@ -12,6 +12,8 @@ import com.finance_tracker.finance_tracker.core.navigation.main.navigationGraph
 import com.finance_tracker.finance_tracker.core.navigation.setupNavigation
 import com.finance_tracker.finance_tracker.data.database.DatabaseInitializer
 import com.finance_tracker.finance_tracker.di.commonModules
+import io.github.aakira.napier.DebugAntilog
+import io.github.aakira.napier.Napier
 import org.koin.core.context.startKoin
 import org.koin.java.KoinJavaComponent.inject
 
@@ -33,6 +35,7 @@ fun main() = singleWindowApplication(
 ) {
     initKoin()
     databaseInitializer.init()
+    Napier.base(DebugAntilog())
     setupNavigation(MainNavigationTree.Main.name) { navigationGraph() }
 }
 

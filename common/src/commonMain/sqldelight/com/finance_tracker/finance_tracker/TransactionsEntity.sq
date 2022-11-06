@@ -22,6 +22,16 @@ ORDER BY
     date DESC,
     insertionDate DESC;
 
+getFullTransactionsByAccountId:
+SELECT *
+FROM TransactionsEntity
+INNER JOIN AccountsEntity AS accounts ON TransactionsEntity.accountId = accounts.id
+INNER JOIN CategoriesEntity AS categories ON TransactionsEntity.categoryId = categories.id
+WHERE accounts.id = :accountId
+ORDER BY
+    date DESC,
+    insertionDate DESC;
+
 getTotalTransactionAmountByDateAndType:
 SELECT SUM(amount)
 FROM TransactionsEntity

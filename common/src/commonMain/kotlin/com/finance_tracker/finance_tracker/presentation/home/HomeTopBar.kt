@@ -14,15 +14,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.common.stringResource
-import com.finance_tracker.finance_tracker.core.navigation.main.MainNavigationTree
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
-import ru.alexgladkov.odyssey.compose.extensions.push
+import com.finance_tracker.finance_tracker.presentation.settings.SettingsSheet
+import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
+import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalSheetConfiguration
 
 @Composable
 fun HomeTopBar() {
     val rootController = LocalRootController.current
+    val modalController = rootController.findModalController()
+
+    val sheetConfiguration = ModalSheetConfiguration(cornerRadius = 12)
+
     TopAppBar(
         backgroundColor = CoinTheme.color.primaryVariant,
         title = {
@@ -48,7 +53,13 @@ fun HomeTopBar() {
                         color = CoinTheme.color.secondaryBackground,
                         shape = CircleShape
                     )
-                    .clickable { rootController.findRootController().push(MainNavigationTree.CategorySettings.name) }
+                    .clickable {
+                        modalController.present(sheetConfiguration) { key ->
+                            SettingsSheet(
+                                onCloseClick = { modalController.popBackStack(key) }
+                            )
+                        }
+                    }
                     .padding(8.dp),
                 tint = CoinTheme.color.content.copy(alpha = 0.8f)
             )

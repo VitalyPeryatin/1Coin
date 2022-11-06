@@ -2,6 +2,7 @@ package com.finance_tracker.finance_tracker.presentation.detail_account
 
 import com.adeo.kviewmodel.KViewModel
 import com.finance_tracker.finance_tracker.domain.interactors.TransactionsInteractor
+import com.finance_tracker.finance_tracker.domain.models.Account
 import com.finance_tracker.finance_tracker.domain.models.TransactionListModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,6 +12,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class DetailAccountViewModel(
+    private val account: Account,
     private val transactionsInteractor: TransactionsInteractor
 ): KViewModel() {
 
@@ -26,7 +28,11 @@ class DetailAccountViewModel(
     private fun loadTransactions() {
         loadTransactionsJob?.cancel()
         loadTransactionsJob = viewModelScope.launch {
-            _transactions.update { transactionsInteractor.getAllTransactions() }
+            _transactions.update {
+                transactionsInteractor.getTransactions(
+                    accountId = account.id
+                )
+            }
         }
     }
 }

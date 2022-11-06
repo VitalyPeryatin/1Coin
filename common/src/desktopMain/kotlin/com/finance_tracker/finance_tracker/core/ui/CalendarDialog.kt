@@ -1,7 +1,12 @@
 package com.finance_tracker.finance_tracker.core.ui
 
 import androidx.compose.foundation.layout.size
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.awt.SwingPanel
 import androidx.compose.ui.graphics.Color
@@ -10,22 +15,27 @@ import com.github.lgooddatepicker.components.DatePicker
 import com.github.lgooddatepicker.components.DatePickerSettings
 import com.github.lgooddatepicker.optionalusertools.DateChangeListener
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.util.*
 
 @Composable
 actual fun CalendarDialog(
+    minDate: Long,
+    maxDate: Long,
     modifier: Modifier,
     onControllerCreate: (CalendarDialogController) -> Unit,
     onDateChangeListener: (LocalDate) -> Unit
 ) {
 
-    val datePicker: DatePicker by remember {
+    val datePickerSettings: DatePickerSettings by remember {
         mutableStateOf(
-            DatePicker(
-                DatePickerSettings().apply {
-                    visibleClearButton = false
-                }
-            )
+            DatePickerSettings().apply {
+                visibleClearButton = false
+            }
         )
+    }
+    val datePicker: DatePicker by remember(datePickerSettings) {
+        mutableStateOf(DatePicker(datePickerSettings))
     }
     LaunchedEffect(datePicker) {
         onControllerCreate.invoke(getCalendarDialogController(datePicker))
@@ -35,6 +45,9 @@ actual fun CalendarDialog(
         background = Color.Red,
         factory = { datePicker }
     )
+    LaunchedEffect(datePickerSettings) {
+        datePickerSettings.setDateRangeLimits(minDate.toLocalDate(), maxDate.toLocalDate())
+    }
     DisposableEffect(datePicker) {
         val dateChangeListener = DateChangeListener {
             onDateChangeListener.invoke(it.newDate)
@@ -60,4 +73,10 @@ private fun getCalendarDialogController(datePicker: DatePicker): CalendarDialogC
             }
         }
     }
+}
+
+@Suppress("NewApi")
+private fun Long.toLocalDate(): LocalDate {
+    val calendar = Calendar.getInstance().apply { time = Date(this@toLocalDate) }
+    return LocalDateTime.ofInstant(calendar.toInstant(), calendar.timeZone.toZoneId()).toLocalDate()
 }

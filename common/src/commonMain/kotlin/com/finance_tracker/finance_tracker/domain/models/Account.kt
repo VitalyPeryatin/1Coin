@@ -15,4 +15,22 @@ data class Account(
         CreditCard("account_type_credit_card"),
         Cash("account_type_cash")
     }
+
+    val iconId: String
+        get() = if (type == Type.Cash) {
+            "ic_wallet_active"
+        } else {
+            "ic_card"
+        }
+
+    companion object {
+        val EMPTY = Account(
+            id = -1,
+            type = Type.Cash,
+            name = "",
+            balance = 0.0,
+            color = Color.Black,
+            currency = Currency.list.first()
+        )
+    }
 }

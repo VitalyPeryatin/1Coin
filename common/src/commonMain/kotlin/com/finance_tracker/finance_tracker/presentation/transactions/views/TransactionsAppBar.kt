@@ -9,8 +9,6 @@ import androidx.compose.ui.graphics.Color
 import com.finance_tracker.finance_tracker.core.common.statusBarsPadding
 import com.finance_tracker.finance_tracker.core.common.stringResource
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
-import com.finance_tracker.finance_tracker.core.ui.AppBarIcon
-import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
 
 @Composable
 fun TransactionsAppBar(
@@ -25,9 +23,6 @@ fun TransactionsAppBar(
                 text = stringResource("transactions_title"),
                 style = CoinTheme.typography.h4
             )
-        },
-        actions = {
-            AppBarIcon(painter = rememberVectorPainter("ic_more_vert"))
         },
         backgroundColor = Color.White
     )
