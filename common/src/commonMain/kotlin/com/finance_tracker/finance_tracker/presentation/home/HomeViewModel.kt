@@ -5,7 +5,6 @@ import com.finance_tracker.finance_tracker.core.common.EventChannel
 import com.finance_tracker.finance_tracker.data.repositories.AccountsRepository
 import com.finance_tracker.finance_tracker.domain.interactors.TransactionsInteractor
 import com.finance_tracker.finance_tracker.domain.models.Account
-import com.finance_tracker.finance_tracker.domain.models.Transaction
 import com.finance_tracker.finance_tracker.domain.models.TransactionListModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -25,12 +24,14 @@ class HomeViewModel(
 
     private val _transactions = MutableStateFlow<List<TransactionListModel>>(emptyList())
     val transactions = _transactions.asStateFlow()
+
     init {
         getTransactions()
     }
+
     private fun getTransactions() {
         viewModelScope.launch {
-            _transactions.value = transactionsInteractor.getAllTransactions()
+            _transactions.value = transactionsInteractor.getTransactions()
         }
     }
 

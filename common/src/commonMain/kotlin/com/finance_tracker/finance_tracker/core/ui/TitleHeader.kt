@@ -15,7 +15,7 @@ import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 
 @Composable
 fun TitleHeader(
-    textValue: String,
+    text: String,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -26,7 +26,7 @@ fun TitleHeader(
             )
     ) {
         Text(
-            text = stringResource(textValue),
+            text = stringResource(text),
             style = CoinTheme.typography.h4
         )
         Spacer(

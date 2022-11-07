@@ -5,16 +5,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.common.StoredViewModel
-import com.finance_tracker.finance_tracker.core.common.statusBarsPadding
-import com.finance_tracker.finance_tracker.core.common.stringResource
 import com.finance_tracker.finance_tracker.core.common.systemBarsPadding
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.ui.TitleHeader
@@ -60,7 +54,7 @@ fun HomeScreen() {
             TitleHeader(
                 modifier = Modifier
                     .padding(top = 26.dp),
-                textValue = stringResource("home_my_accounts")
+                text = "home_my_accounts"
             )
 
             AccountsWidget(
@@ -71,9 +65,10 @@ fun HomeScreen() {
             TitleHeader(
                 modifier = Modifier
                     .padding(top = 26.dp),
-                textValue = stringResource("home_last_transaction")
+                text = "home_last_transaction"
             )
 
-            CommonTransactionsList(transactions = transactions)
+            CommonTransactionsList(transactions = transactions.takeLast(3))
+        }
     }
 }
