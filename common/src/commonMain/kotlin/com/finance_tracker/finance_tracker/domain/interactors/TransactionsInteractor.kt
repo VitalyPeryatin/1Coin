@@ -3,7 +3,8 @@ package com.finance_tracker.finance_tracker.domain.interactors
 import com.finance_tracker.finance_tracker.data.repositories.TransactionsRepository
 import com.finance_tracker.finance_tracker.domain.models.TransactionListModel
 import com.finance_tracker.finance_tracker.domain.models.TransactionType
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 
 class TransactionsInteractor(
     private val transactionsRepository: TransactionsRepository

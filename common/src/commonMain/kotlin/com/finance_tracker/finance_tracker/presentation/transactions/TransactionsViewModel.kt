@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class TransactionsViewModel constructor(
-    private val transactionsInteractor: TransactionsInteractor
+    private val transactionsInteractor: TransactionsInteractor,
 ): KViewModel() {
 
     private val _transactions: MutableStateFlow<List<TransactionListModel>> = MutableStateFlow(emptyList())

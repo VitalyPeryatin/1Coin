@@ -10,7 +10,7 @@ import com.finance_tracker.finance_tracker.domain.models.TransactionType
 import com.financetracker.financetracker.TransactionsEntityQueries
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.util.*
+import java.util.Date
 
 class TransactionsRepository(
     private val transactionsEntityQueries: TransactionsEntityQueries
@@ -85,6 +85,12 @@ class TransactionsRepository(
                 date = DateFormatType.CommonDateFormat.format(date),
                 type = type
             ).executeAsOneOrNull()?.SUM ?: 0.0
+        }
+    }
+
+    suspend fun getAllFullTransactionsPaginated(page: Long) {
+        return withContext(Dispatchers.IO) {
+            transactionsEntityQueries.getAllFullTransactionsPaginated(page)
         }
     }
 }
