@@ -23,6 +23,7 @@ kotlin {
                 api(libs.bundles.odyssey)
                 api(libs.bundles.kviewmodel)
                 api(libs.napier)
+                api(libs.paging)
             }
         }
         named("desktopMain") {

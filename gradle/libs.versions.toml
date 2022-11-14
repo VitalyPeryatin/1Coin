@@ -10,6 +10,10 @@ chucker = "3.5.2"
 kviewmodel = "0.11"
 
 [libraries]
+paging = "androidx.paging:paging-runtime:3.1.1"
+paging-compose = "androidx.paging:paging-compose:1.0.0-alpha17"
+paging-multiplatform = "app.cash.paging:paging-common:3.1.1-0.1.1"
+
 odyssey-core = { module = "io.github.alexgladkov:odyssey-core", version.ref = "odyssey" }
 odyssey-compose = { module = "io.github.alexgladkov:odyssey-compose", version.ref = "odyssey" }
 

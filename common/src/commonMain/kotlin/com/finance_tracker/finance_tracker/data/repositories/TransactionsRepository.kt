@@ -90,7 +90,7 @@ class TransactionsRepository(
 
     suspend fun getAllFullTransactionsPaginated(page: Long) {
         return withContext(Dispatchers.IO) {
-            transactionsEntityQueries.getAllFullTransactionsPaginated(page)
+            //transactionsEntityQueries.getAllFullTransactionsPaginated(page)
         }
     }
 }

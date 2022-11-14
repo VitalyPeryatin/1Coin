@@ -30,7 +30,7 @@ class DetailAccountViewModel(
         loadTransactionsJob = viewModelScope.launch {
             _transactions.update {
                 transactionsInteractor.getTransactions(
-                    accountId = account.id
+                    accountId = account.id,
                 )
             }
         }
