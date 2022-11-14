@@ -27,7 +27,8 @@ data class CoinColors(
     val secondaryBackground: Color,
     val dividers: Color,
     val content: Color,
-    val accentGreen: Color
+    val accentGreen: Color,
+    val accentRed: Color
 )
 
 val LocalCoinColors = staticCompositionLocalOf {
@@ -39,7 +40,8 @@ val LocalCoinColors = staticCompositionLocalOf {
         secondaryBackground = Color.Unspecified,
         dividers = Color.Unspecified,
         content = Color.Unspecified,
-        accentGreen = Color.Unspecified
+        accentGreen = Color.Unspecified,
+        accentRed = Color.Unspecified
     )
 }
 val LocalCoinTypography = staticCompositionLocalOf {
@@ -78,7 +80,8 @@ private val DarkColorPalette = CoinColors(
     secondaryBackground = Color(0xFFF7F7F7),
     dividers = Color(0xFFE6E6E6),
     content = Color.Black,
-    accentGreen = Color(0xFF00BC2D)
+    accentGreen = Color(0xFF00BC2D),
+    accentRed = Color(0xFFF62D2D)
 )
 private val LightColorPalette = CoinColors(
     primary = Color(0xFF009BFF),
@@ -88,7 +91,8 @@ private val LightColorPalette = CoinColors(
     secondaryBackground = Color(0xFFF7F7F7),
     dividers = Color(0xFFE6E6E6),
     content = Color.Black,
-    accentGreen = Color(0xFF00BC2D)
+    accentGreen = Color(0xFF00BC2D),
+    accentRed = Color(0xFFF62D2D)
 )
 
 @Composable

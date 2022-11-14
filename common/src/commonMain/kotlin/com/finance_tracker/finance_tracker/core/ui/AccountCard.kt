@@ -27,7 +27,6 @@ fun AccountCard(
     val navController = LocalRootController.current.findRootController()
     Card(
         modifier = modifier
-            .padding(4.dp)
             .size(
                 width = 160.dp,
                 height = 128.dp

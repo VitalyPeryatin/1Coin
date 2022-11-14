@@ -3,6 +3,13 @@
 
     <!-- General -->
     <string name="general_no_transactions">No transactions yet</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_delete">Delete</string>
+    <string name="dialog_body_delete">Are you sure you want to delete?</string>
+    <string name="dialog_title_delete">Deleting</string>
+    <string name="transaction">Transaction</string>
+    <string name="transactions">Transactions</string>
+    <string name="got_it">Got it</string>
 
     <!-- Account -->
     <string name="account_type_debit_card">Debit card</string>
@@ -23,6 +30,8 @@
     <string name="add_transaction_stage_category">Category</string>
     <string name="add_transaction_today">Today</string>
     <string name="add_transaction_yesterday">Yesterday</string>
+    <string name="add_transaction_btn_add">Add</string>
+    <string name="add_transaction_btn_edit">Edit</string>
 
     <!-- Home -->
     <string name="home_topbar_text">Total Balance</string>
@@ -39,7 +48,8 @@
     <!-- Transactions -->
     <string name="transactions_today">Today</string>
     <string name="transactions_yesterday">Yesterday</string>
-    <string name="transactions_title">Transactions</string>
+    <string name="transactions_title_normal">Transactions</string>
+    <string name="transactions_title_selected">Selected: </string>
 
     <!-- Categories -->
     <string name="category_settings">Category Settings</string>

@@ -3,7 +3,16 @@ package com.finance_tracker.finance_tracker.presentation.add_transaction.views
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.LocalContentColor
@@ -24,7 +33,7 @@ import com.finance_tracker.finance_tracker.domain.models.Category
 import com.finance_tracker.finance_tracker.presentation.add_transaction.views.enter_transaction_controller.AccountCard
 
 data class StepsEnterTransactionBarData(
-    val currentStep: EnterTransactionStep = EnterTransactionStep.Account,
+    val currentStep: EnterTransactionStep? = EnterTransactionStep.Account,
     val accountData: Account? = null,
     val categoryData: Category? = null
 )
@@ -132,7 +141,7 @@ fun NextIcon(
 private fun <T: Any> RowScope.StageText(
     currentStep: EnterTransactionStep,
     data: T?,
-    selectedStep: EnterTransactionStep,
+    selectedStep: EnterTransactionStep?,
     onStepSelect: (EnterTransactionStep) -> Unit,
     modifier: Modifier = Modifier,
     dataContent: @Composable (data: T) -> Unit = {}

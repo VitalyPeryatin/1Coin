@@ -2,6 +2,7 @@ plugins {
     id("org.jetbrains.compose")
     id("com.android.application")
     id("com.google.firebase.crashlytics")
+    id("io.gitlab.arturbosch.detekt")
     id("com.google.gms.google-services")
     kotlin("android")
 }

@@ -20,12 +20,6 @@ class App: Application(), KoinComponent {
     override fun onCreate() {
         super.onCreate()
 
-        startKoin {
-            androidLogger()
-            androidContext(this@App)
-            modules(commonModules())
-        }
-
         if (BuildConfig.DEBUG) {
             Firebase.crashlytics.setCrashlyticsCollectionEnabled(false)
             Napier.base(DebugAntilog())
@@ -34,6 +28,12 @@ class App: Application(), KoinComponent {
             Napier.base(CrashlyticsAntilog())
         }
 
-        databaseInitializer.init()
+        startKoin {
+            androidLogger()
+            androidContext(this@App)
+            modules(commonModules())
+        }
+
+        databaseInitializer.init(this)
     }
 }

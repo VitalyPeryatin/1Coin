@@ -43,7 +43,7 @@ class TransactionsRepository(
         Transaction(
             id = id,
             type = type,
-            amountCurrency = amountCurrency,
+            amountCurrency = Currency.getByName(amountCurrency),
             account = Account(
                 id = accountId ?: 0L,
                 type = accountType,
@@ -73,6 +73,36 @@ class TransactionsRepository(
     suspend fun getTransactions(accountId: Long): List<Transaction> {
         return withContext(Dispatchers.IO) {
             transactionsEntityQueries.getFullTransactionsByAccountId(accountId, fullTransactionMapper).executeAsList()
+        }
+    }
+
+    suspend fun deleteTransactions(transactions: List<Transaction>) {
+        withContext(Dispatchers.IO) {
+            transactionsEntityQueries.deleteTransactionsById(
+                ids = transactions.mapNotNull { it.id }
+            )
+        }
+    }
+
+    suspend fun deleteTransaction(transaction: Transaction) {
+        withContext(Dispatchers.IO) {
+            val transactionId = transaction.id ?: return@withContext
+            transactionsEntityQueries.deleteTransactionById(transactionId)
+        }
+    }
+
+    suspend fun addOrUpdateTransaction(transaction: Transaction) {
+        withContext(Dispatchers.IO) {
+            transactionsEntityQueries.insertTransaction(
+                id = transaction.id,
+                type = transaction.type,
+                amount = transaction.amount,
+                amountCurrency = transaction.amountCurrency.name,
+                categoryId = transaction.category?.id,
+                accountId = transaction.account.id,
+                insertionDate = Date(),
+                date = transaction.date,
+            )
         }
     }
 

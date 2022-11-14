@@ -35,7 +35,9 @@ private val DateFormatter = SimpleDateFormat("dd.MM")
 @Composable
 fun CommonTransactionsList(
     transactions: List<TransactionListModel>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: (TransactionListModel.Data) -> Unit = {},
+    onLongClick: (TransactionListModel.Data) -> Unit = {}
 ) {
     if (transactions.isEmpty()) {
         EmptyTransactionsStub(
@@ -44,7 +46,9 @@ fun CommonTransactionsList(
     } else {
         TransactionsList(
             modifier = modifier,
-            transactions = transactions
+            transactions = transactions,
+            onClick = onClick,
+            onLongClick = onLongClick
         )
     }
 }
@@ -52,7 +56,9 @@ fun CommonTransactionsList(
 @Composable
 private fun TransactionsList(
     transactions: List<TransactionListModel>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: (TransactionListModel.Data) -> Unit = {},
+    onLongClick: (TransactionListModel.Data) -> Unit = {}
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -61,7 +67,11 @@ private fun TransactionsList(
         items(transactions) { transactionModel ->
             when (transactionModel) {
                 is TransactionListModel.Data -> {
-                    TransactionItem(transaction = transactionModel.transaction)
+                    TransactionItem(
+                        transactionData = transactionModel,
+                        onClick = { onClick.invoke(transactionModel) },
+                        onLongClick = { onLongClick.invoke(transactionModel) }
+                    )
                 }
                 is TransactionListModel.DateAndDayTotal -> {
                     DayTotalHeader(dayTotalModel = transactionModel)

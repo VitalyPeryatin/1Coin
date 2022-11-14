@@ -14,7 +14,7 @@ class AccountsViewModel(
     private val _accounts = MutableStateFlow<List<Account>>(emptyList())
     val accounts = _accounts.asStateFlow()
 
-    init {
+    fun onScreenComposed() {
         loadAccounts()
     }
 

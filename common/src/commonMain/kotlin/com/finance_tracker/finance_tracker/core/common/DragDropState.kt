@@ -81,7 +81,11 @@ class DragDropState internal constructor(
 
             currentElement?.let { hovered ->
                 state.layoutInfo.visibleItemsInfo
-                    .filterNot { item -> item.offsetEnd < startOffset || item.offset > endOffset || hovered.index == item.index }
+                    .filterNot { item ->
+                        item.offsetEnd < startOffset
+                                || item.offset > endOffset
+                                || hovered.index == item.index
+                    }
                     .firstOrNull { item ->
                         val delta = (startOffset - hovered.offset)
                         when {
@@ -108,8 +112,10 @@ class DragDropState internal constructor(
             val startOffset = it.offset + draggedDistance
             val endOffset = it.offsetEnd + draggedDistance
             return@let when {
-                draggedDistance > 0 -> (endOffset - state.layoutInfo.viewportEndOffset + 50f).takeIf { diff -> diff > 0 }
-                draggedDistance < 0 -> (startOffset - state.layoutInfo.viewportStartOffset - 50f).takeIf { diff -> diff < 0 }
+                draggedDistance > 0 -> (endOffset - state.layoutInfo.viewportEndOffset + 50f)
+                    .takeIf{ diff -> diff > 0 }
+                draggedDistance < 0 -> (startOffset - state.layoutInfo.viewportStartOffset - 50f)
+                    .takeIf { diff -> diff < 0 }
                 else -> null
             }
         } ?: 0f

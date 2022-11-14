@@ -51,4 +51,16 @@ class AccountsRepository(
                 .map { it.accountToDomainModel() }
         }
     }
+
+    suspend fun increaseAccountBalance(id: Long, value: Double) {
+        withContext(Dispatchers.IO) {
+            accountsEntityQueries.increaseBalanceByAccountId(value, id)
+        }
+    }
+
+    suspend fun reduceAccountBalance(id: Long, value: Double) {
+        withContext(Dispatchers.IO) {
+            accountsEntityQueries.reduceBalanceByAccountId(value, id)
+        }
+    }
 }

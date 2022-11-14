@@ -1,7 +1,11 @@
 package com.finance_tracker.finance_tracker.presentation.add_transaction.views.enter_transaction_controller
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.with
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,7 +26,7 @@ private const val ContentAnimationDuration = 200
 fun EnterTransactionController(
     accounts: List<Account>,
     categories: List<Category>,
-    currentStep: EnterTransactionStep,
+    currentStep: EnterTransactionStep?,
     animationDirection: Int,
     modifier: Modifier = Modifier,
     onAccountSelect: (Account) -> Unit = {},
@@ -67,6 +71,9 @@ fun EnterTransactionController(
                     AmountKeyboard(
                         onButtonClick = onKeyboardButtonClick
                     )
+                }
+                else -> {
+                    /* no keyboard */
                 }
             }
         }

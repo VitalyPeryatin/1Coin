@@ -4,6 +4,8 @@ plugins {
     id("com.android.library")
     id("com.squareup.sqldelight")
     id("kotlin-parcelize")
+    id("io.gitlab.arturbosch.detekt")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 kotlin {
@@ -23,6 +25,10 @@ kotlin {
                 api(libs.bundles.odyssey)
                 api(libs.bundles.kviewmodel)
                 api(libs.napier)
+                api(libs.serialization)
+
+                implementation(libs.sqldelight.coroutines)
+                implementation(libs.bundles.ktor)
                 api(libs.paging)
             }
         }
@@ -30,6 +36,7 @@ kotlin {
             dependencies {
                 implementation(libs.sqldelight.jvm)
                 implementation(libs.datepicker.desktop)
+                implementation(libs.ktor.jvm)
             }
         }
         named("androidMain") {
@@ -37,6 +44,7 @@ kotlin {
                 implementation(libs.viewModel)
                 implementation(libs.bundles.koin.android)
                 implementation(libs.sqldelight.android)
+                implementation(libs.ktor.android)
             }
         }
     }

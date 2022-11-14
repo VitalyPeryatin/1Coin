@@ -5,11 +5,14 @@ data class Currency(
     val sign: String
 ) {
     companion object {
-        val list = listOf(
-            Currency(name = "USD", sign = "\$"),
-            Currency(name = "EURO", sign = "€"),
-            Currency(name = "GBR", sign = "£")
-        )
+
+        private val USD = Currency(name = "USD", sign = "\$")
+        private val EUR = Currency(name = "EUR", sign = "€")
+        private val RUB = Currency(name = "RUB", sign = "₽")
+        private val TRY = Currency(name = "TRY", sign = "₺")
+
+        val list = listOf(USD, EUR, RUB, TRY)
+        val default = USD
 
         private val map = list.associateBy { it.name }
 

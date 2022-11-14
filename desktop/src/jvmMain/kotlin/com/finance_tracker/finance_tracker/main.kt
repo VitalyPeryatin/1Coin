@@ -6,6 +6,7 @@ import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.type
 import androidx.compose.ui.window.singleWindowApplication
+import com.finance_tracker.finance_tracker.core.common.EmptyContext
 import com.finance_tracker.finance_tracker.core.common.MessageKeyQueue
 import com.finance_tracker.finance_tracker.core.navigation.main.MainNavigationTree
 import com.finance_tracker.finance_tracker.core.navigation.main.navigationGraph
@@ -33,9 +34,9 @@ fun main() = singleWindowApplication(
         false
     }
 ) {
-    initKoin()
-    databaseInitializer.init()
     Napier.base(DebugAntilog())
+    initKoin()
+    databaseInitializer.init(EmptyContext)
     setupNavigation(MainNavigationTree.Main.name) { navigationGraph() }
 }
 

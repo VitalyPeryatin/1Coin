@@ -1,10 +1,20 @@
 package com.finance_tracker.finance_tracker.data.database
 
+import com.finance_tracker.finance_tracker.core.common.Context
+import com.finance_tracker.finance_tracker.core.common.getRaw
 import com.finance_tracker.finance_tracker.domain.models.Category
 import com.financetracker.financetracker.CategoriesEntityQueries
+import com.financetracker.financetracker.CurrencyRatesEntityQueries
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.double
+import kotlinx.serialization.json.jsonPrimitive
 
 class DatabaseInitializer(
+    private val jsonFactory: Json,
     private val categoriesEntityQueries: CategoriesEntityQueries,
+    private val currencyRatesEntityQueries: CurrencyRatesEntityQueries
 ) {
 
     private val defaultExpenseCategories = listOf(
@@ -94,8 +104,9 @@ class DatabaseInitializer(
     )
 
 
-    fun init() {
+    fun init(context: Context) {
         initCategories()
+        initCurrencyRates(context)
     }
 
     private fun initCategories() {
@@ -121,6 +132,23 @@ class DatabaseInitializer(
                         position = category.id,
                         isExpense = false,
                         isIncome = true,
+                    )
+                }
+            }
+        }
+    }
+
+    private fun initCurrencyRates(context: Context) {
+        val currencyRatesJson = getRaw(context, "base_rates", "json")
+        currencyRatesEntityQueries.transaction {
+            val databaseCurrencyRates = currencyRatesEntityQueries.getAllRates().executeAsList()
+
+            if (databaseCurrencyRates.isEmpty()) {
+                val currencyRatesObject = jsonFactory.decodeFromString<JsonObject>(currencyRatesJson)
+                currencyRatesObject.forEach { (key, value) ->
+                    currencyRatesEntityQueries.insertNewRate(
+                        currency = key,
+                        rate = value.jsonPrimitive.double
                     )
                 }
             }

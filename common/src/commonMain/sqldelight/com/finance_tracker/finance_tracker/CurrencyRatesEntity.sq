@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS CurrencyRatesEntity (
+    currency TEXT NOT NULL PRIMARY KEY,
+    rate REAL NOT NULL
+);
+
+getAllRates:
+SELECT *
+FROM CurrencyRatesEntity;
+
+insertNewRate:
+INSERT OR REPLACE
+INTO CurrencyRatesEntity
+VALUES (?,?);

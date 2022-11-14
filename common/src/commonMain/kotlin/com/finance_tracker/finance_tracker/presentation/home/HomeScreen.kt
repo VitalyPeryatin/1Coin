@@ -50,7 +50,12 @@ fun HomeScreen() {
                 .systemBarsPadding()
         ) {
 
-            HomeTopBar()
+            val totalAmount by viewModel.totalAmount.collectAsState()
+            val totalCurrency by viewModel.totalCurrency.collectAsState()
+            HomeTopBar(
+                totalAmount = totalAmount,
+                totalCurrency = totalCurrency
+            )
 
             MyAccountsHeader(
                 modifier = Modifier

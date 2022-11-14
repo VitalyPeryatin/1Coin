@@ -21,6 +21,7 @@ internal val databaseModule = module {
     factory { get<AppDatabase>().categoriesEntityQueries }
     factory { get<AppDatabase>().accountColorsEntityQueries }
     factory { get<AppDatabase>().defaultCategoriesEntityQueries }
+    factory { get<AppDatabase>().currencyRatesEntityQueries }
 }
 
 private fun provideAppDatabase(driverFactory: DriverFactory): AppDatabase {

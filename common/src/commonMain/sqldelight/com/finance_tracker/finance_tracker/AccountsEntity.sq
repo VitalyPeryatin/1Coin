@@ -29,3 +29,13 @@ VALUES (?,?,?,?,?,?);
 deleteAccountById:
 DELETE FROM AccountsEntity
 WHERE id = :id;
+
+increaseBalanceByAccountId:
+UPDATE AccountsEntity
+SET balance = balance + :balance
+WHERE id = :id;
+
+reduceBalanceByAccountId:
+UPDATE AccountsEntity
+SET balance = balance - :balance
+WHERE id = :id;
