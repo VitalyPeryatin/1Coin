@@ -13,7 +13,7 @@ class TransactionsInteractor(
     private val accountsRepository: AccountsRepository,
 ) {
 
-    suspend fun getTransactions(accountId: Long? = null): List<TransactionListModel> {
+    suspend fun getTransactions(accountId: Long? = null/*, page: Long*/): List<TransactionListModel> {
         val allTransactions = if (accountId == null) {
             transactionsRepository.getAllTransactions()
         } else {

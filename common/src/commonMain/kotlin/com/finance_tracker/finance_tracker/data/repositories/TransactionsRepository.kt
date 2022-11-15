@@ -118,9 +118,15 @@ class TransactionsRepository(
         }
     }
 
-    suspend fun getAllFullTransactionsPaginated(page: Long) {
+    suspend fun getAllTransactionsByAccountIdPaginated(page: Long): List<Transaction> {
         return withContext(Dispatchers.IO) {
-            //transactionsEntityQueries.getAllFullTransactionsPaginated(page)
+            transactionsEntityQueries.getAllFullTransactionsPaginated(page).executeAsList()
         }
     }
+
+    /*suspend fun getAllFullTransactionsPaginated(page: Long): List<Transaction> {
+        return withContext(Dispatchers.IO) {
+            transactionsEntityQueries.getAllFullTransactionsPaginated(page).executeAsList()
+        }
+    }*/
 }
