@@ -15,6 +15,7 @@ import com.finance_tracker.finance_tracker.core.common.stringResource
 import com.finance_tracker.finance_tracker.core.navigation.main.MainNavigationTree
 import com.finance_tracker.finance_tracker.core.ui.DeleteDialog
 import com.finance_tracker.finance_tracker.core.ui.transactions.CommonTransactionsList
+import com.finance_tracker.finance_tracker.domain.models.Transaction
 import com.finance_tracker.finance_tracker.domain.models.TransactionListModel
 import com.finance_tracker.finance_tracker.presentation.transactions.views.TransactionsAppBar
 import ru.alexgladkov.odyssey.compose.extensions.present
@@ -97,7 +98,7 @@ fun TransactionsScreen() {
                 }
             )
 
-            val lazyTransactionList = viewModel
+            val lazyTransactionList: LazyPagingItems<Transaction> = viewModel.transactionsPaginated.collectAsLazyPagingItems()
             //val transactions: LazyPagingItems<>
             //CommonTransactionsList(transactions)
         }

@@ -1,28 +1,39 @@
 package com.finance_tracker.finance_tracker.presentation.transactions
 
+import app.cash.paging.Pager
+import app.cash.paging.PagingConfig
+import app.cash.paging.PagingData
 import com.adeo.kviewmodel.KViewModel
+import com.finance_tracker.finance_tracker.data.database.data_sources.TransactionSource
+import com.finance_tracker.finance_tracker.data.repositories.TransactionsRepository
 import com.finance_tracker.finance_tracker.domain.interactors.TransactionsInteractor
+import com.finance_tracker.finance_tracker.domain.models.Transaction
 import com.finance_tracker.finance_tracker.domain.models.TransactionListModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class TransactionsViewModel(
-    private val transactionsInteractor: TransactionsInteractor
+    private val transactionsInteractor: TransactionsInteractor,
+    private val transactionsRepository: TransactionsRepository
 ): KViewModel() {
 
     private val _transactions: MutableStateFlow<List<TransactionListModel>> = MutableStateFlow(emptyList())
     val transactions: StateFlow<List<TransactionListModel>> = _transactions.asStateFlow()
+
+    val transactionsPaginated: Flow<PagingData<Transaction>> = Pager(PagingConfig(pageSize = 20)) {
+        TransactionSource(transactionsRepository)
+    }.flow
 
     private var loadTransactionsJob: Job? = null
 
     fun loadTransactions() {
         loadTransactionsJob?.cancel()
         loadTransactionsJob = viewModelScope.launch {
-            _transactions.update { transactionsInteractor.getTransactions() }
+            //_transactions.update { transactionsInteractor.getTransactions() }
         }
     }
 

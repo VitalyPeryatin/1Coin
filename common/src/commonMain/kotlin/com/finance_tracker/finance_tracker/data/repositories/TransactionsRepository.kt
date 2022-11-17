@@ -1,5 +1,6 @@
 package com.finance_tracker.finance_tracker.data.repositories
 
+import com.finance_tracker.finance_tracker.TransactionsEntityQueries
 import com.finance_tracker.finance_tracker.core.common.DateFormatType
 import com.finance_tracker.finance_tracker.core.common.hexToColor
 import com.finance_tracker.finance_tracker.domain.models.Account
@@ -7,7 +8,6 @@ import com.finance_tracker.finance_tracker.domain.models.Category
 import com.finance_tracker.finance_tracker.domain.models.Currency
 import com.finance_tracker.finance_tracker.domain.models.Transaction
 import com.finance_tracker.finance_tracker.domain.models.TransactionType
-import com.financetracker.financetracker.TransactionsEntityQueries
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.Date
@@ -118,15 +118,23 @@ class TransactionsRepository(
         }
     }
 
-    suspend fun getAllTransactionsByAccountIdPaginated(page: Long): List<Transaction> {
+    suspend fun getAllTransactionsByAccountIdPaginated(accountId: Long, page: Long): List<Transaction> {
         return withContext(Dispatchers.IO) {
-            transactionsEntityQueries.getAllFullTransactionsPaginated(page).executeAsList()
+            transactionsEntityQueries.getFullTransactionsByAccountIdPaginated(
+                accountId = accountId,
+                offset = page,
+                mapper = fullTransactionMapper
+            ).executeAsList()
         }
     }
 
-    /*suspend fun getAllFullTransactionsPaginated(page: Long): List<Transaction> {
+    suspend fun getAllFullTransactionsPaginated(page: Long): List<Transaction> {
         return withContext(Dispatchers.IO) {
-            transactionsEntityQueries.getAllFullTransactionsPaginated(page).executeAsList()
+            transactionsEntityQueries.getAllFullTransactionsPaginated(
+                offset = page,
+                mapper = fullTransactionMapper
+            ).executeAsList()
         }
-    }*/
+    }
+
 }

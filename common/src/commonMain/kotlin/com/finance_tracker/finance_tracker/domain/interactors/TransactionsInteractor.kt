@@ -13,11 +13,14 @@ class TransactionsInteractor(
     private val accountsRepository: AccountsRepository,
 ) {
 
-    suspend fun getTransactions(accountId: Long? = null/*, page: Long*/): List<TransactionListModel> {
+    suspend fun getTransactions(accountId: Long? = null, page: Long): List<TransactionListModel> {
         val allTransactions = if (accountId == null) {
-            transactionsRepository.getAllTransactions()
+            transactionsRepository.getAllFullTransactionsPaginated(page)
         } else {
-            transactionsRepository.getTransactions(accountId)
+            transactionsRepository.getAllTransactionsByAccountIdPaginated(
+                accountId = accountId,
+                page = page
+            )
         }
         val newTransactions = mutableListOf<TransactionListModel>()
         for (transaction in allTransactions) {

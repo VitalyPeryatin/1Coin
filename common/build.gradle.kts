@@ -29,7 +29,7 @@ kotlin {
 
                 implementation(libs.sqldelight.coroutines)
                 implementation(libs.bundles.ktor)
-                api(libs.paging)
+                implementation(libs.bundles.paging)
             }
         }
         named("desktopMain") {
