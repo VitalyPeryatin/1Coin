@@ -1,0 +1,7 @@
+#!/bin/sh
+#coding=UTF-8
+
+./gradlew :common:verifyCommonMainAppDatabaseMigration
+./gradlew detektAll
+RESULT=$?
+exit $RESULT
