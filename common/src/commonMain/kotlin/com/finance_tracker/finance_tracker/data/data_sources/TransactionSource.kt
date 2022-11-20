@@ -1,22 +1,23 @@
-package com.finance_tracker.finance_tracker.data.database.data_sources
+package com.finance_tracker.finance_tracker.data.data_sources
 
 import androidx.paging.PagingState
 import app.cash.paging.PagingSource
-import com.finance_tracker.finance_tracker.data.repositories.TransactionsRepository
-import com.finance_tracker.finance_tracker.domain.models.Transaction
+import com.finance_tracker.finance_tracker.domain.interactors.TransactionsInteractor
+import com.finance_tracker.finance_tracker.domain.models.TransactionListModel
+import java.io.IOException
 
 class TransactionSource(
-    private val repository: TransactionsRepository
-): PagingSource<Long, Transaction>() {
-    override fun getRefreshKey(state: PagingState<Long, Transaction>): Long? {
+    private val interactor: TransactionsInteractor
+): PagingSource<Long, TransactionListModel>() {
+    override fun getRefreshKey(state: PagingState<Long, TransactionListModel>): Long? {
         return state.anchorPosition?.toLong()
     }
 
-    override suspend fun load(params: LoadParams<Long>): LoadResult<Long, Transaction> {
+    override suspend fun load(params: LoadParams<Long>): LoadResult<Long, TransactionListModel> {
         return try {
 
             val nextPage = params.key ?: 1
-            val transactionList = repository.getAllFullTransactionsPaginated(page = nextPage)
+            val transactionList = interactor.getTransactions(page = nextPage)
 
             LoadResult.Page(
                 data = transactionList,
@@ -31,7 +32,7 @@ class TransactionSource(
                     nextPage + 1
                 }
             )
-        } catch (exception: Exception) {
+        } catch (exception: IOException) {
             return LoadResult.Error(exception)
         }
     }
