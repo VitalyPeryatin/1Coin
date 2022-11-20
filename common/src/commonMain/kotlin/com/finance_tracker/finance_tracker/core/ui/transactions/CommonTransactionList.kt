@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -26,20 +25,23 @@ import com.finance_tracker.finance_tracker.core.common.DecimalFormatType
 import com.finance_tracker.finance_tracker.core.common.stringResource
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
+import com.finance_tracker.finance_tracker.data.pagination.LazyPagingItems
+import com.finance_tracker.finance_tracker.data.pagination.items
 import com.finance_tracker.finance_tracker.domain.models.TransactionListModel
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 
 private val DateFormatter = SimpleDateFormat("dd.MM")
 
 @Composable
 fun CommonTransactionsList(
-    transactions: List<TransactionListModel>,
+    transactions: LazyPagingItems<TransactionListModel>,
     modifier: Modifier = Modifier,
     onClick: (TransactionListModel.Data) -> Unit = {},
     onLongClick: (TransactionListModel.Data) -> Unit = {}
 ) {
-    if (transactions.isEmpty()) {
+    if (transactions.itemCount == 0) {
         EmptyTransactionsStub(
             modifier = modifier
         )
@@ -55,7 +57,7 @@ fun CommonTransactionsList(
 
 @Composable
 private fun TransactionsList(
-    transactions: List<TransactionListModel>,
+    transactions: LazyPagingItems<TransactionListModel>,
     modifier: Modifier = Modifier,
     onClick: (TransactionListModel.Data) -> Unit = {},
     onLongClick: (TransactionListModel.Data) -> Unit = {}
@@ -76,6 +78,8 @@ private fun TransactionsList(
                 is TransactionListModel.DateAndDayTotal -> {
                     DayTotalHeader(dayTotalModel = transactionModel)
                 }
+
+                else -> {}
             }
         }
     }

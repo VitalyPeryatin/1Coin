@@ -20,7 +20,6 @@ import com.finance_tracker.finance_tracker.core.ui.collapsing_toolbar.Collapsing
 import com.finance_tracker.finance_tracker.core.ui.collapsing_toolbar.ScrollStrategy
 import com.finance_tracker.finance_tracker.core.ui.collapsing_toolbar.rememberCollapsingToolbarScaffoldState
 import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
-import com.finance_tracker.finance_tracker.core.ui.transactions.CommonTransactionsList
 import com.finance_tracker.finance_tracker.domain.models.Account
 import com.finance_tracker.finance_tracker.presentation.detail_account.views.AccountNameText
 import com.finance_tracker.finance_tracker.presentation.detail_account.views.DetailAccountAppBar
@@ -92,7 +91,7 @@ fun DetailAccountScreen(
             }
         ) {
             val transactions by viewModel.transactions.collectAsState()
-            CommonTransactionsList(transactions)
+            //CommonTransactionsList(transactions)
         }
     }
 }
