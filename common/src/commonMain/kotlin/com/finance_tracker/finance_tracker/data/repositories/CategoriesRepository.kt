@@ -2,8 +2,8 @@ package com.finance_tracker.finance_tracker.data.repositories
 
 import com.finance_tracker.finance_tracker.data.database.mappers.categoryToDomainModel
 import com.finance_tracker.finance_tracker.domain.models.Category
-import com.financetracker.financetracker.CategoriesEntityQueries
-import com.financetracker.financetracker.DefaultCategoriesEntityQueries
+import com.financetracker.financetracker.data.CategoriesEntityQueries
+import com.financetracker.financetracker.data.DefaultCategoriesEntityQueries
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

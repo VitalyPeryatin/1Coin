@@ -19,6 +19,7 @@ import java.time.LocalDateTime
 import java.util.*
 
 @Composable
+@Suppress("MissingModifierDefaultValue", "ModifierParameterPosition")
 actual fun CalendarDialog(
     minDate: Long,
     maxDate: Long,

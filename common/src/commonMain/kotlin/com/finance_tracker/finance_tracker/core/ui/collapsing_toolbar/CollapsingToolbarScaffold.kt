@@ -167,10 +167,12 @@ private class ScaffoldChildAlignmentModifier(
 	private val alignment: Alignment
 ) : ParentDataModifier {
 	override fun Density.modifyParentData(parentData: Any?): Any {
-		return (parentData as? ScaffoldParentData) ?: ScaffoldParentData(alignment)
+		return parentData as? ScaffoldParentData
+			?: ScaffoldParentData(alignment)
 	}
 }
 
+@Suppress("DataClassShouldBeImmutable")
 private data class ScaffoldParentData(
 	var alignment: Alignment? = null
 )

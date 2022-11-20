@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 
 @Composable
+@Suppress("MissingModifierDefaultValue", "ModifierParameterPosition", "ReusedModifierInstance")
 actual fun CoinGridDropdownMenu(
     columnSize: Dp,
     expanded: Boolean,

@@ -32,9 +32,9 @@ class SmsMessageParser(
                 name = "Fake card",
                 balance = 0.0,
                 color = Color.Red,
-                currency = Currency.list.first()
+                currency = Currency.default
             ),
-            amountCurrency = fields.getAmountCurrency(),
+            amountCurrency = Currency.getByName(fields.getAmountCurrency()),
             category = null,
             date = date
         )

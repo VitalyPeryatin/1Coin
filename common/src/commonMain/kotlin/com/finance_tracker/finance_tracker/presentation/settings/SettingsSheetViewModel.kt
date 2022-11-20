@@ -5,9 +5,9 @@ import com.finance_tracker.finance_tracker.domain.models.Currency
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class SettingsSheetViewModel(): KViewModel() {
+class SettingsSheetViewModel: KViewModel() {
 
-    private val _chosenCurrency = MutableStateFlow(Currency.list.first())
+    private val _chosenCurrency = MutableStateFlow(Currency.default)
     val chosenCurrency = _chosenCurrency.asStateFlow()
 
     fun onCurrencySelect(currency: Currency) {

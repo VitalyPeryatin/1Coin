@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "264104872393",
+    "project_id": "coin-15433",
+    "storage_bucket": "coin-15433.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:264104872393:android:b8a115442c9c3137f00018",
+        "android_client_info": {
+          "package_name": "com.finance_tracker.finance_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "264104872393-ojoml4eg1iee7ng42a4amjuoj5j3jj04.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZXizfZ47pdErBizBOx3GlGw9LJji_4Vc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "264104872393-ojoml4eg1iee7ng42a4amjuoj5j3jj04.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

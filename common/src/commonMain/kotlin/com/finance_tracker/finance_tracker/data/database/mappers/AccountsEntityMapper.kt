@@ -3,7 +3,7 @@ package com.finance_tracker.finance_tracker.data.database.mappers
 import com.finance_tracker.finance_tracker.core.common.hexToColor
 import com.finance_tracker.finance_tracker.domain.models.Account
 import com.finance_tracker.finance_tracker.domain.models.Currency
-import com.financetracker.financetracker.AccountsEntity
+import com.financetracker.financetracker.data.AccountsEntity
 
 fun AccountsEntity.accountToDomainModel(): Account {
     return Account(

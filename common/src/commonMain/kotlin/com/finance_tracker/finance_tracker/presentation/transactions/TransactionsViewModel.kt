@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class TransactionsViewModel constructor(
+class TransactionsViewModel(
     private val transactionsInteractor: TransactionsInteractor
 ): KViewModel() {
 
@@ -23,6 +23,17 @@ class TransactionsViewModel constructor(
         loadTransactionsJob?.cancel()
         loadTransactionsJob = viewModelScope.launch {
             _transactions.update { transactionsInteractor.getTransactions() }
+        }
+    }
+
+    fun onDeleteTransactions(
+        transactions: List<TransactionListModel.Data>
+    ) {
+        viewModelScope.launch {
+            transactionsInteractor.deleteTransactions(
+                transactions = transactions.map { it.transaction }
+            )
+            loadTransactions()
         }
     }
 }

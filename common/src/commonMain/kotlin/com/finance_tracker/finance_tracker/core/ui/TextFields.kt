@@ -31,9 +31,9 @@ import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 
 @Composable
 fun CoinOutlinedTextField(
+    modifier: Modifier = Modifier,
     value: String = "",
     onValueChange: (String) -> Unit = {},
-    modifier: Modifier = Modifier,
     label: @Composable (() -> Unit)? = null,
     placeholder: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
@@ -77,9 +77,9 @@ fun CoinOutlinedTextField(
 
 @Composable
 fun CoinOutlinedSelectTextField(
+    modifier: Modifier = Modifier,
     value: String = "",
     onValueChange: (String) -> Unit = {},
-    modifier: Modifier = Modifier,
     leadingIcon: @Composable (() -> Unit)? = null,
     label: @Composable (() -> Unit)? = null,
     placeholder: @Composable (() -> Unit)? = null,

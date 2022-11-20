@@ -18,7 +18,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.common.DateFormatType
@@ -28,14 +27,17 @@ import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
 import com.finance_tracker.finance_tracker.domain.models.TransactionListModel
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 
 private val DateFormatter = SimpleDateFormat("dd.MM")
 
 @Composable
 fun CommonTransactionsList(
     transactions: List<TransactionListModel>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: (TransactionListModel.Data) -> Unit = {},
+    onLongClick: (TransactionListModel.Data) -> Unit = {}
 ) {
     if (transactions.isEmpty()) {
         EmptyTransactionsStub(
@@ -44,7 +46,9 @@ fun CommonTransactionsList(
     } else {
         TransactionsList(
             modifier = modifier,
-            transactions = transactions
+            transactions = transactions,
+            onClick = onClick,
+            onLongClick = onLongClick
         )
     }
 }
@@ -52,7 +56,9 @@ fun CommonTransactionsList(
 @Composable
 private fun TransactionsList(
     transactions: List<TransactionListModel>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: (TransactionListModel.Data) -> Unit = {},
+    onLongClick: (TransactionListModel.Data) -> Unit = {}
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -61,7 +67,11 @@ private fun TransactionsList(
         items(transactions) { transactionModel ->
             when (transactionModel) {
                 is TransactionListModel.Data -> {
-                    TransactionItem(transaction = transactionModel.transaction)
+                    TransactionItem(
+                        transactionData = transactionModel,
+                        onClick = { onClick.invoke(transactionModel) },
+                        onLongClick = { onLongClick.invoke(transactionModel) }
+                    )
                 }
                 is TransactionListModel.DateAndDayTotal -> {
                     DayTotalHeader(dayTotalModel = transactionModel)
@@ -73,8 +83,8 @@ private fun TransactionsList(
 
 @Composable
 private fun DayTotalHeader(
-    modifier: Modifier = Modifier,
-    dayTotalModel: TransactionListModel.DateAndDayTotal
+    dayTotalModel: TransactionListModel.DateAndDayTotal,
+    modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier
@@ -125,7 +135,7 @@ private fun EmptyTransactionsStub(
             .padding(16.dp)
             .border(
                 width = 1.dp,
-                color = Color(0xFFECECEC),
+                color = CoinTheme.color.dividers,
                 shape = RoundedCornerShape(12.dp)
             )
             .fillMaxWidth()

@@ -14,5 +14,5 @@ expect fun CoinGridDropdownMenu(
     modifier: Modifier = Modifier,
     xOffset: Dp = 0.dp,
     yOffset: Dp = 8.dp,
-    content: LazyGridScope.() -> Unit
+    content: LazyGridScope.() -> Unit = {}
 )

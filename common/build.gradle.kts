@@ -4,6 +4,8 @@ plugins {
     id("com.android.library")
     id("com.squareup.sqldelight")
     id("kotlin-parcelize")
+    id("io.gitlab.arturbosch.detekt")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 kotlin {
@@ -23,12 +25,18 @@ kotlin {
                 api(libs.bundles.odyssey)
                 api(libs.bundles.kviewmodel)
                 api(libs.napier)
+                api(libs.serialization)
+
+                implementation(libs.sqldelight.coroutines)
+                implementation(libs.bundles.ktor)
+                implementation(libs.koalaplot)
             }
         }
         named("desktopMain") {
             dependencies {
                 implementation(libs.sqldelight.jvm)
                 implementation(libs.datepicker.desktop)
+                implementation(libs.ktor.jvm)
             }
         }
         named("androidMain") {
@@ -36,6 +44,7 @@ kotlin {
                 implementation(libs.viewModel)
                 implementation(libs.bundles.koin.android)
                 implementation(libs.sqldelight.android)
+                implementation(libs.ktor.android)
             }
         }
     }
@@ -60,5 +69,7 @@ android {
 sqldelight {
     database("AppDatabase") {
         packageName = "com.finance_tracker.finance_tracker"
+        schemaOutputDirectory = file("src/commonMain/sqldelight/com/finance_tracker/finance_tracker/schemas")
+        verifyMigrations = true
     }
 }

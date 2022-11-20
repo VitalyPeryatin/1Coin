@@ -93,6 +93,12 @@ class AddAccountViewModel(
         _enteredAmount.value = amount
     }
 
+    fun onDeleteClick(account: Account) {
+        viewModelScope.launch {
+            accountsRepository.deleteAccountById(account.id)
+        }
+    }
+
     fun onAddAccountClick() {
         viewModelScope.launch {
             val accountName = enteredAccountName.value.takeIf { it.isNotBlank() } ?: run {
@@ -119,13 +125,24 @@ class AddAccountViewModel(
                 ))
                 return@launch
             }
-            accountsRepository.insertAccount(
-                accountName = accountName,
-                balance = balance,
-                colorHex = selectedColor.toHexString(),
-                type = type,
-                currency = selectedCurrency.value
-            )
+            if (account == null) {
+                accountsRepository.insertAccount(
+                    accountName = accountName,
+                    balance = balance,
+                    colorHex = selectedColor.toHexString(),
+                    type = type,
+                    currency = selectedCurrency.value
+                )
+            } else {
+                accountsRepository.updateAccount(
+                    type = type,
+                    name = accountName,
+                    balance = balance,
+                    colorHex = selectedColor.toHexString(),
+                    currency = selectedCurrency.value,
+                    id = account.id,
+                )
+            }
             _events.send(AddAccountEvent.Close)
         }
     }

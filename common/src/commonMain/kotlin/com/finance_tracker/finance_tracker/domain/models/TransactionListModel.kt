@@ -1,5 +1,7 @@
 package com.finance_tracker.finance_tracker.domain.models
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import java.util.*
 
 sealed interface TransactionListModel {
@@ -11,6 +13,7 @@ sealed interface TransactionListModel {
     ): TransactionListModel
 
     data class Data(
-        val transaction: Transaction
+        val transaction: Transaction,
+        val isSelected: MutableState<Boolean> = mutableStateOf(false)
     ): TransactionListModel
 }

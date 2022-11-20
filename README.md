@@ -31,7 +31,7 @@
 
 <div align="center">
   <h3>
-    <a href="">
+    <a href="https://github.com/VitalyPeryatin/1Coin/blob/develop/CONTRIBUTING.md">
       Contributing
     </a>
     <span> | </span>
@@ -43,9 +43,10 @@
 
 <div align="center">
   <sub>Built with ❤︎ by
-  <a href="https://github.com/VitalyPeryatin/FinanceTracker/graphs/contributors">
-    contributors
-  </a>
+    <a href="https://github.com/VitalyPeryatin/FinanceTracker/graphs/contributors">
+      contributors
+    </a>
+  </sub>
 </div>
 
 ## Table of Contents
@@ -74,6 +75,7 @@
 - [Odyssey](https://github.com/AlexGladkov/Odyssey) - Navigation
 - [KViewModel](https://github.com/adeo-opensource/kviewmodel--mpp) - Shared ViewModel
 - [Koin](https://insert-koin.io/) - Dependency injection
+- [Koalaplot](https://github.com/KoalaPlot/koalaplot-core) - Charts
 - [SqlDelight](https://github.com/cashapp/sqldelight) - SQLite database
 - [Napier](https://github.com/AAkira/Napier) - Logger
 - [Firebase](https://firebase.google.com/) - Crashlytics
@@ -83,8 +85,6 @@
 
 ## How to build
 - Android
-    - Request <i>'google-services.json'</i> file from <a href="https://t.me/infinity_coder">@infinity_coder</a> in Telegram
-    - Add <i>'google-services.json'</i> file in <i>'/android/'</i> folder
     - Sync gradle
     - Run Android configuration project
 - Desktop

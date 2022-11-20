@@ -14,9 +14,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.common.`if`
+import com.finance_tracker.finance_tracker.core.theme.CoinAlpha
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 
 @Composable
+@Suppress("ReusedModifierInstance")
 fun PrimaryButton(
     text: String,
     modifier: Modifier = Modifier,
@@ -29,7 +31,7 @@ fun PrimaryButton(
         Text(
             modifier = modifier
                 .`if`(!enabled) {
-                    alpha(0.2f)
+                    alpha(CoinAlpha.Medium)
                 }
                 .clip(RoundedCornerShape(12.dp))
                 .background(CoinTheme.color.primary)

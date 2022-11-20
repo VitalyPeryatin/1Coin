@@ -27,23 +27,19 @@ import com.finance_tracker.finance_tracker.presentation.add_category.views.AddCa
 import com.finance_tracker.finance_tracker.presentation.add_category.views.ChooseIconButton
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 
-private const val MIN_CATEGORY_NAME_LENGTH = 2
+private const val MinCategoryNameLength = 2
 
 @Composable
-fun AddCategoryScreen(
-    modifier: Modifier = Modifier,
-    appBarText: String,
-) {
+fun AddCategoryScreen(appBarText: String, ) {
     StoredViewModel<AddCategoryViewModel> { viewModel ->
         val rootController = LocalRootController.current
         val context = LocalContext.current
 
         Column(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
                 .statusBarsPadding()
         ) {
-
             AddCategoryAppBar(textValue = appBarText)
 
             val chosenIcon by viewModel.chosenIcon.collectAsState()
@@ -115,7 +111,7 @@ fun AddCategoryScreen(
                     bottom = 12.dp
                 ),
                 shape = RoundedCornerShape(12.dp),
-                enabled = newCategoryName.length >= MIN_CATEGORY_NAME_LENGTH
+                enabled = newCategoryName.length >= MinCategoryNameLength
             ) {
                 Text(
                     text = getLocalizedString(

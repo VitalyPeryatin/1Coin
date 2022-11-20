@@ -7,5 +7,5 @@ object KoinContainer {
     var koinApp : KoinApplication? = null
 }
 
-val globalKoin: Koin
+val GlobalKoin: Koin
     get() = KoinContainer.koinApp?.koin!!

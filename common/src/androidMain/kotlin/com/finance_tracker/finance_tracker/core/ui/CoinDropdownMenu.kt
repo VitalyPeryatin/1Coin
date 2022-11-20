@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.material.DropdownMenuItem as AndroidDropDownMenuItem
 
 @Composable
+@Suppress("MissingModifierDefaultValue", "ReusedModifierInstance")
 actual fun CoinDropdownMenu(
     expanded: Boolean,
     onDismissRequest: () -> Unit,
@@ -33,6 +34,7 @@ actual fun CoinDropdownMenu(
 }
 
 @Composable
+@Suppress("MissingModifierDefaultValue")
 actual fun DropdownMenuItem(
     modifier: Modifier,
     onClick: () -> Unit,

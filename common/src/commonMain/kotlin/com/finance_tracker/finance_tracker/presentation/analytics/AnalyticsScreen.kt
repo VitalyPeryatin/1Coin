@@ -29,5 +29,6 @@ fun AnalyticsScreen() {
                 )
         )
 
+        PieChart()
     }
 }

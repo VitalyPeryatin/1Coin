@@ -3,14 +3,14 @@ package com.finance_tracker.finance_tracker.di
 import com.finance_tracker.finance_tracker.AppDatabase
 import com.finance_tracker.finance_tracker.data.database.DatabaseInitializer
 import com.finance_tracker.finance_tracker.data.database.DriverFactory
-import com.financetracker.financetracker.AccountsEntity
-import com.financetracker.financetracker.TransactionsEntity
+import com.financetracker.financetracker.data.AccountsEntity
+import com.financetracker.financetracker.data.TransactionsEntity
 import com.squareup.sqldelight.ColumnAdapter
 import com.squareup.sqldelight.EnumColumnAdapter
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
 internal val databaseModule = module {
     singleOf(::DatabaseInitializer)
@@ -21,6 +21,7 @@ internal val databaseModule = module {
     factory { get<AppDatabase>().categoriesEntityQueries }
     factory { get<AppDatabase>().accountColorsEntityQueries }
     factory { get<AppDatabase>().defaultCategoriesEntityQueries }
+    factory { get<AppDatabase>().currencyRatesEntityQueries }
 }
 
 private fun provideAppDatabase(driverFactory: DriverFactory): AppDatabase {

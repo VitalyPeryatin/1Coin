@@ -20,15 +20,12 @@ import com.finance_tracker.finance_tracker.presentation.settings.views.SettingsS
 import com.finance_tracker.finance_tracker.presentation.settings.views.SettingsSheetMainCurrencyItem
 
 @Composable
-fun SettingsSheet(
-    onCloseClick: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
+fun SettingsSheet(onCloseClick: () -> Unit) {
     StoredViewModel<SettingsSheetViewModel> { viewModel ->
         val chosenCurrency by viewModel.chosenCurrency.collectAsState()
 
         Column(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .navigationBarsPadding(),
         ) {

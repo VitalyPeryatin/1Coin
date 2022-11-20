@@ -5,6 +5,8 @@ data class SmsTemplate(
     val fromAddresses: List<String>,
     val pattern: String
 ) {
+    val regex = getRegexFromPattern(pattern)
+    val transactionFields = getAllTransactionFieldsFromPattern(pattern)
 
     companion object {
 
@@ -28,7 +30,4 @@ data class SmsTemplate(
                 .toList()
         }
     }
-
-    val regex = getRegexFromPattern(pattern)
-    val transactionFields = getAllTransactionFieldsFromPattern(pattern)
 }

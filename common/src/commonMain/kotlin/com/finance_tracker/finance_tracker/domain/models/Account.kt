@@ -30,7 +30,7 @@ data class Account(
             name = "",
             balance = 0.0,
             color = Color.Black,
-            currency = Currency.list.first()
+            currency = Currency.default
         )
     }
 }

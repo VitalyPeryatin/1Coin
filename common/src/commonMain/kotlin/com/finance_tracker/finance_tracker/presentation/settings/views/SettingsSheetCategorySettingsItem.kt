@@ -21,7 +21,7 @@ import ru.alexgladkov.odyssey.compose.local.LocalRootController
 @Composable
 fun SettingsSheetCategorySettingsItem(
     modifier: Modifier = Modifier,
-    onCloseClick: () -> Unit
+    onCloseClick: () -> Unit = {}
 ) {
 
     val rootController = LocalRootController.current

@@ -7,6 +7,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 @Immutable
+@Suppress("ConstructorParameterNaming")
 data class CoinTypography(
     val h1: TextStyle = TextStyle(
         fontWeight = FontWeight.Medium,

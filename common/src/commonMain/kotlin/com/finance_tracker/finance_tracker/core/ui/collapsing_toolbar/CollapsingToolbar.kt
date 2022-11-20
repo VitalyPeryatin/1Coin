@@ -81,6 +81,9 @@ class CollapsingToolbarState(
 				((height - minHeight).toFloat() / (maxHeight - minHeight)).coerceIn(0f, 1f)
 			}
 
+	override val isScrollInProgress: Boolean
+		get() = scrollableState.isScrollInProgress
+
 	private val scrollableState = ScrollableState { value ->
 		val consume = if (value < 0) {
 			max(minHeight.toFloat() - height, value)
@@ -135,9 +138,6 @@ class CollapsingToolbarState(
 
 		return left
 	}
-
-	override val isScrollInProgress: Boolean
-		get() = scrollableState.isScrollInProgress
 
 	override fun dispatchRawDelta(delta: Float): Float = scrollableState.dispatchRawDelta(delta)
 

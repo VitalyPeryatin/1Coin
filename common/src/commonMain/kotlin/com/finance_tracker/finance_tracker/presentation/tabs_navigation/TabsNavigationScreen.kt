@@ -61,9 +61,9 @@ fun TabsNavigationScreen() {
 
 @Composable
 fun TabNavigator(
-    modifier: Modifier = Modifier,
     startScreen: String?,
-    currentTab: TabNavigationModel
+    currentTab: TabNavigationModel,
+    modifier: Modifier = Modifier
 ) {
     val configuration = currentTab.rootController.currentScreen.collectAsState()
     val saveableStateHolder = rememberSaveableStateHolder()
