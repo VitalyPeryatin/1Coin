@@ -34,6 +34,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.finance_tracker.finance_tracker.core.common.DialogConfigurations
 import com.finance_tracker.finance_tracker.core.common.LocalContext
 import com.finance_tracker.finance_tracker.core.common.StoredViewModel
 import com.finance_tracker.finance_tracker.core.common.statusBarsPadding
@@ -44,6 +45,7 @@ import com.finance_tracker.finance_tracker.core.theme.staticTextSize
 import com.finance_tracker.finance_tracker.core.ui.AppBarIcon
 import com.finance_tracker.finance_tracker.core.ui.CoinOutlinedSelectTextField
 import com.finance_tracker.finance_tracker.core.ui.CoinOutlinedTextField
+import com.finance_tracker.finance_tracker.core.ui.DeleteDialog
 import com.finance_tracker.finance_tracker.core.ui.PrimaryButton
 import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
 import com.finance_tracker.finance_tracker.domain.models.Account
@@ -54,6 +56,7 @@ import com.finance_tracker.finance_tracker.presentation.add_account.views.Curren
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.core.parameter.parametersOf
+import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 
 private const val AccountNameCharsLimit = 40
@@ -66,7 +69,9 @@ fun AddAccountScreen(
         parameters = { parametersOf(account) }
     ) { viewModel ->
         val rootController = LocalRootController.current
+        val navController = rootController.findRootController()
         val context = LocalContext.current
+        val modalNavController = rootController.findModalController()
         val coroutineScope = rememberCoroutineScope()
         val scaffoldState = rememberScaffoldState()
         LaunchedEffect(Unit) {
@@ -193,8 +198,21 @@ fun AddAccountScreen(
                                 shape = RoundedCornerShape(12.dp),
                             )
                             .clickable {
-                                viewModel.onDeleteClick(account)
-                                rootController.findRootController().backToScreen(MainNavigationTree.Main.name)
+                                modalNavController.present(DialogConfigurations.alert) { key ->
+                                    DeleteDialog(
+                                        titleEntity = stringResource("account"),
+                                        onCancelClick = {
+                                            modalNavController.popBackStack(key, animate = false)
+                                        },
+                                        onDeleteClick = {
+                                            modalNavController.popBackStack(key, animate = false)
+                                            viewModel.onDeleteClick(account)
+                                            navController.backToScreen(
+                                                MainNavigationTree.Main.name
+                                            )
+                                        }
+                                    )
+                                }
                             },
                     ) {
                         Icon(
