@@ -1,5 +1,5 @@
 [versions]
-gradleplugin = "7.1.3"
+android_plugin = "7.2.0"
 kotlin = "1.7.20"
 odyssey = "1.1.0-dev-preview"
 compose = "1.3.0-beta02"
@@ -10,8 +10,22 @@ chucker = "3.5.2"
 kviewmodel = "0.11"
 ktor = "2.1.3"
 koalaplot = "0.2.0"
+serialization = "1.4.1"
+detekt = "1.22.0"
+google_services = "4.3.14"
+firebase_crashlytics = "2.9.2"
+slf4j = "1.7.36"
 
 [libraries]
+gradleplugins-android = { module = "com.android.tools.build:gradle", version.ref = "android_plugin" }
+gradleplugins-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+gradleplugins-compose = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "compose" }
+gradleplugins-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
+gradleplugins-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+gradleplugins-google-services = { module = "com.google.gms:google-services", version.ref = "google_services" }
+gradleplugins-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebase_crashlytics" }
+gradleplugins-sqldelight = { module = "com.squareup.sqldelight:gradle-plugin", version.ref = "sqldelight" }
+
 odyssey-core = { module = "io.github.alexgladkov:odyssey-core", version.ref = "odyssey" }
 odyssey-compose = { module = "io.github.alexgladkov:odyssey-compose", version.ref = "odyssey" }
 
@@ -39,7 +53,7 @@ viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
 
 napier = "io.github.aakira:napier:2.6.1"
 
-serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1"
+serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
 
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
@@ -58,16 +72,14 @@ chucker-debug = { module = "com.github.chuckerteam.chucker:library", version.ref
 
 koalaplot = { module = "io.github.koalaplot:koalaplot-core", version.ref = "koalaplot" }
 
+detekt-cli = { module = "io.gitlab.arturbosch.detekt:detekt-cli", version.ref = "detekt" }
+detekt-rules-compose = "ru.kode:detekt-rules-compose:1.2.2"
+
+slf4j = { module = "org.slf4j:slf4j-simple", version.ref = "slf4j" }
+
 [bundles]
 odyssey = ["odyssey-core", "odyssey-compose"]
 compose = ["compose-animation", "compose-foundation", "compose-material", "compose-ui", "compose-tooling"]
 koin-android = ["koin-android", "koin-compose"]
 kviewmodel = ["kviewmodel", "kviewmodel-compose", "kviewmodel-odyssey"]
 ktor = ["ktor-core", "ktor-contentNegotiation", "ktor-serialization", "ktor-logging"]
-
-[plugins]
-android-application = { id = "com.android.application", version.ref = "gradleplugin" }
-android-library = { id = "com.android.library", version.ref = "gradleplugin" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

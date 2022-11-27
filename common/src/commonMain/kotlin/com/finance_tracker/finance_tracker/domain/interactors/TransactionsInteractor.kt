@@ -47,7 +47,7 @@ class TransactionsInteractor(
         return newTransactions
     }
 
-    private suspend fun updateAccountBalance(transaction: Transaction) {
+    private suspend fun updateAccountBalanceForDeleteTransaction(transaction: Transaction) {
         if (transaction.type == TransactionType.Expense) {
             accountsRepository.increaseAccountBalance(transaction.account.id, transaction.amount)
         } else {
@@ -55,17 +55,25 @@ class TransactionsInteractor(
         }
     }
 
+    private suspend fun updateAccountBalanceForAddTransaction(transaction: Transaction) {
+        if (transaction.type == TransactionType.Expense) {
+            accountsRepository.reduceAccountBalance(transaction.account.id, transaction.amount)
+        } else {
+            accountsRepository.increaseAccountBalance(transaction.account.id, transaction.amount)
+        }
+    }
+
     suspend fun deleteTransactions(transactions: List<Transaction>) {
         transactionsRepository.deleteTransactions(transactions)
 
         transactions.forEach {
-            updateAccountBalance(it)
+            updateAccountBalanceForDeleteTransaction(it)
         }
     }
 
     suspend fun addOrUpdateTransaction(transaction: Transaction) {
         transactionsRepository.addOrUpdateTransaction(transaction)
-        updateAccountBalance(transaction)
+        updateAccountBalanceForAddTransaction(transaction)
     }
 
     private fun Date?.isCalendarDateEquals(date: Date?): Boolean {

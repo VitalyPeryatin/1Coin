@@ -1,5 +1,6 @@
 package com.finance_tracker.finance_tracker.core.ui.transactions
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -44,6 +45,7 @@ fun CommonTransactionsList(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun TransactionsList(
     transactions: List<TransactionListModel>,
@@ -54,10 +56,11 @@ private fun TransactionsList(
     LazyColumn(
         modifier = modifier.fillMaxWidth(),
     ) {
-        items(transactions) { transactionModel ->
+        items(transactions, key = { it.id }) { transactionModel ->
             when (transactionModel) {
                 is TransactionListModel.Data -> {
                     TransactionItem(
+                        modifier = Modifier.animateItemPlacement(),
                         transactionData = transactionModel,
                         onClick = { onClick.invoke(transactionModel) },
                         onLongClick = { onLongClick.invoke(transactionModel) }
