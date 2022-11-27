@@ -1,12 +1,15 @@
 package com.finance_tracker.finance_tracker.presentation.home
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.common.StoredViewModel
@@ -76,7 +79,8 @@ fun HomeScreen() {
                 text = stringResource("home_last_transaction")
             )
 
-            Box(
+            CommonTransactionsList(
+                transactions = transactions.takeLast(3),
                 modifier = Modifier
                     .padding(all = 16.dp)
                     .border(
@@ -88,18 +92,7 @@ fun HomeScreen() {
                         color = CoinTheme.color.content.copy(alpha = 0.2f),
                         radius = 12.dp,
                     ),
-
-                ) {
-                CommonTransactionsList(
-                    transactions = transactions.takeLast(3),
-                    modifier = Modifier.padding(
-                        start = 8.dp,
-                        end = 8.dp,
-                        top = 16.dp,
-                        bottom = 16.dp
-                    )
-                )
-            }
+            )
         }
     }
 }
