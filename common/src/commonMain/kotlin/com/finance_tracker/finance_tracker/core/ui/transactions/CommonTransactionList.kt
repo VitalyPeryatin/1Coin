@@ -1,15 +1,7 @@
 package com.finance_tracker.finance_tracker.core.ui.transactions
 
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -27,8 +19,7 @@ import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
 import com.finance_tracker.finance_tracker.domain.models.TransactionListModel
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Date
+import java.util.*
 
 private val DateFormatter = SimpleDateFormat("dd.MM")
 
@@ -61,8 +52,7 @@ private fun TransactionsList(
     onLongClick: (TransactionListModel.Data) -> Unit = {}
 ) {
     LazyColumn(
-        modifier = modifier.fillMaxSize(),
-        contentPadding = PaddingValues(bottom = 96.dp)
+        modifier = modifier.fillMaxWidth(),
     ) {
         items(transactions) { transactionModel ->
             when (transactionModel) {
@@ -73,6 +63,7 @@ private fun TransactionsList(
                         onLongClick = { onLongClick.invoke(transactionModel) }
                     )
                 }
+
                 is TransactionListModel.DateAndDayTotal -> {
                     DayTotalHeader(dayTotalModel = transactionModel)
                 }
@@ -88,15 +79,17 @@ private fun DayTotalHeader(
 ) {
     Row(
         modifier = modifier
-            .padding(top = 24.dp, bottom = 8.dp)
+            .padding(top = 12.dp, bottom = 8.dp)
     ) {
         val formattedDate = when {
             dayTotalModel.date.isToday() -> {
                 stringResource("transactions_today")
             }
+
             dayTotalModel.date.isYesterday() -> {
                 stringResource("transactions_yesterday")
             }
+
             else -> {
                 DateFormatter.format(dayTotalModel.date)
             }
@@ -107,9 +100,11 @@ private fun DayTotalHeader(
             style = CoinTheme.typography.subtitle2,
             color = CoinTheme.color.secondary
         )
-        Spacer(modifier = Modifier
-            .weight(1f)
-            .defaultMinSize(minWidth = 16.dp))
+        Spacer(
+            modifier = Modifier
+                .weight(1f)
+                .defaultMinSize(minWidth = 16.dp)
+        )
         Text(
             modifier = Modifier.padding(end = 16.dp),
             text = "+${DecimalFormatType.Amount.format(dayTotalModel.income)}",

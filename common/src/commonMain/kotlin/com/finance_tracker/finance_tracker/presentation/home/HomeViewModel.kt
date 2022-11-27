@@ -24,9 +24,7 @@ import kotlinx.coroutines.plus
 
 class HomeViewModel(
     private val accountsRepository: AccountsRepository,
-    private val transactionsInteractor: TransactionsInteractor
-) : KViewModel() {
-    private val accountsRepository: AccountsRepository,
+    private val transactionsInteractor: TransactionsInteractor,
     private val currenciesRepository: CurrenciesRepository,
     private val currencyConverterInteractor: CurrencyConverterInteractor
 ): KViewModel() {
@@ -49,16 +47,6 @@ class HomeViewModel(
     private val _transactions = MutableStateFlow<List<TransactionListModel>>(emptyList())
     val transactions = _transactions.asStateFlow()
 
-    init {
-        getTransactions()
-    }
-
-    private fun getTransactions() {
-        viewModelScope.launch {
-            _transactions.value = transactionsInteractor.getTransactions()
-        }
-    }
-
     private var loadTotalAmountJob: Job? = null
 
     private val baseCurrencyName = "USD" // TODO: Убрать моковые данные
@@ -74,6 +62,13 @@ class HomeViewModel(
     fun onScreenComposed() {
         loadAccounts()
         loadTotalAmount()
+        loadTransactions()
+    }
+
+    private fun loadTransactions() {
+        viewModelScope.launch {
+            _transactions.value = transactionsInteractor.getTransactions()
+        }
     }
 
     private fun updateCurrencyRates() {

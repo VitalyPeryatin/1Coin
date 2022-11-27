@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.finance_tracker.finance_tracker.core.common.stringResource
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 
 @Composable
@@ -26,7 +25,7 @@ fun TitleHeader(
             )
     ) {
         Text(
-            text = stringResource(text),
+            text = text,
             style = CoinTheme.typography.h4
         )
         Spacer(

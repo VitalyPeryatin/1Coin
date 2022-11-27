@@ -1,6 +1,7 @@
 package com.finance_tracker.finance_tracker.presentation.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -9,9 +10,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.common.StoredViewModel
+import com.finance_tracker.finance_tracker.core.common.stringResource
 import com.finance_tracker.finance_tracker.core.common.systemBarsPadding
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.ui.TitleHeader
+import com.finance_tracker.finance_tracker.core.ui.border
 import com.finance_tracker.finance_tracker.core.ui.transactions.CommonTransactionsList
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
@@ -59,7 +62,7 @@ fun HomeScreen() {
             TitleHeader(
                 modifier = Modifier
                     .padding(top = 26.dp),
-                text = "home_my_accounts"
+                text = stringResource("home_my_accounts")
             )
 
             AccountsWidget(
@@ -70,10 +73,33 @@ fun HomeScreen() {
             TitleHeader(
                 modifier = Modifier
                     .padding(top = 26.dp),
-                text = "home_last_transaction"
+                text = stringResource("home_last_transaction")
             )
 
-            CommonTransactionsList(transactions = transactions.takeLast(3))
+            Box(
+                modifier = Modifier
+                    .padding(all = 16.dp)
+                    .border(
+                        strokeWidth = if (transactions.isEmpty()) {
+                            0.dp
+                        } else {
+                            1.dp
+                        },
+                        color = CoinTheme.color.content.copy(alpha = 0.2f),
+                        radius = 12.dp,
+                    ),
+
+                ) {
+                CommonTransactionsList(
+                    transactions = transactions.takeLast(3),
+                    modifier = Modifier.padding(
+                        start = 8.dp,
+                        end = 8.dp,
+                        top = 16.dp,
+                        bottom = 16.dp
+                    )
+                )
+            }
         }
     }
 }
