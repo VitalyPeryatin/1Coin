@@ -22,11 +22,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.common.DateFormatType
 import com.finance_tracker.finance_tracker.core.common.DecimalFormatType
+import com.finance_tracker.finance_tracker.core.common.pagination.LazyPagingItems
+import com.finance_tracker.finance_tracker.core.common.pagination.items
 import com.finance_tracker.finance_tracker.core.common.stringResource
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
-import com.finance_tracker.finance_tracker.data.pagination.LazyPagingItems
-import com.finance_tracker.finance_tracker.data.pagination.items
 import com.finance_tracker.finance_tracker.domain.models.TransactionListModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -67,6 +67,8 @@ private fun TransactionsList(
         contentPadding = PaddingValues(bottom = 96.dp)
     ) {
         items(transactions) { transactionModel ->
+            if (transactionModel == null) return@items
+
             when (transactionModel) {
                 is TransactionListModel.Data -> {
                     TransactionItem(
@@ -78,8 +80,6 @@ private fun TransactionsList(
                 is TransactionListModel.DateAndDayTotal -> {
                     DayTotalHeader(dayTotalModel = transactionModel)
                 }
-
-                else -> {}
             }
         }
     }

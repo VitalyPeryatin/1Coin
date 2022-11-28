@@ -1,10 +1,15 @@
 package com.finance_tracker.finance_tracker.domain.interactors
 
+import androidx.paging.insertSeparators
+import app.cash.paging.PagingData
+import app.cash.paging.map
 import com.finance_tracker.finance_tracker.data.repositories.AccountsRepository
 import com.finance_tracker.finance_tracker.data.repositories.TransactionsRepository
 import com.finance_tracker.finance_tracker.domain.models.Transaction
 import com.finance_tracker.finance_tracker.domain.models.TransactionListModel
 import com.finance_tracker.finance_tracker.domain.models.TransactionType
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import java.util.Calendar
 import java.util.Date
 
@@ -12,46 +17,6 @@ class TransactionsInteractor(
     private val transactionsRepository: TransactionsRepository,
     private val accountsRepository: AccountsRepository,
 ) {
-
-    suspend fun getTransactions(accountId: Long? = null, page: Long): List<TransactionListModel> {
-        val allTransactions = if (accountId == null) {
-            transactionsRepository.getAllFullTransactionsPaginated(page)
-        } else {
-            transactionsRepository.getAllTransactionsByAccountIdPaginated(
-                accountId = accountId,
-                page = page
-            )
-        }
-        val newTransactions = mutableListOf<TransactionListModel>()
-        for (transaction in allTransactions) {
-            val lastUiTransactionModel = newTransactions.lastOrNull()
-
-            if (lastUiTransactionModel == null ||
-                (lastUiTransactionModel is TransactionListModel.Data &&
-                        !lastUiTransactionModel.transaction.date.isCalendarDateEquals(
-                            transaction.date
-                        ))
-            ) {
-                val totalIncomeAmount =
-                    transactionsRepository.getTotalTransactionAmountByDateAndType(
-                        date = transaction.date,
-                        type = TransactionType.Income
-                    )
-                val totalExpenseAmount =
-                    transactionsRepository.getTotalTransactionAmountByDateAndType(
-                        date = transaction.date,
-                        type = TransactionType.Expense
-                    )
-                newTransactions += TransactionListModel.DateAndDayTotal(
-                    date = transaction.date,
-                    income = totalIncomeAmount,
-                    expense = totalExpenseAmount
-                ) // получение общего дохода и расхода за 1 день
-            }
-            newTransactions += TransactionListModel.Data(transaction)
-        }
-        return newTransactions
-    }
 
     private suspend fun updateAccountBalance(transaction: Transaction) {
         if (transaction.type == TransactionType.Expense) {
@@ -84,5 +49,54 @@ class TransactionsInteractor(
         return calendar1.get(Calendar.YEAR) == calendar2.get(Calendar.YEAR) &&
                 calendar1.get(Calendar.MONTH) == calendar2.get(Calendar.MONTH) &&
                 calendar1.get(Calendar.DAY_OF_MONTH) == calendar2.get(Calendar.DAY_OF_MONTH)
+    }
+
+    fun getPaginatedTransactions(): Flow<PagingData<TransactionListModel>> {
+        return transactionsRepository.getPaginatedTransactions()
+            .map {
+                it.map { TransactionListModel.Data(it) }
+            }
+            .map {
+                insertSeparators(it)
+            }
+    }
+
+    fun getPaginatedTransactionsByAccountId(id: Long): Flow<PagingData<TransactionListModel>> {
+        return transactionsRepository.getPaginatedTransactionsByAccountId(id)
+            .map {
+                it.map { TransactionListModel.Data(it) }
+            }
+            .map {
+                insertSeparators(it)
+            }
+    }
+
+    private fun insertSeparators(
+        pagingData: PagingData<TransactionListModel.Data>
+    ): PagingData<TransactionListModel> {
+        return pagingData.insertSeparators { data: TransactionListModel.Data?,
+                                      data2: TransactionListModel.Data? ->
+            val transaction = data?.transaction
+            val transaction2 = data2?.transaction ?: return@insertSeparators null
+            if (transaction == null || !transaction.date.isCalendarDateEquals(transaction2.date)) {
+                val totalIncomeAmount =
+                    transactionsRepository.getTotalTransactionAmountByDateAndType(
+                        date = transaction2.date,
+                        type = TransactionType.Income
+                    )
+                val totalExpenseAmount =
+                    transactionsRepository.getTotalTransactionAmountByDateAndType(
+                        date = transaction2.date,
+                        type = TransactionType.Expense
+                    )
+                TransactionListModel.DateAndDayTotal(
+                    date = transaction2.date,
+                    income = totalIncomeAmount,
+                    expense = totalExpenseAmount
+                ) // получение общего дохода и расхода за 1 день
+            } else {
+                null
+            }
+        }
     }
 }

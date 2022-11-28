@@ -1,80 +1,30 @@
 package com.finance_tracker.finance_tracker.data.repositories
 
+import app.cash.paging.Pager
+import app.cash.paging.PagingConfig
+import app.cash.paging.PagingData
 import com.finance_tracker.finance_tracker.core.common.DateFormatType
-import com.finance_tracker.finance_tracker.core.common.hexToColor
-import com.finance_tracker.finance_tracker.domain.models.Account
-import com.finance_tracker.finance_tracker.domain.models.Category
-import com.finance_tracker.finance_tracker.domain.models.Currency
+import com.finance_tracker.finance_tracker.data.data_sources.TransactionSource
+import com.finance_tracker.finance_tracker.data.data_sources.TransactionSourceFactory
 import com.finance_tracker.finance_tracker.domain.models.Transaction
 import com.finance_tracker.finance_tracker.domain.models.TransactionType
 import com.financetracker.financetracker.TransactionsEntityQueries
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import java.util.Date
 
+private const val PageSize = 20
+
 class TransactionsRepository(
-    private val transactionsEntityQueries: TransactionsEntityQueries
+    private val transactionsEntityQueries: TransactionsEntityQueries,
+    private val transactionSourceFactory: TransactionSourceFactory
 ) {
 
-    private val fullTransactionMapper: (
-        id: Long,
-        type: TransactionType,
-        amount: Double,
-        amountCurrency: String,
-        categoryId: Long?,
-        accountId: Long?,
-        insertionDate: Date,
-        date: Date,
-        id_: Long,
-        type_: Account.Type,
-        name: String,
-        balance: Double,
-        colorHex: String,
-        currency: String,
-        id__: Long,
-        name_: String,
-        icon: String,
-        position: Long?,
-        isExpense: Boolean,
-        isIncome: Boolean
-    ) -> Transaction = { id, type, amount, amountCurrency, categoryId,
-                         accountId, _, date, _, accountType, accountName, balance, accountColorHex, currency,
-                         _, categoryName, categoryIcon, _, _, _ ->
-        Transaction(
-            id = id,
-            type = type,
-            amountCurrency = Currency.getByName(amountCurrency),
-            account = Account(
-                id = accountId ?: 0L,
-                type = accountType,
-                color = accountColorHex.hexToColor(),
-                name = accountName,
-                balance = balance,
-                currency = Currency.getByName(currency)
-            ),
-            category = categoryId?.let {
-                Category(
-                    id = categoryId,
-                    name = categoryName,
-                    iconId = categoryIcon
-                )
-            },
-            amount = amount,
-            date = date
-        )
-    }
-
-    suspend fun getAllTransactions(): List<Transaction> {
-        return withContext(Dispatchers.IO) {
-            transactionsEntityQueries.getAllFullTransactions(fullTransactionMapper).executeAsList()
-        }
-    }
-
-    suspend fun getTransactions(accountId: Long): List<Transaction> {
-        return withContext(Dispatchers.IO) {
-            transactionsEntityQueries.getFullTransactionsByAccountId(accountId, fullTransactionMapper).executeAsList()
-        }
-    }
+    private val paginatedTransactions: Flow<PagingData<Transaction>> =
+        Pager(PagingConfig(pageSize = PageSize)) {
+            TransactionSource(transactionsEntityQueries)
+        }.flow
 
     suspend fun deleteTransactions(transactions: List<Transaction>) {
         withContext(Dispatchers.IO) {
@@ -118,23 +68,13 @@ class TransactionsRepository(
         }
     }
 
-    suspend fun getAllTransactionsByAccountIdPaginated(accountId: Long, page: Long): List<Transaction> {
-        return withContext(Dispatchers.IO) {
-            transactionsEntityQueries.getFullTransactionsByAccountIdPaginated(
-                accountId = accountId,
-                offset = page,
-                mapper = fullTransactionMapper
-            ).executeAsList()
-        }
+    fun getPaginatedTransactions(): Flow<PagingData<Transaction>> {
+        return paginatedTransactions
     }
 
-    suspend fun getAllFullTransactionsPaginated(page: Long): List<Transaction> {
-        return withContext(Dispatchers.IO) {
-            transactionsEntityQueries.getAllFullTransactionsPaginated(
-                offset = page,
-                mapper = fullTransactionMapper
-            ).executeAsList()
-        }
+    fun getPaginatedTransactionsByAccountId(id: Long): Flow<PagingData<Transaction>> {
+        return Pager(PagingConfig(pageSize = PageSize)) {
+            transactionSourceFactory.create(id)
+        }.flow
     }
-
 }

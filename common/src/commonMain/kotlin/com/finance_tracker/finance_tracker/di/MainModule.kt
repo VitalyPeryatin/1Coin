@@ -7,5 +7,6 @@ fun commonModules() = listOf(
     databaseModule,
     networkModule,
     repositoriesModule,
-    domainModule
+    domainModule,
+    sourcesModule,
 )

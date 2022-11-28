@@ -1,4 +1,4 @@
-package com.finance_tracker.finance_tracker.data.pagination
+package com.finance_tracker.finance_tracker.core.common.pagination
 
 /*
  * Copyright 2020 The Android Open Source Project

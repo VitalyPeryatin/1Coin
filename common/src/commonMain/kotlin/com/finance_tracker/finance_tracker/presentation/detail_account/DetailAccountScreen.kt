@@ -3,14 +3,12 @@ package com.finance_tracker.finance_tracker.presentation.detail_account
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.common.StoredViewModel
+import com.finance_tracker.finance_tracker.core.common.pagination.collectAsLazyPagingItems
 import com.finance_tracker.finance_tracker.core.common.statusBarsPadding
 import com.finance_tracker.finance_tracker.core.navigation.main.MainNavigationTree
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
@@ -20,6 +18,7 @@ import com.finance_tracker.finance_tracker.core.ui.collapsing_toolbar.Collapsing
 import com.finance_tracker.finance_tracker.core.ui.collapsing_toolbar.ScrollStrategy
 import com.finance_tracker.finance_tracker.core.ui.collapsing_toolbar.rememberCollapsingToolbarScaffoldState
 import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
+import com.finance_tracker.finance_tracker.core.ui.transactions.CommonTransactionsList
 import com.finance_tracker.finance_tracker.domain.models.Account
 import com.finance_tracker.finance_tracker.presentation.detail_account.views.AccountNameText
 import com.finance_tracker.finance_tracker.presentation.detail_account.views.DetailAccountAppBar
@@ -36,9 +35,6 @@ fun DetailAccountScreen(
     StoredViewModel<DetailAccountViewModel>(
         parameters = { parametersOf(account) }
     ) { viewModel ->
-        LaunchedEffect(Unit) {
-            viewModel.onScreenComposed()
-        }
         val navController = LocalRootController.current.findRootController()
         val state = rememberCollapsingToolbarScaffoldState()
         CollapsingToolbarScaffold(
@@ -90,8 +86,16 @@ fun DetailAccountScreen(
                 )
             }
         ) {
-            val transactions by viewModel.transactions.collectAsState()
-            //CommonTransactionsList(transactions)
+            val transactions = viewModel.paginatedTransactions.collectAsLazyPagingItems()
+            CommonTransactionsList(
+                transactions = transactions,
+                onClick = {
+                    navController.push(
+                        screen = MainNavigationTree.AddTransaction.name,
+                        params = it.transaction
+                    )
+                }
+            )
         }
     }
 }

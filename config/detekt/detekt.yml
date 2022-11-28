@@ -342,7 +342,7 @@ naming:
     constantPattern: '[A-Z][a-zA-Z0-9]*'
     propertyPattern: '[A-Z][a-zA-Z0-9]*'
     privatePropertyPattern: '_?[A-Za-z][_A-Za-z0-9]*'
-    excludes: ['**/build/**', '**/di/**', '**/templates/**', '**/common/DragDropExt.kt']
+    excludes: ['**/build/**', '**/di/**', '**/templates/**', '**/common/DragDropExt.kt', '**/mappers/**']
   VariableMaxLength:
     active: false
     maximumVariableNameLength: 64

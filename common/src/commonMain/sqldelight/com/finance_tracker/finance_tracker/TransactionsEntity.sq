@@ -53,7 +53,7 @@ WHERE accounts.id IS NOT NULL
 ORDER BY
     date DESC,
     insertionDate DESC
-LIMIT 20 OFFSET :offset;
+LIMIT :limit OFFSET :offset;
 
 getFullTransactionsByAccountIdPaginated:
 SELECT *
@@ -64,7 +64,7 @@ WHERE accounts.id = :accountId
 ORDER BY
     date DESC,
     insertionDate DESC
-LIMIT 20 OFFSET :offset;
+LIMIT :limit OFFSET :offset;
 
 deleteTransactionsById:
 DELETE FROM TransactionsEntity
