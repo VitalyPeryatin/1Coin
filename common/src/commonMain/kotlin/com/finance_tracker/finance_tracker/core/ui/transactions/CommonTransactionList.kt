@@ -18,7 +18,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.common.DateFormatType
@@ -68,7 +67,6 @@ private fun TransactionsList(
         modifier = modifier.fillMaxSize(),
         contentPadding = PaddingValues(bottom = 96.dp)
     ) {
-        //TODO RESOLVE CONFLICTS
         items(transactions, key = { it.id }) { transactionModel ->
             if (transactionModel == null) return@items
 
