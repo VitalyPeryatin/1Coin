@@ -73,6 +73,12 @@ class AddAccountViewModel(
         }
     }
 
+    fun onDeleteClick(account: Account) {
+        viewModelScope.launch {
+            accountsRepository.deleteAccountById(account.id)
+        }
+    }
+
     fun onAccountNameChange(accountName: String) {
         _enteredAccountName.value = accountName
     }

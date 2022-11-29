@@ -13,7 +13,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.SnackbarHost
 import androidx.compose.material.Text
@@ -27,6 +29,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInParent
 import androidx.compose.ui.platform.LocalFocusManager
@@ -38,13 +41,14 @@ import com.finance_tracker.finance_tracker.core.common.LocalContext
 import com.finance_tracker.finance_tracker.core.common.StoredViewModel
 import com.finance_tracker.finance_tracker.core.common.statusBarsPadding
 import com.finance_tracker.finance_tracker.core.common.stringResource
+import com.finance_tracker.finance_tracker.core.navigation.main.MainNavigationTree
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.theme.staticTextSize
 import com.finance_tracker.finance_tracker.core.ui.AppBarIcon
 import com.finance_tracker.finance_tracker.core.ui.CoinOutlinedSelectTextField
 import com.finance_tracker.finance_tracker.core.ui.CoinOutlinedTextField
-import com.finance_tracker.finance_tracker.core.ui.DeleteDialog
 import com.finance_tracker.finance_tracker.core.ui.DefaultSnackbar
+import com.finance_tracker.finance_tracker.core.ui.DeleteDialog
 import com.finance_tracker.finance_tracker.core.ui.PrimaryButton
 import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
 import com.finance_tracker.finance_tracker.domain.models.Account
@@ -173,130 +177,86 @@ fun AddAccountScreen(
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                 )
 
-            val isAddButtonEnabled by viewModel.isAddButtonEnabled.collectAsState()
-            if (account == Account.EMPTY) {
-                PrimaryButton(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(
-                            top = 16.dp,
-                            start = 16.dp,
-                            end = 16.dp
-                        ),
-                    text = stringResource("new_account_btn_add"),
-                    onClick = viewModel::onAddAccountClick,
-                    enabled = isAddButtonEnabled
-                )
-            } else {
-                Row(
-                    modifier = Modifier
-                        .padding(top = 16.dp)
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .padding(
-                                start = 16.dp,
-                                end = 8.dp
-                            )
-                            .size(40.dp)
-                            .clip(RoundedCornerShape(12.dp))
-                            .background(
-                                color = CoinTheme.color.secondaryBackground,
-                                shape = RoundedCornerShape(12.dp),
-                            )
-                            .clickable {
-                                modalNavController.present(DialogConfigurations.alert) { key ->
-                                    DeleteDialog(
-                                        titleEntity = stringResource("account"),
-                                        onCancelClick = {
-                                            modalNavController.popBackStack(key, animate = false)
-                                        },
-                                        onDeleteClick = {
-                                            modalNavController.popBackStack(key, animate = false)
-                                            viewModel.onDeleteClick(account)
-                                            navController.backToScreen(
-                                                MainNavigationTree.Main.name
-                                            )
-                                        }
-                                    )
-                                }
-                            },
-                    ) {
-                        Icon(
-                            painter = rememberVectorPainter("ic_recycle_bin"),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .padding(
-                                    start = 8.dp,
-                                    top = 8.dp
-                                )
-                                .size(24.dp),
-                            tint = CoinTheme.color.accentRed
-                        )
-                    }
+                val isAddButtonEnabled by viewModel.isAddButtonEnabled.collectAsState()
+                if (account == Account.EMPTY) {
                     PrimaryButton(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(end = 16.dp),
-                        text = stringResource("edit_account_btn_save"),
+                            .padding(
+                                top = 16.dp,
+                                start = 16.dp,
+                                end = 16.dp
+                            ),
+                        text = stringResource("new_account_btn_add"),
                         onClick = viewModel::onAddAccountClick,
                         enabled = isAddButtonEnabled
                     )
+                } else {
+                    Row(
+                        modifier = Modifier
+                            .padding(top = 16.dp)
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .padding(
+                                    start = 16.dp,
+                                    end = 8.dp
+                                )
+                                .size(40.dp)
+                                .clip(RoundedCornerShape(12.dp))
+                                .background(
+                                    color = CoinTheme.color.secondaryBackground,
+                                    shape = RoundedCornerShape(12.dp),
+                                )
+                                .clickable {
+                                    modalNavController.present(DialogConfigurations.alert) { key ->
+                                        DeleteDialog(
+                                            titleEntity = stringResource("account"),
+                                            onCancelClick = {
+                                                modalNavController.popBackStack(
+                                                    key,
+                                                    animate = false
+                                                )
+                                            },
+                                            onDeleteClick = {
+                                                modalNavController.popBackStack(
+                                                    key,
+                                                    animate = false
+                                                )
+                                                viewModel.onDeleteClick(account)
+                                                navController.backToScreen(
+                                                    MainNavigationTree.Main.name
+                                                )
+                                            }
+                                        )
+                                    }
+                                },
+                        ) {
+                            Icon(
+                                painter = rememberVectorPainter("ic_recycle_bin"),
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .padding(
+                                        start = 8.dp,
+                                        top = 8.dp
+                                    )
+                                    .size(24.dp),
+                                tint = CoinTheme.color.accentRed
+                            )
+                        }
+                        PrimaryButton(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(end = 16.dp),
+                            text = stringResource("edit_account_btn_save"),
+                            onClick = viewModel::onAddAccountClick,
+                            enabled = isAddButtonEnabled
+                        )
+                    }
                 }
             }
         }
     }
-}
-
-@Composable
-private fun RowScope.AccountTypeTextField(
-    viewModel: AddAccountViewModel,
-    modifier: Modifier = Modifier
-) {
-    val focusManager = LocalFocusManager.current
-    val accountTypeMenuExpanded = remember { mutableStateOf(false) }
-    val interactionSource = remember { MutableInteractionSource() }
-    val selectedType by viewModel.selectedType.collectAsState()
-    val valueTextId = selectedType?.textId
-    CoinOutlinedSelectTextField(
-        value = if (valueTextId != null) {
-            stringResource(valueTextId)
-        } else {
-            ""
-        },
-        modifier = modifier
-            .weight(1f)
-            .clickable(
-                interactionSource = interactionSource,
-                indication = null
-            ) {
-                focusManager.clearFocus()
-                accountTypeMenuExpanded.value = true
-            },
-        label = {
-            Text(
-                text = stringResource("new_account_field_type_label"),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-        },
-        placeholder = {
-            Text(
-                text = stringResource("new_account_field_type_placeholder"),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                style = CoinTheme.typography.body1.staticTextSize()
-            )
-        },
-        selected = accountTypeMenuExpanded.value
-    )
-
-    val accountTypes by viewModel.types.collectAsState()
-    AccountTypesDropdownMenu(
-        items = accountTypes,
-        expandedState = accountTypeMenuExpanded,
-        onSelect = viewModel::onAccountTypeSelect
-    )
 }
 
 @Composable
@@ -370,7 +330,7 @@ fun ColorIcon(accountColorData: AccountColorData?) {
 }
 
 @Composable
-private fun AddAccountTopBar(
+fun AddAccountTopBar(
     topBarTextId: String,
     modifier: Modifier = Modifier,
 ) {
@@ -391,5 +351,56 @@ private fun AddAccountTopBar(
                 style = CoinTheme.typography.h4
             )
         }
+    )
+}
+
+@Composable
+private fun RowScope.AccountTypeTextField(
+    viewModel: AddAccountViewModel,
+    modifier: Modifier = Modifier
+) {
+    val focusManager = LocalFocusManager.current
+    val accountTypeMenuExpanded = remember { mutableStateOf(false) }
+    val interactionSource = remember { MutableInteractionSource() }
+    val selectedType by viewModel.selectedType.collectAsState()
+    val valueTextId = selectedType?.textId
+    CoinOutlinedSelectTextField(
+        value = if (valueTextId != null) {
+            stringResource(valueTextId)
+        } else {
+            ""
+        },
+        modifier = modifier
+            .weight(1f)
+            .clickable(
+                interactionSource = interactionSource,
+                indication = null
+            ) {
+                focusManager.clearFocus()
+                accountTypeMenuExpanded.value = true
+            },
+        label = {
+            Text(
+                text = stringResource("new_account_field_type_label"),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+        },
+        placeholder = {
+            Text(
+                text = stringResource("new_account_field_type_placeholder"),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                style = CoinTheme.typography.body1.staticTextSize()
+            )
+        },
+        selected = accountTypeMenuExpanded.value
+    )
+
+    val accountTypes by viewModel.types.collectAsState()
+    AccountTypesDropdownMenu(
+        items = accountTypes,
+        expandedState = accountTypeMenuExpanded,
+        onSelect = viewModel::onAccountTypeSelect
     )
 }

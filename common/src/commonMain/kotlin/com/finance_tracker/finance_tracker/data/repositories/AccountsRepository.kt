@@ -63,4 +63,10 @@ class AccountsRepository(
             accountsEntityQueries.reduceBalanceByAccountId(value, id)
         }
     }
+
+    suspend fun deleteAccountById(id: Long) {
+        withContext(Dispatchers.IO) {
+            accountsEntityQueries.deleteAccountById(id)
+        }
+    }
 }

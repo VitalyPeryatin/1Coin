@@ -40,6 +40,8 @@
 
     <!--Accounts -->
     <string name="accounts_screen_header">Accounts</string>
+    <string name="accounts_screen_top_bar">Edit Account</string>
+    <string name="edit_account_btn_save">Save</string>
 
     <!-- Settings -->
     <string name="settings_top_text">Settings</string>
