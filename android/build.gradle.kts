@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.finance_tracker.finance_tracker"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 33
         versionCode = 1
         versionName = "1.0.0"

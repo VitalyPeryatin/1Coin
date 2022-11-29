@@ -16,6 +16,7 @@ import com.finance_tracker.finance_tracker.core.common.StoredViewModel
 import com.finance_tracker.finance_tracker.core.common.navigationBarsPadding
 import com.finance_tracker.finance_tracker.core.common.stringResource
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
+import com.finance_tracker.finance_tracker.presentation.settings.views.SettingSheetTelegramChatItem
 import com.finance_tracker.finance_tracker.presentation.settings.views.SettingsSheetCategorySettingsItem
 import com.finance_tracker.finance_tracker.presentation.settings.views.SettingsSheetMainCurrencyItem
 
@@ -55,6 +56,7 @@ fun SettingsSheet(
             SettingsSheetCategorySettingsItem {
                 onCloseClick()
             }
+            SettingSheetTelegramChatItem()
         }
     }
 }

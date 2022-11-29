@@ -1,5 +1,6 @@
 package com.finance_tracker.finance_tracker.core.ui.transactions
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -55,6 +56,7 @@ fun CommonTransactionsList(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun TransactionsList(
     transactions: LazyPagingItems<TransactionListModel>,
@@ -66,12 +68,14 @@ private fun TransactionsList(
         modifier = modifier.fillMaxSize(),
         contentPadding = PaddingValues(bottom = 96.dp)
     ) {
-        items(transactions) { transactionModel ->
+        //TODO RESOLVE CONFLICTS
+        items(transactions, key = { it.id }) { transactionModel ->
             if (transactionModel == null) return@items
 
             when (transactionModel) {
                 is TransactionListModel.Data -> {
                     TransactionItem(
+                        modifier = Modifier.animateItemPlacement(),
                         transactionData = transactionModel,
                         onClick = { onClick.invoke(transactionModel) },
                         onLongClick = { onLongClick.invoke(transactionModel) }
@@ -87,8 +91,8 @@ private fun TransactionsList(
 
 @Composable
 private fun DayTotalHeader(
-    modifier: Modifier = Modifier,
-    dayTotalModel: TransactionListModel.DateAndDayTotal
+    dayTotalModel: TransactionListModel.DateAndDayTotal,
+    modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier
@@ -139,7 +143,7 @@ private fun EmptyTransactionsStub(
             .padding(16.dp)
             .border(
                 width = 1.dp,
-                color = Color(0xFFECECEC),
+                color = CoinTheme.color.dividers,
                 shape = RoundedCornerShape(12.dp)
             )
             .fillMaxWidth()
