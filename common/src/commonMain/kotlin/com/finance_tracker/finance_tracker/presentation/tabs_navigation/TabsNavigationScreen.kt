@@ -11,6 +11,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.Modifier
 import com.finance_tracker.finance_tracker.core.common.navigationBarsPadding
@@ -18,6 +19,8 @@ import com.finance_tracker.finance_tracker.core.navigation.main.MainNavigationTr
 import com.finance_tracker.finance_tracker.core.navigation.tabs.TabsNavigationTree
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
+import com.finance_tracker.finance_tracker.presentation.tabs_navigation.analytics.TabsNavigationAnalytics
+import org.koin.java.KoinJavaComponent
 import ru.alexgladkov.odyssey.compose.base.AnimatedHost
 import ru.alexgladkov.odyssey.compose.controllers.MultiStackRootController
 import ru.alexgladkov.odyssey.compose.controllers.TabNavigationModel
@@ -27,18 +30,28 @@ import ru.alexgladkov.odyssey.core.toScreenBundle
 
 @Composable
 fun TabsNavigationScreen() {
+
     val rootController = LocalRootController.current as MultiStackRootController
     val selectedTabItem by rootController.stackChangeObserver.collectAsState()
+    val analytics: TabsNavigationAnalytics = remember { KoinJavaComponent.getKoin().get() }
+
     Scaffold(
         modifier = Modifier.navigationBarsPadding(),
         bottomBar = {
-            BottomNavigationBar(selectedTabItem)
+            BottomNavigationBar(
+                selectedTabItem = selectedTabItem,
+                onItemSelect = { tab ->
+                    analytics.trackTabClick(tab)
+                    rootController.switchTab(tab)
+                }
+            )
         },
         floatingActionButton = {
             FloatingActionButton(
                 backgroundColor = CoinTheme.color.primary,
                 contentColor = CoinTheme.color.primaryVariant,
                 onClick = {
+                    analytics.trackAddTransactionClick()
                     rootController.findRootController().push(MainNavigationTree.AddTransaction.name)
                 }
             ) {
@@ -60,7 +73,7 @@ fun TabsNavigationScreen() {
 }
 
 @Composable
-fun TabNavigator(
+private fun TabNavigator(
     startScreen: String?,
     currentTab: TabNavigationModel,
     modifier: Modifier = Modifier,

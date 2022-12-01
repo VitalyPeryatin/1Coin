@@ -20,7 +20,8 @@ import ru.alexgladkov.odyssey.compose.local.LocalRootController
 @Composable
 fun BottomNavigationBar(
     selectedTabItem: TabNavigationModel,
-    modifier: Modifier = Modifier
+    onItemSelect: (tab: TabNavigationModel) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val rootController = LocalRootController.current as MultiStackRootController
     val tabItems = rootController.tabItems.take(2) + null + rootController.tabItems.takeLast(2)
@@ -34,7 +35,8 @@ fun BottomNavigationBar(
             if (item != null) {
                 BottomNavigationItem(
                     item = item,
-                    isSelected = selectedTabItem == item
+                    isSelected = selectedTabItem == item,
+                    onClick = { onItemSelect.invoke(item) }
                 )
             } else {
                 EmptyBottomNavigationItem()
@@ -51,9 +53,9 @@ private fun EmptyBottomNavigationItem() {
 @Composable
 private fun RowScope.BottomNavigationItem(
     item: TabNavigationModel,
-    isSelected: Boolean
+    isSelected: Boolean,
+    onClick: () -> Unit
 ) {
-    val rootController = LocalRootController.current as MultiStackRootController
     val itemConfiguration = item.tabInfo.tabItem.configuration
     BottomNavigationItem(
         icon = {
@@ -75,7 +77,7 @@ private fun RowScope.BottomNavigationItem(
         alwaysShowLabel = true,
         selected = isSelected,
         onClick = {
-            rootController.switchTab(item)
+            onClick.invoke()
         }
     )
 }

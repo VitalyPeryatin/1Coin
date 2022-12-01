@@ -81,6 +81,15 @@ detekt-rules-compose = "ru.kode:detekt-rules-compose:1.2.2"
 
 slf4j = { module = "org.slf4j:slf4j-simple", version.ref = "slf4j" }
 
+json = "org.json:json:20211205"
+
+amplitude-java = "com.amplitude:java-sdk:1.10.0"
+amplitude-android = "com.amplitude:analytics-android:1.5.2"
+
+settings = "com.russhwolf:multiplatform-settings:1.0.0-RC"
+
+uuid = "com.benasher44:uuid:0.6.0"
+
 [bundles]
 paging = ["paging", "paging-compose", "paging-multiplatform"]
 odyssey = ["odyssey-core", "odyssey-compose"]
