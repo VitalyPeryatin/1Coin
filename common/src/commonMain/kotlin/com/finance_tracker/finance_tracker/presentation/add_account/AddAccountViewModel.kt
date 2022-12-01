@@ -125,13 +125,24 @@ class AddAccountViewModel(
                 ))
                 return@launch
             }
-            accountsRepository.insertAccount(
-                accountName = accountName,
-                balance = balance,
-                colorHex = selectedColor.toHexString(),
-                type = type,
-                currency = selectedCurrency.value
-            )
+            if (account == null) {
+                accountsRepository.insertAccount(
+                    accountName = accountName,
+                    balance = balance,
+                    colorHex = selectedColor.toHexString(),
+                    type = type,
+                    currency = selectedCurrency.value
+                )
+            } else {
+                accountsRepository.updateAccountById(
+                    id = account.id,
+                    accountName = accountName,
+                    balance = balance,
+                    colorHex = selectedColor.toHexString(),
+                    type = type,
+                    currency = selectedCurrency.value
+                )
+            }
             _events.send(AddAccountEvent.Close)
         }
     }

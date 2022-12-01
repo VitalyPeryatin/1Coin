@@ -3,6 +3,9 @@ package com.finance_tracker.finance_tracker.presentation.detail_account
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
@@ -36,6 +39,11 @@ fun DetailAccountScreen(
     StoredViewModel<DetailAccountViewModel>(
         parameters = { parametersOf(account) }
     ) { viewModel ->
+        LaunchedEffect(Unit) {
+            viewModel.onScreenComposed()
+        }
+
+        val accountData by viewModel.accountData.collectAsState()
         val navController = LocalRootController.current.findRootController()
         val state = rememberCollapsingToolbarScaffoldState()
         CollapsingToolbarScaffold(
@@ -48,16 +56,16 @@ fun DetailAccountScreen(
                         .graphicsLayer {
                             alpha = 1f - state.toolbarState.progress
                         },
-                    color = account.color
+                    color = accountData.color
                 )
                 DetailAccountExpandedAppBar(
                     modifier = Modifier
                         .parallax(0.4f),
                     contentAlpha = state.toolbarState.progress,
-                    color = account.color,
-                    amount = account.balance,
-                    currency = account.currency,
-                    iconId = account.iconId
+                    color = accountData.color,
+                    amount = accountData.balance,
+                    currency = accountData.currency,
+                    iconId = accountData.iconId
                 )
 
                 AppBarIcon(
@@ -71,13 +79,13 @@ fun DetailAccountScreen(
                 )
 
                 AccountNameText(
-                    name = account.name,
+                    name = accountData.name,
                     state = state
                 )
 
                 EditButton(
                     state = state,
-                    tint = account.color,
+                    tint = accountData.color,
                     onClick = {
                         navController.push(
                             screen = MainNavigationTree.AddAccount.name,
