@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import kotlin.math.max
 import kotlin.math.min
 
@@ -26,7 +27,7 @@ fun ItemWrapper(
         modifier = modifier
             .border(
                 strokeWidth = 1.dp,
-                color = Color(0xFFECECEC),
+                color = CoinTheme.color.dividers,
                 radius = 24.dp,
                 hasStartBorder = true,
                 hasEndBorder = true,

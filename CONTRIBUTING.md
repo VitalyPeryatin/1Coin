@@ -91,6 +91,8 @@ Once it's filed:
 <!-- You might want to create an issue template for bugs and errors that can be used as a guide and that defines the structure of the information to be included. If you do so, reference it here in the description. -->
 
 ### How to build project
+- Execute ./gradlew enableGitHooks
+  - Enables pre-commit files with checks: detektAll
 - Android
     - Sync gradle
     - Run Android configuration project

@@ -27,5 +27,8 @@ jobs:
     - name: Build desktop version
       run: ./gradlew :desktop:build
 
+    - name: Run verifyDatabaseMigration
+      run: ./gradlew :common:verifyCommonMainAppDatabaseMigration
+
     - name: Run detekt
       run: ./gradlew detektAll

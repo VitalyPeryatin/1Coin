@@ -22,6 +22,7 @@ kotlin {
                 implementation(libs.sqldelight.coroutines)
                 implementation(libs.bundles.ktor)
                 implementation(libs.bundles.paging)
+                implementation(libs.koalaplot)
             }
         }
         named("desktopMain") {
@@ -46,5 +47,7 @@ kotlin {
 sqldelight {
     database("AppDatabase") {
         packageName = "com.finance_tracker.finance_tracker"
+        schemaOutputDirectory = file("src/commonMain/sqldelight/com/finance_tracker/finance_tracker/schemas")
+        verifyMigrations = true
     }
 }

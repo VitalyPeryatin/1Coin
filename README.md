@@ -44,8 +44,9 @@
 <div align="center">
   <sub>Built with ❤︎ by
   <a href="https://github.com/VitalyPeryatin/FinanceTracker/graphs/contributors">
-    contributors
-  </a>
+       contributors
+     </a>
+   </sub>
 </div>
 
 ## Table of Contents
@@ -75,6 +76,7 @@
 - [KViewModel](https://github.com/adeo-opensource/kviewmodel--mpp) - Shared ViewModel
 - [Koin](https://insert-koin.io/) - Dependency injection
 - [SqlDelight](https://github.com/cashapp/sqldelight) - SQLite database
+- [Koalaplot](https://github.com/KoalaPlot/koalaplot-core) - Charts
 - [Napier](https://github.com/AAkira/Napier) - Logger
 - [Firebase](https://firebase.google.com/) - Crashlytics
 - [LeakCanary](https://square.github.io/leakcanary/) - Android memory leaks checker

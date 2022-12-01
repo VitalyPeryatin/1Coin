@@ -1,5 +1,6 @@
 package com.finance_tracker.finance_tracker.presentation.add_transaction
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -26,6 +27,7 @@ import com.finance_tracker.finance_tracker.presentation.add_transaction.views.Ac
 import com.finance_tracker.finance_tracker.presentation.add_transaction.views.AmountTextField
 import com.finance_tracker.finance_tracker.presentation.add_transaction.views.CalendarDayView
 import com.finance_tracker.finance_tracker.presentation.add_transaction.views.CategoriesAppBar
+import com.finance_tracker.finance_tracker.presentation.add_transaction.views.EnterTransactionStep
 import com.finance_tracker.finance_tracker.presentation.add_transaction.views.StepsEnterTransactionBar
 import com.finance_tracker.finance_tracker.presentation.add_transaction.views.StepsEnterTransactionBarData
 import com.finance_tracker.finance_tracker.presentation.add_transaction.views.enter_transaction_controller.EnterTransactionController
@@ -100,9 +102,14 @@ fun AddTransactionScreen(
                 }
             )
 
+            var currentStep by rememberSaveable { mutableStateOf(viewModel.firstStep) }
+
             AmountTextField(
                 modifier = Modifier
-                    .weight(1f),
+                    .weight(1f)
+                    .clickable {
+                        currentStep = EnterTransactionStep.Amount
+                    },
                 currency = currency.sign,
                 amount = amountText
             )
@@ -112,7 +119,7 @@ fun AddTransactionScreen(
                 onDateChange = viewModel::onDateSelect
             )
 
-            var currentStep by rememberSaveable { mutableStateOf(viewModel.firstStep) }
+
             Surface(
                 modifier = Modifier
                     .`if`(currentStep != null) {

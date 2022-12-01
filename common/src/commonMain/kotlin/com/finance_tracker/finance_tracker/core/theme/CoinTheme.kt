@@ -44,6 +44,11 @@ val LocalCoinColors = staticCompositionLocalOf {
         accentRed = Color.Unspecified
     )
 }
+object CoinAlpha {
+    const val Medium = 0.2f
+    const val Soft = 0.8f
+}
+
 val LocalCoinTypography = staticCompositionLocalOf {
     CoinTypography()
 }

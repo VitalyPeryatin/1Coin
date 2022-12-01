@@ -12,7 +12,7 @@ import com.financetracker.financetracker.SmsMessageEntityQueries
 import com.financetracker.financetracker.TransactionsEntityQueries
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import java.util.*
+import java.util.Date
 
 class SmsBroadcastReceiver : BroadcastReceiver(), KoinComponent {
 

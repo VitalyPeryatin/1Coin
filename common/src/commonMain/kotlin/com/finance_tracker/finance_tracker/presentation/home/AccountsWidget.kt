@@ -14,9 +14,9 @@ import com.finance_tracker.finance_tracker.domain.models.Account
 
 @Composable
 fun AccountsWidget(
-    modifier: Modifier = Modifier,
     data: List<Account>,
-    state: LazyListState
+    state: LazyListState,
+    modifier: Modifier = Modifier,
 ) {
     LazyRow(
         modifier = modifier

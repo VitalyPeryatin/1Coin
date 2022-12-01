@@ -155,13 +155,10 @@ class AddTransactionViewModel(
             }
 
             is KeyboardCommand.Digit -> {
-                when (amountText) {
-                    "0" -> {
-                        newAmountText = command.value.toString()
-                    }
-                    else -> {
-                        newAmountText += command.value.toString()
-                    }
+                if (amountText == "0") {
+                    newAmountText = command.value.toString()
+                } else {
+                    newAmountText += command.value.toString()
                 }
             }
 

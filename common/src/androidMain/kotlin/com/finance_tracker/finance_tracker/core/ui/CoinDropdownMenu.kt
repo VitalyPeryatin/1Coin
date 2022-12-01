@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.material.DropdownMenuItem as AndroidDropDownMenuItem
 
+@Suppress("MissingModifierDefaultValue", "ReusedModifierInstance")
 @Composable
 actual fun CoinDropdownMenu(
     expanded: Boolean,
@@ -32,6 +33,7 @@ actual fun CoinDropdownMenu(
     }
 }
 
+@Suppress("MissingModifierDefaultValue")
 @Composable
 actual fun DropdownMenuItem(
     modifier: Modifier,

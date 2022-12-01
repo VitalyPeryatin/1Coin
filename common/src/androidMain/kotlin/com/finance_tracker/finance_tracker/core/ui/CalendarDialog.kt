@@ -10,6 +10,7 @@ import java.time.LocalDate
 
 private val todayDate = LocalDate.now()
 
+@Suppress("MissingModifierDefaultValue", "ModifierParameterPosition")
 @Composable
 actual fun CalendarDialog(
     minDate: Long,

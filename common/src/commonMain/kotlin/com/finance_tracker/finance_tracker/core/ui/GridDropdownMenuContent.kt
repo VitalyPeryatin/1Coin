@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.finance_tracker.finance_tracker.core.theme.CoinAlpha
 
 private const val InTransitionDuration = 120
 private const val OutTransitionDuration = 75
@@ -59,7 +60,7 @@ fun GridDropdownMenuContent(
             1f
         } else {
             // Menu is dismissed.
-            0.8f
+            CoinAlpha.Soft
         }
     }
 

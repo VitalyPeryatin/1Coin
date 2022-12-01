@@ -16,6 +16,8 @@ import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.theme.CoinTheme
 import com.finance_tracker.finance_tracker.core.ui.rememberVectorPainter
 
+private const val KeyboardRowCount = 3
+
 sealed interface KeyboardCommand {
     data class Digit(val value: Int): KeyboardCommand
     object Point: KeyboardCommand
@@ -37,7 +39,7 @@ fun AmountKeyboard(
     Column(
         modifier = modifier
     ) {
-        val commandsRows = commands.chunked(3)
+        val commandsRows = commands.chunked(KeyboardRowCount)
         for (commandRow in commandsRows) {
             Row(
                 modifier = Modifier.weight(1f)

@@ -45,7 +45,7 @@ class DragDropState internal constructor(
             state.getVisibleItemInfoFor(absoluteIndex = it)
         }
 
-
+    @Suppress("UnnecessaryParentheses")
     fun onDragStart(offset: Offset) {
         state.layoutInfo.visibleItemsInfo
             .firstOrNull { item -> offset.y.toInt() in item.offset..(item.offset + item.size) } ?.also {
@@ -87,10 +87,11 @@ class DragDropState internal constructor(
                                 || hovered.index == item.index
                     }
                     .firstOrNull { item ->
-                        val delta = (startOffset - hovered.offset)
-                        when {
-                            delta > 0 -> (endOffset > item.offsetEnd)
-                            else -> (startOffset < item.offset)
+                        val delta = startOffset - hovered.offset
+                        if (delta > 0) {
+                            endOffset > item.offsetEnd
+                        } else {
+                            startOffset < item.offset
                         }
                     }?.also { item ->
                         currentIndexOfDraggedItem?.let { current ->
@@ -112,12 +113,16 @@ class DragDropState internal constructor(
             val startOffset = it.offset + draggedDistance
             val endOffset = it.offsetEnd + draggedDistance
             return@let when {
-                draggedDistance > 0 -> (endOffset - state.layoutInfo.viewportEndOffset + 50f)
+                draggedDistance > 0 -> (endOffset - state.layoutInfo.viewportEndOffset + OffsetDiff)
                     .takeIf{ diff -> diff > 0 }
-                draggedDistance < 0 -> (startOffset - state.layoutInfo.viewportStartOffset - 50f)
+                draggedDistance < 0 -> (startOffset - state.layoutInfo.viewportStartOffset - OffsetDiff)
                     .takeIf { diff -> diff < 0 }
                 else -> null
             }
         } ?: 0f
+    }
+
+    companion object {
+        private const val OffsetDiff = 50f
     }
 }

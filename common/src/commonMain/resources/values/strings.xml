@@ -11,6 +11,7 @@
     <string name="transactions">Transactions</string>
     <string name="account">Account</string>
     <string name="got_it">Got it</string>
+    <string name="category">Category</string>
 
     <!-- Account -->
     <string name="account_type_debit_card">Debit card</string>

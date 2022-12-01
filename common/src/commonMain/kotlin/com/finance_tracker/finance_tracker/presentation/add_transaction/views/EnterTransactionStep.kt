@@ -11,7 +11,7 @@ enum class EnterTransactionStep(val textId: String? = null): Parcelable {
 
     fun previous(): EnterTransactionStep? {
         val steps = values()
-        val previousIndex = (ordinal - 1)
+        val previousIndex = ordinal - 1
         if (previousIndex < 0) return null
 
         return steps[previousIndex]
@@ -19,7 +19,7 @@ enum class EnterTransactionStep(val textId: String? = null): Parcelable {
 
     fun next(): EnterTransactionStep? {
         val steps = values()
-        val nextIndex = (ordinal + 1)
+        val nextIndex = ordinal + 1
         if (nextIndex >= steps.size) return null
 
         return steps[nextIndex]

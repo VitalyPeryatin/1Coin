@@ -55,7 +55,7 @@ fun GridDropdownMenu(
     focusable: Boolean = true,
     modifier: Modifier = Modifier,
     offset: DpOffset = DpOffset(0.dp, 0.dp),
-    content: LazyGridScope.() -> Unit
+    content: LazyGridScope.() -> Unit = {}
 ) {
     val expandedStates = remember { MutableTransitionState(false) }
     expandedStates.targetState = expanded

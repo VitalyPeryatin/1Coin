@@ -83,7 +83,7 @@ private fun IconActionButton(
     painter: Painter,
     modifier: Modifier = Modifier,
     tint: Color = Color.Unspecified,
-    onClick: () -> Unit
+    onClick: () -> Unit = {}
 ) {
     Icon(
         modifier = modifier

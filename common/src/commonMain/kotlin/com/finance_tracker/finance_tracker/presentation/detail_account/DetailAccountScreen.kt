@@ -29,6 +29,7 @@ import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 
 @Composable
+@Suppress("MagicNumber")
 fun DetailAccountScreen(
     account: Account
 ) {

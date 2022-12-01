@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.finance_tracker.finance_tracker.core.common.`if`
+import com.finance_tracker.finance_tracker.core.theme.CoinAlpha
 
 @Composable
 fun AppBarIcon(
@@ -29,7 +30,7 @@ fun AppBarIcon(
     Icon(
         modifier = modifier
             .`if`(!enabled) {
-                alpha(0.2f)
+                alpha(CoinAlpha.Medium)
             }
             .clip(CircleShape)
             .size(
