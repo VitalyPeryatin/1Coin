@@ -1,6 +1,5 @@
-
 package com.finance_tracker.finance_tracker.presentation.analytics
-/*
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -160,4 +159,3 @@ private fun Float.toPercent(precision: Int): String {
     return "${(this * 100.0f).toString(precision)}%"
 
 }
-*/

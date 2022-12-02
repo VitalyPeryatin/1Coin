@@ -25,7 +25,9 @@ fun AnalyticsScreen() {
             .statusBarsPadding()
     ) {
         AnalyticsScreenAppBar()
-        var selectedTransactionType by remember { mutableStateOf(TransactionTypeTab.Expense) }
+        var selectedTransactionType by remember {
+            mutableStateOf(TransactionTypeTab.Expense)
+        }
         TransactionTypesTabRow(
             selectedType = selectedTransactionType,
             onSelect = { selectedTransactionType = it }
