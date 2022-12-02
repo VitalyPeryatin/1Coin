@@ -28,8 +28,8 @@ import com.finance_tracker.finance_tracker.domain.models.TransactionType
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 
 enum class CategoryTab(val textId: String) {
-    Income("add_transaction_tab_income"),
-    Expense("add_transaction_tab_expense")
+    Income("tab_income"),
+    Expense("tab_expense")
 }
 
 private fun TransactionType.toCategoryTab(): CategoryTab {

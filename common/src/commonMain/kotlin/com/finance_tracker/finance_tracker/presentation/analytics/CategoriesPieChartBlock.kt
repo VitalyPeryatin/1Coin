@@ -45,7 +45,7 @@ private data class ConnectorStyleState(
 @Suppress("MagicNumber")
 @OptIn(ExperimentalKoalaPlotApi::class)
 @Composable
-fun PieChart(
+fun CategoriesPieChart(
     modifier: Modifier = Modifier
 ) {
     val fibonacci = listOf(1f, 1f, 2f, 3f, 5f, 8f, 13f, 21f)
@@ -153,6 +153,7 @@ private fun HoleTotalLabel(
         )
     }
 }
+
 
 private fun Float.toPercent(precision: Int): String {
     @Suppress("MagicNumber")
