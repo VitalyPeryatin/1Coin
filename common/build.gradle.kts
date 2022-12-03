@@ -6,6 +6,15 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization")
 }
 android {
+    signingConfigs {
+        getByName("debug") {
+            storeFile =
+                file("/Users/vitalyperyatin/AndroidStudioProjects/FinanceTracker/1coin-debug.keystore")
+            storePassword = "00000000"
+            keyAlias = "1coin"
+            keyPassword = "00000000"
+        }
+    }
     namespace = "com.finance_tracker.finance_tracker.common"
 }
 

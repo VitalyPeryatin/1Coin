@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("org.jetbrains.compose")
     id("com.android.application")
@@ -7,7 +10,27 @@ plugins {
     kotlin("android")
 }
 
+val keystorePropertiesFile = rootProject.file("keystore.properties")
+val keystoreProperties = Properties()
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+}
+
 android {
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("../1coin-debug.keystore")
+            storePassword = "00000000"
+            keyPassword = "00000000"
+            keyAlias = "1coin"
+        }
+        create("release") {
+            storeFile = file("../1coin.keystore")
+            storePassword = keystoreProperties["storePassword"] as? String
+            keyPassword = keystoreProperties["keyPassword"] as? String
+            keyAlias = keystoreProperties["keyAlias"] as? String
+        }
+    }
     namespace = "com.finance_tracker.finance_tracker"
     compileSdk = 33
 
@@ -17,6 +40,7 @@ android {
         targetSdk = 33
         versionCode = 1
         versionName = "1.0.0"
+        signingConfig = signingConfigs.getByName("debug")
     }
 
     buildTypes {
@@ -29,6 +53,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     java {

@@ -84,6 +84,8 @@ captures/
 .idea/uiDesigner.xml
 
 # Keystore files
+1coin.keystore
+keystore.properties
 
 # OS-specific files
 .DS_Store
