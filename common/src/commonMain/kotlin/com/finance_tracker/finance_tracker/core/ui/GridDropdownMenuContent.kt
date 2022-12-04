@@ -26,14 +26,13 @@ private val MenuElevation = 8.dp
 private val DropdownMenuVerticalPadding = 8.dp
 private val DropdownMenuHorizontalPadding = 8.dp
 
-@Suppress("ModifierParameter")
 @Composable
 fun GridDropdownMenuContent(
     columnSize: Dp,
     expandedStates: MutableTransitionState<Boolean>,
     transformOriginState: MutableState<TransformOrigin>,
     modifier: Modifier = Modifier,
-    content: LazyGridScope.() -> Unit
+    content: LazyGridScope.() -> Unit = {}
 ) {
     // Menu open/close animation.
     val transition = updateTransition(expandedStates, "DropDownMenu")

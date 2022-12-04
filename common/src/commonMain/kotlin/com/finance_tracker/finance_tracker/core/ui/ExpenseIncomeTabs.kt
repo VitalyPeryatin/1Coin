@@ -55,7 +55,7 @@ private fun CategoryItem(
     categoryTab: CategoryTab,
     selectedCategoryTab: CategoryTab,
     modifier: Modifier = Modifier,
-    onClick: (CategoryTab) -> Unit
+    onClick: (CategoryTab) -> Unit = {}
 ) {
     val targetTextColor = if (selectedCategoryTab == categoryTab) {
         Color.Black

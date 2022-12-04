@@ -43,10 +43,10 @@
 
 <div align="center">
   <sub>Built with ❤︎ by
-  <a href="https://github.com/VitalyPeryatin/FinanceTracker/graphs/contributors">
-       contributors
-     </a>
-   </sub>
+    <a href="https://github.com/VitalyPeryatin/FinanceTracker/graphs/contributors">
+      contributors
+    </a>
+  </sub>
 </div>
 
 ## Table of Contents

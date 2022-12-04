@@ -22,8 +22,8 @@ import com.finance_tracker.finance_tracker.domain.models.Category
 @Composable
 fun CategoryCard(
     data: Category,
-    modifier: Modifier = Modifier,
     onCrossDeleteClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier

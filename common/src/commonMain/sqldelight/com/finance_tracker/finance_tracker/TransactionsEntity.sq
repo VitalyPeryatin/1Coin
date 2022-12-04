@@ -55,6 +55,13 @@ ORDER BY
     insertionDate DESC
 LIMIT :limit OFFSET :offset;
 
+countAllFullTransactions:
+SELECT count(*)
+FROM TransactionsEntity
+INNER JOIN AccountsEntity AS accounts ON TransactionsEntity.accountId = accounts.id
+INNER JOIN CategoriesEntity AS categories ON TransactionsEntity.categoryId = categories.id
+WHERE accounts.id IS NOT NULL;
+
 getFullTransactionsByAccountIdPaginated:
 SELECT *
 FROM TransactionsEntity

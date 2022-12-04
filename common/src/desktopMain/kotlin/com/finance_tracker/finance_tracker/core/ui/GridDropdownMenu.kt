@@ -46,7 +46,6 @@ private val androidx.compose.ui.input.key.KeyEvent.isDirectionRight: Boolean
 private val MenuVerticalMargin = 48.dp
 
 @OptIn(ExperimentalComposeUiApi::class)
-@Suppress("ModifierParameter")
 @Composable
 fun GridDropdownMenu(
     columnSize: Dp,

@@ -12,6 +12,11 @@ tasks.register<Detekt>("detektAll") {
     config.setFrom(project.file("config/detekt/detekt.yml"))
 }
 
+dependencies {
+    detekt(libs.detekt.cli)
+    detektPlugins(libs.detekt.rules.compose)
+}
+
 allprojects {
     repositories {
         google()

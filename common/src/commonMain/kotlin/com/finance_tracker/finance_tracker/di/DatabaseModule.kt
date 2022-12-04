@@ -10,7 +10,7 @@ import com.squareup.sqldelight.EnumColumnAdapter
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
 internal val databaseModule = module {
     singleOf(::DatabaseInitializer)

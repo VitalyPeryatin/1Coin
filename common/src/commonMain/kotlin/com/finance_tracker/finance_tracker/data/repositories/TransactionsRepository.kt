@@ -18,7 +18,7 @@ private const val PageSize = 20
 
 class TransactionsRepository(
     private val transactionsEntityQueries: TransactionsEntityQueries,
-    private val transactionSourceFactory: TransactionSourceFactory
+    private val transactionSourceFactory: TransactionSourceFactory,
 ) {
 
     private val paginatedTransactions: Flow<PagingData<Transaction>> =

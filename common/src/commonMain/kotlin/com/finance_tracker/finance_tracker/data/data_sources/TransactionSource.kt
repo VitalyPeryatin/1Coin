@@ -14,12 +14,11 @@ class TransactionSource(
     private val accountId: Long? = null,
 ): PagingSource<Long, Transaction>() {
     override fun getRefreshKey(state: PagingState<Long, Transaction>): Long? {
-        return state.anchorPosition?.toLong()
+        return null
     }
 
     override suspend fun load(params: LoadParams<Long>): LoadResult<Long, Transaction> {
         return try {
-
             val nextPage = params.key ?: 0
             val transactionList = if (accountId == null) {
                 getAllFullTransactionsPaginated(

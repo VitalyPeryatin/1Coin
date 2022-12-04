@@ -25,6 +25,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.paging.CombinedLoadStates
+import androidx.paging.DEBUG
 import androidx.paging.DifferCallback
 import androidx.paging.ItemSnapshotList
 import androidx.paging.LOGGER
@@ -35,6 +36,9 @@ import androidx.paging.Logger
 import androidx.paging.NullPaddedList
 import androidx.paging.PagingData
 import androidx.paging.PagingDataDiffer
+import androidx.paging.VERBOSE
+import com.finance_tracker.finance_tracker.core.common.Parcelable
+import com.finance_tracker.finance_tracker.core.common.Parcelize
 import io.github.aakira.napier.LogLevel
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.Dispatchers
@@ -212,18 +216,18 @@ public class LazyPagingItems<T : Any> internal constructor(
                 }
 
                 override fun log(level: Int, message: String, tr: Throwable?) {
-                    /*when {
-                        tr != null && level == Log.DEBUG -> Log.d(LOG_TAG, message, tr)
-                        tr != null && level == Log.VERBOSE -> Log.v(LOG_TAG, message, tr)
-                        level == Log.DEBUG -> Log.d(LOG_TAG, message)
-                        level == Log.VERBOSE -> Log.v(LOG_TAG, message)
+                    when {
+                        tr != null && level == DEBUG -> Napier.d(message, tr, tag = LOG_TAG)
+                        tr != null && level == VERBOSE -> Napier.v(message, tr, tag = LOG_TAG)
+                        level == DEBUG -> Napier.d(message, tag = LOG_TAG)
+                        level == VERBOSE -> Napier.v(message, tag = LOG_TAG)
                         else -> {
                             throw IllegalArgumentException(
                                 "debug level $level is requested but Paging only supports " +
                                         "default logging for level 2 (DEBUG) or level 3 (VERBOSE)"
                             )
                         }
-                    }*/
+                    }
                 }
             }
         }
@@ -305,7 +309,7 @@ public fun <T : Any> LazyListScope.items(
         key = if (key == null) null else { index ->
             val item = items.peek(index)
             if (item == null) {
-                //PagingPlaceholderKey(index)
+                PagingPlaceholderKey(index)
             } else {
                 key(item)
             }
@@ -344,7 +348,7 @@ public fun <T : Any> LazyListScope.itemsIndexed(
         key = if (key == null) null else { index ->
             val item = items.peek(index)
             if (item == null) {
-                //PagingPlaceholderKey(index)
+                PagingPlaceholderKey(index)
             } else {
                 key(index, item)
             }
@@ -354,26 +358,5 @@ public fun <T : Any> LazyListScope.itemsIndexed(
     }
 }
 
-/*
-@SuppressLint("BanParcelableUsage")
-private data class PagingPlaceholderKey(private val index: Int) : Parcelable {
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(index)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object {
-        @Suppress("unused")
-        @JvmField
-        val CREATOR: Parcelable.Creator<PagingPlaceholderKey> =
-            object : Parcelable.Creator<PagingPlaceholderKey> {
-                override fun createFromParcel(parcel: Parcel) =
-                    PagingPlaceholderKey(parcel.readInt())
-
-                override fun newArray(size: Int) = arrayOfNulls<PagingPlaceholderKey?>(size)
-            }
-    }
-}*/
+@Parcelize
+private data class PagingPlaceholderKey(private val index: Int) : Parcelable
